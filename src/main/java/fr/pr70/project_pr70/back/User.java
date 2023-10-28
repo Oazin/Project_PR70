@@ -3,9 +3,12 @@ package fr.pr70.project_pr70.back;
 import java.util.Date;
 
 public class User {
-    private String username;
-    private Password password;
-    private TaskManager tasks;
+    protected String username;
+    protected Password password;
+    protected TaskManager tasks;
+    protected boolean login;
+    protected boolean admin;
+
 
     /* ----------------- Constructor ----------------- */
 
@@ -105,7 +108,17 @@ public class User {
         tasks.editTask(_task, _name, _description, _deadline, _priority);
     }
 
+    /*! @brief : revoie true si l'utilisateur est admin
+     */
+    public boolean isAdmin() {
+        return admin;
+    }
 
+    /*! @brief : revoie true si l'utilisateur est connecte
+     */
+    public boolean isLogin() {
+        return login;
+    }
 
     @Override
     public String toString() {
