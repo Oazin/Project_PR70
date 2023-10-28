@@ -2,7 +2,8 @@ package fr.pr70.project_pr70.back;
 
 import java.util.Date;
 
-public class User {
+public class User
+{
     protected String username;
     protected Password password;
     protected TaskManager tasks;
@@ -12,7 +13,8 @@ public class User {
 
     /* ----------------- Constructor ----------------- */
 
-    public User(String _username, Password _password){
+    public User(String _username, Password _password)
+    {
         username = _username;
         password = _password;
         tasks = new TaskManager();
@@ -20,28 +22,34 @@ public class User {
 
     /* ----------------- Getters ----------------- */
 
-    public String getUsername() {
+    public String getUsername()
+    {
         return username;
     }
 
-    public TaskManager getTasks() {
+    public TaskManager getTasks()
+    {
         return tasks;
     }
 
-    public Password getPassword() {
+    public Password getPassword()
+    {
         return password;
     }
     /* ----------------- Setters ----------------- */
 
-    public void setPassword(Password _password) {
+    public void setPassword(Password _password)
+    {
         password = _password;
     }
 
-    public void setTasks(TaskManager _tasks) {
+    public void setTasks(TaskManager _tasks)
+    {
         tasks = _tasks;
     }
 
-    public void setUsername(String _username) {
+    public void setUsername(String _username)
+    {
         username = _username;
     }
 
@@ -52,7 +60,8 @@ public class User {
      *  @param _username ; Nom d'utilisateur qui a été entrer
      *  @param _password ; mot de passe qui a été entrer
      */
-    public boolean authenticate(String _username, String _password){
+    public boolean authenticate(String _username, String _password)
+    {
         return getUsername().equals(_username) && password.checkPassword(_password);
     }
 
@@ -67,7 +76,8 @@ public class User {
      *  Passer le gestionnaire de tâche associés à l'utilisateur pour
      *  créer et ajouter la tâche à la liste de l'utilisateur
      */
-    public void addTask(String _name, String _description, Date _deadline, Priority _priority) {
+    public void addTask(String _name, String _description, Date _deadline, Priority _priority)
+    {
         tasks.createTask(_name, _description, _deadline, _priority);
     }
 
@@ -78,7 +88,8 @@ public class User {
      *  Passer le gestionnaire de tâche associés à l'utilisateur pour
      *  supprimer la tâche à la liste de l'utilisateur
      */
-    public void removeTask(Task _task) {
+    public void removeTask(Task _task)
+    {
         tasks.deleteTask(_task);
     }
 
@@ -89,7 +100,8 @@ public class User {
      *  Passer le gestionnaire de tâche associés à l'utilisateur pour
      *  valider la complétion de la tâche à la liste de l'utilisateur
      */
-    public void markTaskAsCompleted(Task _task) {
+    public void markTaskAsCompleted(Task _task)
+    {
         tasks.markTaskAsCompleted(_task);
     }
 
@@ -104,24 +116,28 @@ public class User {
      *  Passer le gestionnaire de tâche associés à l'utilisateur pour
      *  modifier la tâche à la liste de l'utilisateur
      */
-    public void modifyTask(Task _task, String _name, String _description, Date _deadline, Priority _priority){
+    public void modifyTask(Task _task, String _name, String _description, Date _deadline, Priority _priority)
+    {
         tasks.editTask(_task, _name, _description, _deadline, _priority);
     }
 
     /*! @brief : revoie true si l'utilisateur est admin
      */
-    public boolean isAdmin() {
+    public boolean isAdmin()
+    {
         return admin;
     }
 
     /*! @brief : revoie true si l'utilisateur est connecte
      */
-    public boolean isLogin() {
+    public boolean isLogin()
+    {
         return login;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "User{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
