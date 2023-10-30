@@ -6,6 +6,7 @@ public class Task
 {
     protected String name;
     protected String description;
+    protected Date startDate;
     protected Date deadline;
     protected Priority priority;
     protected boolean completed;
@@ -16,6 +17,7 @@ public class Task
     {
         name = _name;
         description = _description;
+        startDate = new Date();
         deadline = _deadline;
         priority = _priority;
         completed = false;
@@ -44,8 +46,16 @@ public class Task
         return deadline;
     }
 
+    public Double getTimePercent()
+    {
+        long duration = deadline.getTime() - startDate.getTime();
+        Date currentDate = new Date();
+        long currentPoint = currentDate.getTime() - startDate.getTime();
+        return currentPoint / duration;
+    }
 
 
+    
 
     /* ----------------- Setters ----------------- */
 
