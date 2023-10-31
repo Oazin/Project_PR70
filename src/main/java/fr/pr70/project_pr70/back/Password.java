@@ -16,6 +16,16 @@ public final class Password
         this.passwordHash = hashPassword(password);
     }
 
+    public String getPasswordHash()
+    {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash)
+    {
+        this.passwordHash = passwordHash;
+    }
+
     public void setPassword(String password)
     {
         this.passwordHash = hashPassword(password);

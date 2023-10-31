@@ -1,61 +1,151 @@
 package fr.pr70.project_pr70.back;
 
-import fr.pr70.project_pr70.back.Password;
+import java.util.Date;
 
-public final class User {
-    private String username;
-    private final Password password;
-    private TaskManager taskManager;
-    private boolean isLoggedIn;
-    private boolean isAdmin;
+public class User
+{
+    protected String username;
+    protected Password password;
+    protected TaskManager tasks;
+    protected boolean admin;
+    protected boolean login;
 
 
-    public User(String _username, String _password){
+    /* ----------------- Constructor ----------------- */
+
+    public User(String _username, String _password)
+    {
         username = _username;
         password = new Password(_password);
-        taskManager = new TaskManager();
-        isLoggedIn = false;
-        isAdmin = false;
+        tasks = new TaskManager();
     }
 
-    // Getters
-    public String getUsername(){
+    /* ----------------- Getters ----------------- */
+
+    public String getUsername()
+    {
         return username;
     }
 
-    public Password getPassword(){
+    public TaskManager getTasks()
+    {
+        return tasks;
+    }
+
+    public Password getPassword()
+    {
         return password;
     }
+    /* ----------------- Setters ----------------- */
 
-    public boolean isLoggedIn(){
-        return isLoggedIn;
+    public void setPassword(Password _password)
+    {
+        password = _password;
     }
 
-    public boolean isAdmin(){
-        return isAdmin;
+    public void setTasks(TaskManager _tasks)
+    {
+        tasks = _tasks;
     }
 
-    // Setters
-    public void setUsername(String _username){
+    public void setUsername(String _username)
+    {
         username = _username;
     }
 
-    public void setPassword(String password){
-        this.password.setPassword(password);
-    }
 
-    public void setLoggedIn(boolean isLoggedIn){
-        this.isLoggedIn = isLoggedIn;
-    }
+    /* ----------------- Methods ----------------- */
 
-    public void setAdmin(boolean isAdmin){
-        this.isAdmin = isAdmin;
-    }
-
-    public static void main(String[] args)
+    /*! @brief : Vérifier si le mot de passe fourni correspond au mot de passe de l'utilisateur
+     *  @param _username ; Nom d'utilisateur qui a été entrer
+     *  @param _password ; mot de passe qui a été entrer
+     */
+    public boolean authenticate(String _username, String _password)
     {
-        User user = new User("John Doe",  "password");
-        System.out.println(user.getUsername()); // John Doe
-        System.out.println(user.getPassword().checkPassword("password")); // true
+        return getUsername().equals(_username) && password.checkPassword(_password);
+    }
+
+
+    /*! @brief : Appel la fonction createTask de TaskManager
+     *  @param String _name ; chaîne de charactère correspondant au nom de la tâche
+     *  @param _description ; chaîne de charactère correspondant à la description de la tâche
+     *  @param _deadline ; Date de fin optimal de la tâche
+     *  @param _priority ; Priorité associée à la tâche
+     *
+     *  @behaviour :
+     *  Passer le gestionnaire de tâche associés à l'utilisateur pour
+     *  créer et ajouter la tâche à la liste de l'utilisateur
+     */
+    public void addTask(String _name, String _description, Date _deadline, Priority _priority)
+    {
+        tasks.createTask(_name, _description, _deadline, _priority);
+    }
+
+    /*! @brief : Appel la fonction deleteTask de TaskManager
+     *  @param _tack ; tâche que l'utilisateur souhaite supprimer
+     *
+     *  @behaviour :
+     *  Passer le gestionnaire de tâche associés à l'utilisateur pour
+     *  supprimer la tâche à la liste de l'utilisateur
+     */
+    public void removeTask(Task _task)
+    {
+        tasks.deleteTask(_task);
+    }
+
+    /*! @brief : Appel la fonction markTaskAsCompleted de TaskManager
+     *  @param _tack ; tâche que l'utilisateur a complété
+     *
+     *  @behaviour :
+     *  Passer le gestionnaire de tâche associés à l'utilisateur pour
+     *  valider la complétion de la tâche à la liste de l'utilisateur
+     */
+    public void markTaskAsCompleted(Task _task)
+    {
+        tasks.markTaskAsCompleted(_task);
+    }
+
+    /*! @brief : Appel la fonction editTask de TaskManager
+     *  @param _tack ; tâche que l'utilisateur a complété
+     *  @param String _name ; chaîne de charactère correspondant au nom de la tâche
+     *  @param _description ; chaîne de charactère correspondant à la description de la tâche
+     *  @param _deadline ; Date de fin optimal de la tâche
+     *  @param _priority ; Priorité associée à la tâche
+     *
+     *  @behaviour :
+     *  Passer le gestionnaire de tâche associés à l'utilisateur pour
+     *  modifier la tâche à la liste de l'utilisateur
+     */
+    public void modifyTask(Task _task, String _name, String _description, Date _deadline, Priority _priority)
+    {
+        tasks.editTask(_task, _name, _description, _deadline, _priority);
+    }
+
+    /*! @brief : revoie true si l'utilisateur est admin
+     */
+    public boolean isAdmin()
+    {
+        return admin;
+    }
+
+    /*! @brief : revoie true si l'utilisateur est connecte
+     */
+    public boolean isLogin()
+    {
+        return login;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", tasks=" + tasks +
+                '}';
+    }
+
+    public void setAdmin(boolean _admin) {
+        admin = _admin;
     }
 }
