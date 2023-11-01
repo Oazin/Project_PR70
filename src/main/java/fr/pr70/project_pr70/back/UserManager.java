@@ -6,15 +6,67 @@ import java.util.List;
 public class UserManager
 {
     private List<User> users;
-
+    
     /* ----------------- Constructor ----------------- */
     public UserManager()
     {
         users = new ArrayList<>();
     }
-
+    
     /* ----------------- Methods ----------------- */
 
+    /*! @brief : Ajoute l'utilisateur
+     *  @param user ; Utilisateur à ajouter
+     *
+     *  @behaviour
+     *  Ajoute l'utilisateur à la liste
+     */
+    public void addUser(User user)
+    {
+        if(user == null) return;
+        users.add(user);
+    }
+
+    /*! @brief : Supprime l'utilisateur
+     *  @param user ; Utilisateur à supprimer
+     *
+     *  @behaviour
+     *  Supprime l'utilisateur de la liste
+     */
+    public void removeUser(User user)
+    {
+        if(user == null) return;
+        users.remove(user);
+    }
+    
+    /*! @brief : Retourne l'utilisateur
+     *  @param _username ; Nom d'utilisateur qui a été entrer
+     *
+     *  @behaviour
+     *  Renvoie l'utilisateur correspondant au nom d'utilisateur entré
+     */
+    public User getUser(String _username)
+    {
+        for (User user : users)
+        {
+            if (user.getUsername().equals(_username))
+            {
+                return user;
+            }
+        }
+        return null; // Aucun utilisateur trouvé avec ce nom d'utilisateur
+    }
+
+    /*! @brief : Verifie si la liste d'utilisateur est vide
+     *
+     *  @behaviour
+     *  Renvoie un boolean correspondant au résultat de la vérification
+     */
+    public boolean isEmpty()
+    {
+        return users.isEmpty();
+    }
+    
     /*! @brief : Cree le nouveau user
      *  @param _username ; Nom d'utilisateur qui a été entrer
      *  @param _password ; mot de passe qui a été entrer
@@ -34,6 +86,21 @@ public class UserManager
         return true; // L'utilisateur a été créé avec succès
     }
 
+    /*! @brief : Connecte l'utilisateur
+     *  @param _username ; Nom d'utilisateur qui a été entrer
+     *  @param _password ; mot de passe qui a été entrer
+     *
+     *  @behaviour
+     *  Renvoie un boolean correspondant au résultat de la connexion
+     *  Il faut verifier que l'utilisateur existe et que le mot de passe est correct
+     */
+    public boolean connectUser(String _username, String _password)
+    {
+        User user = getUser(_username);
+        if (user == null) return false; // L'utilisateur n'existe pas
+        if (!user.getPassword().equals(_password)) return false; // Le mot de passe est incorrect
+        return true; // L'utilisateur a été connecté avec succès
+    }
 
     /*! @brief : Verifie l'égaliter des deux mots de passes rentré par l'utilisateur
      *  @param _password ; mot de passe qui a été entrer
@@ -65,15 +132,5 @@ public class UserManager
             }
         }
         return false; // Aucun utilisateur trouvé avec ce nom d'utilisateur
-    }
-
-    public boolean isEmpty()
-    {
-        return users.isEmpty();
-    }
-
-    public void addUser(User user) {
-        if(user == null) return;
-        users.add(user);
     }
 }
