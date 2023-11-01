@@ -27,9 +27,9 @@ public class UserManager
     public boolean createUser(String _username, String _password, String _confirmPass)
     {
         if (alreadyExist(_username)) return false; // L'utilisateur existe déjà, la création a échoué
-        if (!comfirmPassword(_password,_confirmPass)) return false; // Le mot de passe de confirmation n'est pas identique au mot de passe rentré en premier lieu
+        if (!confirmPassword(_password,_confirmPass)) return false; // Le mot de passe de confirmation n'est pas identique au mot de passe rentré en premier lieu
 
-        User newUser = new User(_username, new Password(_password));
+        User newUser = new User(_username, _password);
         users.add(newUser);
         return true; // L'utilisateur a été créé avec succès
     }
@@ -42,7 +42,8 @@ public class UserManager
      *  @behaviour
      *  Renvoie un boolean correspondant au résultat de l'égalité
      */
-    public boolean comfirmPassword(String _password, String _confirmPass)
+
+    public boolean confirmPassword(String _password, String _confirmPass)
     {
         return _password.equals(_confirmPass);
     }
@@ -64,5 +65,15 @@ public class UserManager
             }
         }
         return false; // Aucun utilisateur trouvé avec ce nom d'utilisateur
+    }
+
+    public boolean isEmpty()
+    {
+        return users.isEmpty();
+    }
+
+    public void addUser(User user) {
+        if(user == null) return;
+        users.add(user);
     }
 }

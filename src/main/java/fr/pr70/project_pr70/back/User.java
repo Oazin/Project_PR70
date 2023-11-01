@@ -7,16 +7,18 @@ public class User
     protected String username;
     protected Password password;
     protected TaskManager tasks;
-    protected boolean login;
     protected boolean admin;
+    protected boolean login;
+
 
 
     /* ----------------- Constructor ----------------- */
 
-    public User(String _username, Password _password)
+
+    public User(String _username, String _password)
     {
         username = _username;
-        password = _password;
+        password = new Password(_password);
         tasks = new TaskManager();
     }
 
@@ -143,5 +145,9 @@ public class User
                 ", password='" + password + '\'' +
                 ", tasks=" + tasks +
                 '}';
+    }
+
+    public void setAdmin(boolean _admin) {
+        admin = _admin;
     }
 }
