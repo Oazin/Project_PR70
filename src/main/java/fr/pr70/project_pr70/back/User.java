@@ -11,7 +11,9 @@ public class User
     protected boolean login;
 
 
+
     /* ----------------- Constructor ----------------- */
+
 
     public User(String _username, String _password)
     {

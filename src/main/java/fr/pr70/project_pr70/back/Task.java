@@ -13,6 +13,7 @@ public class Task
 
     /* ----------------- Constructor ----------------- */
 
+
     public Task()
     {
         name = "";
@@ -22,8 +23,8 @@ public class Task
         priority = Priority.LOW;
         completed = false;
     }
-
-    public Task(String _name , String _description, Date _deadline, Priority _priority)
+  
+    public Task(String _name, String _description, Date _deadline, Priority _priority)
     {
         name = _name;
         description = _description;
@@ -61,7 +62,9 @@ public class Task
         long duration = deadline.getTime() - startDate.getTime();
         Date currentDate = new Date();
         long currentPoint = currentDate.getTime() - startDate.getTime();
+
         return (double) (currentPoint / duration);
+
     }
 
 

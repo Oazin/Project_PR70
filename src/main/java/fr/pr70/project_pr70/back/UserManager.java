@@ -42,6 +42,7 @@ public class UserManager
      *  @behaviour
      *  Renvoie un boolean correspondant au résultat de l'égalité
      */
+
     public boolean confirmPassword(String _password, String _confirmPass)
     {
         return _password.equals(_confirmPass);
