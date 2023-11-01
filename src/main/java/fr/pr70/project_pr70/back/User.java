@@ -8,7 +8,7 @@ public class User
     protected Password password;
     protected TaskManager tasks;
     protected boolean admin;
-    protected boolean login;
+    protected boolean connected;
 
 
 
@@ -55,8 +55,24 @@ public class User
         username = _username;
     }
 
+    public void setAdmin(boolean _admin)
+    {
+        admin = _admin;
+    }
 
     /* ----------------- Methods ----------------- */
+    
+    /*! @brief : Change le mot de passe de l'utilisateur
+     *  @param _password ; mot de passe qui a été entrer
+     *
+     *  @behaviour :
+     *  Créer un nouveau mot de passe avec la chaîne de charactère entrée
+     *  et l'associe à l'utilisateur
+     */
+    public void changePassword(String _password)
+    {
+        password = new Password(_password);
+    }
 
     /*! @brief : Vérifier si le mot de passe fourni correspond au mot de passe de l'utilisateur
      *  @param _username ; Nom d'utilisateur qui a été entrer
@@ -67,29 +83,43 @@ public class User
         return getUsername().equals(_username) && password.checkPassword(_password);
     }
 
-
-    /*! @brief : Appel la fonction createTask de TaskManager
-     *  @param String _name ; chaîne de charactère correspondant au nom de la tâche
-     *  @param _description ; chaîne de charactère correspondant à la description de la tâche
-     *  @param _deadline ; Date de fin optimal de la tâche
-     *  @param _priority ; Priorité associée à la tâche
-     *
-     *  @behaviour :
-     *  Passer le gestionnaire de tâche associés à l'utilisateur pour
-     *  créer et ajouter la tâche à la liste de l'utilisateur
+    /*! @brief : revoie true si l'utilisateur est connecte
      */
+    public boolean isConnected()
+    {
+        return connected;
+    }
+    
+    /*! @brief : revoie true si l'utilisateur est admin
+    */
+    public boolean isAdmin()
+    {
+        return admin;
+    }
+    
+    
+    /*! @brief : Appel la fonction createTask de TaskManager
+    *  @param String _name ; chaîne de charactère correspondant au nom de la tâche
+    *  @param _description ; chaîne de charactère correspondant à la description de la tâche
+    *  @param _deadline ; Date de fin optimal de la tâche
+    *  @param _priority ; Priorité associée à la tâche
+    *
+    *  @behaviour :
+    *  Passer le gestionnaire de tâche associés à l'utilisateur pour
+    *  créer et ajouter la tâche à la liste de l'utilisateur
+    */
     public void addTask(String _name, String _description, Date _deadline, Priority _priority)
     {
         tasks.createTask(_name, _description, _deadline, _priority);
     }
-
+    
     /*! @brief : Appel la fonction deleteTask de TaskManager
-     *  @param _tack ; tâche que l'utilisateur souhaite supprimer
-     *
-     *  @behaviour :
-     *  Passer le gestionnaire de tâche associés à l'utilisateur pour
-     *  supprimer la tâche à la liste de l'utilisateur
-     */
+    *  @param _tack ; tâche que l'utilisateur souhaite supprimer
+    *
+    *  @behaviour :
+    *  Passer le gestionnaire de tâche associés à l'utilisateur pour
+    *  supprimer la tâche à la liste de l'utilisateur
+    */
     public void removeTask(Task _task)
     {
         tasks.deleteTask(_task);
@@ -106,7 +136,7 @@ public class User
     {
         tasks.markTaskAsCompleted(_task);
     }
-
+    
     /*! @brief : Appel la fonction editTask de TaskManager
      *  @param _tack ; tâche que l'utilisateur a complété
      *  @param String _name ; chaîne de charactère correspondant au nom de la tâche
@@ -122,21 +152,8 @@ public class User
     {
         tasks.editTask(_task, _name, _description, _deadline, _priority);
     }
-
-    /*! @brief : revoie true si l'utilisateur est admin
-     */
-    public boolean isAdmin()
-    {
-        return admin;
-    }
-
-    /*! @brief : revoie true si l'utilisateur est connecte
-     */
-    public boolean isLogin()
-    {
-        return login;
-    }
-
+ 
+    /* ----------------- Override ----------------- */
     @Override
     public String toString()
     {
@@ -147,7 +164,4 @@ public class User
                 '}';
     }
 
-    public void setAdmin(boolean _admin) {
-        admin = _admin;
-    }
 }
