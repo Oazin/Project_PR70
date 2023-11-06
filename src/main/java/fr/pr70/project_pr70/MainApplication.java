@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class MainApplication extends Application
 {
@@ -40,6 +41,13 @@ public class MainApplication extends Application
         signIn = new Scene(signInView.load(), 400, 600);
         login = new Scene(loginView.load(), 400, 600);
         dashboard = new Scene(dashboardView.load(), 1920, 1080);
+        URL url = this.getClass().getResource("style.css");
+        if (url == null) {
+            System.out.println("Resource not found. Aborting.");
+            System.exit(-1);
+        }
+        String css = url.toExternalForm();
+        dashboard.getStylesheets().add(css);
         stage.setTitle("MainApp");
         if(userManager.isEmpty())
         {

@@ -4,16 +4,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
-      fx:id="mainVBox"
+<SplitPane xmlns:fx="http://javafx.com/fxml"
+      fx:id="mainPane" orientation="VERTICAL"
       fx:controller="fr.pr70.project_pr70.front.DashboardController">
 
-    <HBox xmlns:fx="http://javafx.com/fxml">
+    <HBox xmlns:fx="http://javafx.com/fxml"
+          fx:id="navigationBar">
         <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
         </padding>
-        <Label text="New Task"/>
+        <Button fx:id="button" text="New Task"/>
     </HBox>
-
-    <Label text="Username:"/>
-</VBox>
+    <VBox xmlns:fx="http://javafx.com/fxml"
+          fx:id="taskVBox">
+        <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        </padding>
+        <Label text="Username:"/>
+    </VBox>
+</SplitPane>
