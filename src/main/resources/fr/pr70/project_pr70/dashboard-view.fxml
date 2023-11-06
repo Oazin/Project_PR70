@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fr.pr70.project_pr70.front.DashboardController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="fr.pr70.project_pr70.front.DashboardController">
+    <top>
+        <ToolBar>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+            <Button id="button" text="New task" onAction="#handleNewTask" />
+            <Button id="button" text="New category" onAction="#handleNewCategory" />
+        </ToolBar>
+    </top>
+    <center>
+        <VBox>
+            <!-- Add the content of your dashboard here -->
+        </VBox>
+    </center>
+</BorderPane>

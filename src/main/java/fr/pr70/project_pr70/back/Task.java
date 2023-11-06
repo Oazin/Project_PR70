@@ -23,12 +23,22 @@ public class Task
         priority = Priority.LOW;
         completed = false;
     }
-  
+
     public Task(String _name, String _description, Date _deadline, Priority _priority)
     {
         name = _name;
         description = _description;
         startDate = new Date();
+        deadline = _deadline;
+        priority = _priority;
+        completed = false;
+    }
+
+    public Task(String _name, String _description, Date _startDate, Date _deadline, Priority _priority)
+    {
+        name = _name;
+        description = _description;
+        startDate = _startDate;
         deadline = _deadline;
         priority = _priority;
         completed = false;
@@ -68,7 +78,7 @@ public class Task
     }
 
 
-    
+
 
     /* ----------------- Setters ----------------- */
 
@@ -115,6 +125,7 @@ public class Task
         return "Task{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", startDate=" + startDate +
                 ", deadline=" + deadline +
                 ", priority=" + priority +
                 ", completed=" + completed +

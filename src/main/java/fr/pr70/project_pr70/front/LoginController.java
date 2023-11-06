@@ -23,8 +23,6 @@ public class LoginController
     @FXML
     protected void onSubmitClicked()
     {
-        userLabel.setText("Username:");
-        passwordLabel.setText("Password:");
         UserManager userManager = MainApplication.getUserManager();
         boolean connected = userManager.connectUser(userTextField.getText(), passwordTextField.getText());
         if(connected)
