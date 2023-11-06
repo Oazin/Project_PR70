@@ -14,12 +14,7 @@
     -fx-background-color: #A9A9A9;
 }
 
-#navigationBar
+.tool-bar
 {
-
-}
-
-#taskVBox
-{
-    -fx-background-color: white;
+    -fx-spacing: 20;
 }
