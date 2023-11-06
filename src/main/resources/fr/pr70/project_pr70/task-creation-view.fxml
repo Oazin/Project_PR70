@@ -20,11 +20,9 @@
 
     <TextArea fx:id="descriptionArea" promptText="Task description"/>
 
-    <Label text="Start date" />
-    <DatePicker fx:id="startDatePicker"/>
+    <DatePicker fx:id="startDatePicker" promptText="Start date"/>
 
-    <Label text="Deadline" />
-    <DatePicker fx:id="deadlinePicker"/>
+    <DatePicker fx:id="deadlinePicker" promptText="Deadline"/>
 
     <ComboBox fx:id="priorityComboBox" value="LOW">
         <items>
