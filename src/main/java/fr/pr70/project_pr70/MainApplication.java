@@ -50,11 +50,14 @@ public class MainApplication extends Application
         FXMLLoader signInView = new FXMLLoader(MainApplication.class.getResource("sign-in-view.fxml"));
         FXMLLoader loginView = new FXMLLoader(MainApplication.class.getResource("login-view.fxml"));
         FXMLLoader dashboardView = new FXMLLoader(MainApplication.class.getResource("dashboard-view.fxml"));
+
         // FXMLLoader profileView = new FXMLLoader(MainApplication.class.getResource("profile-view.fxml"));
+
         FXMLLoader taskCreationView = new FXMLLoader(MainApplication.class.getResource("task-creation-view.fxml"));
         signIn = new Scene(signInView.load(), 400, 600);
         login = new Scene(loginView.load(), 400, 600);
         dashboard = new Scene(dashboardView.load(), 960, 540);
+
         // profile = new Scene(profileView.load(), 400, 600);
         taskCreation = new Scene(taskCreationView.load(), 400, 600);
         //import style.css
@@ -65,6 +68,7 @@ public class MainApplication extends Application
         }
         String css = url.toExternalForm();
         dashboard.getStylesheets().add(css);
+
         //stage.setScene(profile);
         if(userManager.isEmpty())
         {

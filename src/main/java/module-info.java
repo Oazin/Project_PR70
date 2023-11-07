@@ -1,7 +1,7 @@
 module fr.pr70.project_pr70 {
     requires javafx.controls;
     requires javafx.fxml;
-    requires mysql.connector.j;
+    //requires mysql.connector.j;
     requires java.sql;
 
 
