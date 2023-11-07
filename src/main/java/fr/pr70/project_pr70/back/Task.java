@@ -23,7 +23,7 @@ public class Task
         priority = Priority.LOW;
         completed = false;
     }
-  
+
     public Task(String _name, String _description, Date _deadline, Priority _priority)
     {
         name = _name;
@@ -78,7 +78,7 @@ public class Task
     }
 
 
-    
+
 
     /* ----------------- Setters ----------------- */
 

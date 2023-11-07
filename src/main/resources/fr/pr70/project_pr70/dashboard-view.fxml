@@ -5,11 +5,16 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="fr.pr70.project_pr70.front.DashboardController">
     <top>
         <ToolBar>
-            <Button text="New task" onAction="#handleNewTask" />
-            <Button text="New category" onAction="#handleNewCategory" />
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+            <Button id="button" text="New task" onAction="#handleNewTask" />
+            <Button id="button" text="New category" onAction="#handleNewCategory" />
+
         </ToolBar>
     </top>
     <center>

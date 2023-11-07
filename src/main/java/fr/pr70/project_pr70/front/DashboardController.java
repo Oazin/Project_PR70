@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 public class DashboardController
 {
 
-
     @FXML
     private void handleNewTask() {
         MainApplication.setTaskCreation();

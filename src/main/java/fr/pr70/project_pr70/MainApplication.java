@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class MainApplication extends Application
 {
@@ -45,16 +46,29 @@ public class MainApplication extends Application
     public void start(Stage _stage) throws IOException
     {
         stage = _stage;
+        stage.setTitle("Gestionnaire de tache personnel");
         FXMLLoader signInView = new FXMLLoader(MainApplication.class.getResource("sign-in-view.fxml"));
         FXMLLoader loginView = new FXMLLoader(MainApplication.class.getResource("login-view.fxml"));
         FXMLLoader dashboardView = new FXMLLoader(MainApplication.class.getResource("dashboard-view.fxml"));
-        FXMLLoader profileView = new FXMLLoader(MainApplication.class.getResource("profile-view.fxml"));
+
+        // FXMLLoader profileView = new FXMLLoader(MainApplication.class.getResource("profile-view.fxml"));
+
         FXMLLoader taskCreationView = new FXMLLoader(MainApplication.class.getResource("task-creation-view.fxml"));
         signIn = new Scene(signInView.load(), 400, 600);
         login = new Scene(loginView.load(), 400, 600);
         dashboard = new Scene(dashboardView.load(), 960, 540);
-        profile = new Scene(profileView.load(), 400, 600);
+
+        // profile = new Scene(profileView.load(), 400, 600);
         taskCreation = new Scene(taskCreationView.load(), 400, 600);
+        //import style.css
+        URL url = this.getClass().getResource("style.css");
+        if (url == null) {
+            System.out.println("Resource not found. Aborting.");
+            System.exit(-1);
+        }
+        String css = url.toExternalForm();
+        dashboard.getStylesheets().add(css);
+
         //stage.setScene(profile);
         if(userManager.isEmpty())
         {

@@ -30,8 +30,6 @@ public class SignInController
     @FXML
     protected void onSubmitClicked()
     {
-        userLabel.setText("Username:");
-        passwordLabel.setText("Password:");
         UserManager userManager = MainApplication.getUserManager();
         User user = new User(userTextField.getText(), passwordTextField.getText());
         userManager.createUser(userTextField.getText(), passwordTextField.getText(), confirmPasswordTextField.getText());
