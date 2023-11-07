@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class TaskCreationController {
@@ -51,6 +52,7 @@ public class TaskCreationController {
             Date deadline = java.sql.Date.valueOf(deadlinePicker.getValue());
             Priority priority = Priority.valueOf(priorityComboBox.getValue());
             Task task = new Task(name, description, startdDate, deadline, priority);
+            MainApplication.getUserManager().getConnectedUser().getTasks().getTasks().add(task);
             System.out.println(task);
             MainApplication.setDashboard();
         }

@@ -12,6 +12,10 @@ public class TaskManager
         tasks = new ArrayList<>();
     }
 
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
     /*! @brief : Ajouter la tâche à la liste de tâches
      *  @param _task ; Tâche que l'utilisateur veux ajouter à sont gestionnaire
      */

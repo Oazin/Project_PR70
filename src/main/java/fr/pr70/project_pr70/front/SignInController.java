@@ -32,7 +32,7 @@ public class SignInController
     {
         UserManager userManager = MainApplication.getUserManager();
         User user = new User(userTextField.getText(), passwordTextField.getText());
-        userManager.createUser(userTextField.getText(), passwordTextField.getText(), confirmPasswordTextField.getText());
+        user.setConnected(true);
         if(userManager.isEmpty())
         {
             user.setAdmin(true);

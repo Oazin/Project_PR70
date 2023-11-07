@@ -60,6 +60,11 @@ public class User
         admin = _admin;
     }
 
+    public void setConnected(boolean _connected)
+    {
+        connected = _connected;
+    }
+
     /* ----------------- Methods ----------------- */
     
     /*! @brief : Change le mot de passe de l'utilisateur

@@ -1,6 +1,7 @@
 package fr.pr70.project_pr70;
 
 import fr.pr70.project_pr70.back.UserManager;
+import fr.pr70.project_pr70.front.DashboardController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,14 @@ public class MainApplication extends Application
 
     private static Stage stage;
 
+    private static FXMLLoader loginView;
+
+    private static FXMLLoader signInView;
+
+    private static FXMLLoader dashboardView;
+
+    private static FXMLLoader taskCreationView;
+
     private static Scene login;
 
     private static Scene signIn;
@@ -36,6 +45,8 @@ public class MainApplication extends Application
 
     public static void setDashboard()
     {
+        DashboardController dashboardController = dashboardView.getController();
+        dashboardController.updateTaskList();
         stage.setScene(dashboard);
     }
     public static void setProfile(){stage.setScene(profile);}
@@ -47,11 +58,11 @@ public class MainApplication extends Application
     {
         stage = _stage;
         stage.setTitle("Gestionnaire de tache personnel");
-        FXMLLoader signInView = new FXMLLoader(MainApplication.class.getResource("sign-in-view.fxml"));
-        FXMLLoader loginView = new FXMLLoader(MainApplication.class.getResource("login-view.fxml"));
-        FXMLLoader dashboardView = new FXMLLoader(MainApplication.class.getResource("dashboard-view.fxml"));
+        signInView = new FXMLLoader(MainApplication.class.getResource("sign-in-view.fxml"));
+        loginView = new FXMLLoader(MainApplication.class.getResource("login-view.fxml"));
+        dashboardView = new FXMLLoader(MainApplication.class.getResource("dashboard-view.fxml"));
         // FXMLLoader profileView = new FXMLLoader(MainApplication.class.getResource("profile-view.fxml"));
-        FXMLLoader taskCreationView = new FXMLLoader(MainApplication.class.getResource("task-creation-view.fxml"));
+        taskCreationView = new FXMLLoader(MainApplication.class.getResource("task-creation-view.fxml"));
         signIn = new Scene(signInView.load(), 400, 600);
         login = new Scene(loginView.load(), 400, 600);
         dashboard = new Scene(dashboardView.load(), 960, 540);
