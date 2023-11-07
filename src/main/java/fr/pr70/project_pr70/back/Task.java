@@ -24,16 +24,6 @@ public class Task
         completed = false;
     }
 
-    public Task(String _name, String _description, Date _deadline, Priority _priority)
-    {
-        name = _name;
-        description = _description;
-        startDate = new Date();
-        deadline = _deadline;
-        priority = _priority;
-        completed = false;
-    }
-
     public Task(String _name, String _description, Date _startDate, Date _deadline, Priority _priority)
     {
         name = _name;
@@ -62,6 +52,10 @@ public class Task
         return priority;
     }
 
+    public Date getStartDate() {
+        return startDate;
+    }
+
     public Date getDeadline()
     {
         return deadline;
@@ -85,6 +79,10 @@ public class Task
     public void setCompleted(boolean _completed)
     {
         completed = _completed;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
     public void setDeadline(Date _deadline)

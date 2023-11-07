@@ -27,6 +27,7 @@ public class LoginController
         boolean connected = userManager.connectUser(userTextField.getText(), passwordTextField.getText());
         if(connected)
         {
+            MainApplication.setCurrentUsername(userTextField.getText());
             MainApplication.setDashboard();
         }
     }

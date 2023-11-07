@@ -37,6 +37,7 @@ public class SignInController
         {
             user.setAdmin(true);
         }
+        MainApplication.setCurrentUsername(user.getUsername());
         userManager.addUser(user);
         MainApplication.setDashboard();
     }

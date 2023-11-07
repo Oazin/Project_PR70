@@ -3,6 +3,8 @@ package fr.pr70.project_pr70.front;
 import fr.pr70.project_pr70.MainApplication;
 import fr.pr70.project_pr70.back.Priority;
 import fr.pr70.project_pr70.back.Task;
+import fr.pr70.project_pr70.back.User;
+import fr.pr70.project_pr70.back.UserManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -50,8 +52,10 @@ public class TaskCreationController {
             Date startdDate = java.sql.Date.valueOf(startDatePicker.getValue());
             Date deadline = java.sql.Date.valueOf(deadlinePicker.getValue());
             Priority priority = Priority.valueOf(priorityComboBox.getValue());
-            Task task = new Task(name, description, startdDate, deadline, priority);
-            System.out.println(task);
+            UserManager userManager = MainApplication.getUserManager();
+            User user = userManager.getUser(MainApplication.getCurrentUsername());
+            user.addTask(name, description, startdDate, deadline, priority);
+            System.out.println(user.getTasks());
             MainApplication.setDashboard();
         }
 

@@ -101,6 +101,7 @@ public class User
     /*! @brief : Appel la fonction createTask de TaskManager
     *  @param String _name ; chaîne de charactère correspondant au nom de la tâche
     *  @param _description ; chaîne de charactère correspondant à la description de la tâche
+    *  @param _deadline ; Date de debut optimal de la tâche
     *  @param _deadline ; Date de fin optimal de la tâche
     *  @param _priority ; Priorité associée à la tâche
     *
@@ -108,9 +109,9 @@ public class User
     *  Passer le gestionnaire de tâche associés à l'utilisateur pour
     *  créer et ajouter la tâche à la liste de l'utilisateur
     */
-    public void addTask(String _name, String _description, Date _deadline, Priority _priority)
+    public void addTask(String _name, String _description,Date _startDate, Date _deadline, Priority _priority)
     {
-        tasks.createTask(_name, _description, _deadline, _priority);
+        tasks.createTask(_name, _description, _startDate, _deadline, _priority);
     }
     
     /*! @brief : Appel la fonction deleteTask de TaskManager
@@ -148,9 +149,9 @@ public class User
      *  Passer le gestionnaire de tâche associés à l'utilisateur pour
      *  modifier la tâche à la liste de l'utilisateur
      */
-    public void modifyTask(Task _task, String _name, String _description, Date _deadline, Priority _priority)
+    public void modifyTask(Task _task, String _name, String _description, Date _startDate, Date _deadline, Priority _priority)
     {
-        tasks.editTask(_task, _name, _description, _deadline, _priority);
+        tasks.editTask(_task, _name, _description, _startDate,_deadline, _priority);
     }
  
     /* ----------------- Override ----------------- */
