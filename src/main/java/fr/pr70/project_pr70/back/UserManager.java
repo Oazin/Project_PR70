@@ -99,6 +99,7 @@ public class UserManager
         User user = getUser(_username);
         if (user == null) return false; // L'utilisateur n'existe pas
         if (!user.getPassword().equals(_password)) return false; // Le mot de passe est incorrect
+        user.setConnected(true);
         return true; // L'utilisateur a été connecté avec succès
     }
 
@@ -132,5 +133,28 @@ public class UserManager
             }
         }
         return false; // Aucun utilisateur trouvé avec ce nom d'utilisateur
+    }
+
+    public void resetConnectedUser()
+    {
+        for (User user : users)
+        {
+            if (user.isConnected())
+            {
+                user.setConnected(false);
+            }
+        }
+    }
+
+    public User getConnectedUser()
+    {
+        for (User user : users)
+        {
+            if (user.isConnected())
+            {
+                return user;
+            }
+        }
+        return null; // Aucun utilisateur trouvé avec ce nom d'utilisateur
     }
 }
