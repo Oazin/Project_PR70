@@ -32,6 +32,9 @@ public class TaskCreationController {
     private Button createBtn;
 
     @FXML
+    private Label invalidText;
+
+    @FXML
     public void handleCreateTask(ActionEvent e)
     {
         if (nameField.getText().trim().isEmpty() ||
@@ -40,10 +43,7 @@ public class TaskCreationController {
                 deadlinePicker.getValue() == null ||
                 priorityComboBox.getValue() == null)
         {
-            Alert fail= new Alert(Alert.AlertType.INFORMATION);
-            fail.setHeaderText("failure");
-            fail.setContentText("you haven't typed something");
-            fail.showAndWait();
+            invalidText.setText("All field need to be completed");
         }
         else
         {
