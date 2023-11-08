@@ -34,6 +34,10 @@ public class MainApplication extends Application
 
     private static FXMLLoader taskCreationView;
 
+    private static FXMLLoader categoryCreationView;
+
+    private static FXMLLoader profileView;
+
     private static Scene login;
 
     private static Scene signIn;
@@ -42,6 +46,8 @@ public class MainApplication extends Application
     private static Scene profile;
 
     private static Scene taskCreation;
+
+    private static Scene categoryCreation;
 
     public static void setCurrentUsername(String _currentUsername) {
         MainApplication.currentUsername = _currentUsername;
@@ -62,32 +68,43 @@ public class MainApplication extends Application
 
     public static void setDashboard()
     {
-        DashboardController dashboardController = dashboardView.getController();
-        dashboardController.updateTaskList();
         stage.setScene(dashboard);
     }
     public static void setProfile(){stage.setScene(profile);}
 
     public static void setTaskCreation() {stage.setScene(taskCreation);}
 
+    public static void setCategoryCreation() {
+        stage.setScene(categoryCreation);
+    }
+
+    public static void setLogin(){
+        stage.setScene(login);
+    }
+
+    public static void setSignIn(){
+        stage.setScene(signIn);
+    }
+
     @Override
     public void start(Stage _stage) throws IOException
     {
         stage = _stage;
-        stage.setTitle("Gestionnaire de tache personnel");
+        stage.setTitle("YO Task Manager");
 
         signInView = new FXMLLoader(MainApplication.class.getResource("sign-in-view.fxml"));
         loginView = new FXMLLoader(MainApplication.class.getResource("login-view.fxml"));
         dashboardView = new FXMLLoader(MainApplication.class.getResource("dashboard-view.fxml"));
-        // FXMLLoader profileView = new FXMLLoader(MainApplication.class.getResource("profile-view.fxml"));
+        profileView = new FXMLLoader(MainApplication.class.getResource("profile-view.fxml"));
         taskCreationView = new FXMLLoader(MainApplication.class.getResource("task-creation-view.fxml"));
-
+        categoryCreationView = new FXMLLoader(MainApplication.class.getResource("category-creation-view.fxml"));
         signIn = new Scene(signInView.load(), 400, 600);
         login = new Scene(loginView.load(), 400, 600);
         dashboard = new Scene(dashboardView.load(), 960, 540);
 
-        // profile = new Scene(profileView.load(), 400, 600);
+        profile = new Scene(profileView.load(), 400, 600);
         taskCreation = new Scene(taskCreationView.load(), 400, 600);
+        categoryCreation = new Scene(categoryCreationView.load(), 400, 600);
         //import style.css
         URL url = this.getClass().getResource("style.css");
         if (url == null) {
@@ -96,8 +113,6 @@ public class MainApplication extends Application
         }
         String css = url.toExternalForm();
         dashboard.getStylesheets().add(css);
-
-        //stage.setScene(profile);
         if(userManager.isEmpty())
         {
             stage.setScene(signIn);

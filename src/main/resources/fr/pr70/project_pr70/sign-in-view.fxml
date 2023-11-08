@@ -16,5 +16,9 @@
     <TextField fx:id="passwordTextField"/>
     <Label fx:id="confirmPasswordLabel" text="Confirm Password:"/>
     <TextField fx:id="confirmPasswordTextField"/>
+
+
+    <Label fx:id="invalidText" textFill="RED" />
     <Button text="SignIn" onAction="#onSubmitClicked"/>
+    <Button text="Login" onAction="#handleLogin"/>
 </VBox>
