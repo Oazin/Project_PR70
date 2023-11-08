@@ -1,5 +1,6 @@
 package fr.pr70.project_pr70;
 
+import fr.pr70.project_pr70.back.CategoryManager;
 import fr.pr70.project_pr70.back.UserManager;
 import fr.pr70.project_pr70.front.DashboardController;
 import javafx.application.Application;
@@ -18,6 +19,10 @@ import java.net.URL;
 public class MainApplication extends Application
 {
     private static UserManager userManager;
+
+    private static String currentUsername;
+
+    private static CategoryManager categoryManager;
 
     private static Stage stage;
 
@@ -38,9 +43,21 @@ public class MainApplication extends Application
 
     private static Scene taskCreation;
 
+    public static void setCurrentUsername(String _currentUsername) {
+        MainApplication.currentUsername = _currentUsername;
+    }
+
+    public static String getCurrentUsername() {
+        return currentUsername;
+    }
+
     public static UserManager getUserManager()
     {
         return userManager;
+    }
+
+    public static CategoryManager getCategoryManager() {
+        return categoryManager;
     }
 
     public static void setDashboard()
@@ -91,6 +108,7 @@ public class MainApplication extends Application
     public static void main(String[] args)
     {
         userManager = new UserManager();
+        categoryManager = new CategoryManager();
         launch();
     }
 }

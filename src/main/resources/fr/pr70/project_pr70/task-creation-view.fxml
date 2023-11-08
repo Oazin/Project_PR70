@@ -34,6 +34,7 @@
         </items>
     </ComboBox>
 
+    <Label fx:id="invalidText" textFill="RED" />
     <Button text="Create task" onAction="#handleCreateTask"/>
     <Button text="Cancel" onAction="#handleCancel"/>
 </VBox>
