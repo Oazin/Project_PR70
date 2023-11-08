@@ -61,13 +61,13 @@ public class Task
         return deadline;
     }
 
-    public Double getTimePercent()
+    public double getTimePercent()
     {
         long duration = deadline.getTime() - startDate.getTime();
         Date currentDate = new Date();
         long currentPoint = currentDate.getTime() - startDate.getTime();
 
-        return (double) (currentPoint / duration);
+        return (double)currentPoint / (double)duration;
 
     }
 
