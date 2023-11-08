@@ -10,6 +10,9 @@ import javafx.scene.control.TextField;
 public class SignInController
 {
     @FXML
+    private Label invalidText;
+
+    @FXML
     private Label userLabel;
 
     @FXML
@@ -31,14 +34,24 @@ public class SignInController
     protected void onSubmitClicked()
     {
         UserManager userManager = MainApplication.getUserManager();
-        User user = new User(userTextField.getText(), passwordTextField.getText());
-        user.setConnected(true);
-        if(userManager.isEmpty())
-        {
-            user.setAdmin(true);
+        if (!userManager.alreadyExist(userTextField.getText())){
+            User user = new User(userTextField.getText(), passwordTextField.getText());
+            user.setConnected(true);
+            if(userManager.isEmpty())
+            {
+                user.setAdmin(true);
+            }
+            MainApplication.setCurrentUsername(user.getUsername());
+            userManager.addUser(user);
+            MainApplication.setDashboard();
+        } else {
+            invalidText.setText("This username already exist");
         }
-        MainApplication.setCurrentUsername(user.getUsername());
-        userManager.addUser(user);
-        MainApplication.setDashboard();
+
+    }
+
+    @FXML
+    protected void handleLogin(){
+        MainApplication.setLogin();
     }
 }

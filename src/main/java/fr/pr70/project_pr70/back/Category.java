@@ -9,6 +9,7 @@ public class Category {
     {
         name = _name;
         color = _color;
+
     }
 
     public String getName() {

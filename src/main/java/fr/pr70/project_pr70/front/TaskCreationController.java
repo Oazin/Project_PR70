@@ -61,7 +61,7 @@ public class TaskCreationController {
 
     }
 
-
+    @FXML
     public void handleCancel()
     {
         MainApplication.setDashboard();

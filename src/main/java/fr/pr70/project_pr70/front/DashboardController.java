@@ -26,7 +26,19 @@ public class DashboardController
     @FXML
     private void handleNewCategory()
     {
+        MainApplication.setCategoryCreation();
+    }
 
+    @FXML
+    private void handleProfile()
+    {
+        MainApplication.setProfile();
+    }
+
+    @FXML
+    private void handleLogout(){
+        MainApplication.setCurrentUsername("");
+        MainApplication.setLogin();
     }
 
     @FXML

@@ -9,6 +9,9 @@ import javafx.scene.control.TextField;
 public class LoginController
 {
     @FXML
+    private Label invalidText;
+
+    @FXML
     private Label userLabel;
 
     @FXML
@@ -29,6 +32,13 @@ public class LoginController
         {
             MainApplication.setCurrentUsername(userTextField.getText());
             MainApplication.setDashboard();
+        } else {
+            invalidText.setText("Wrong username or password");
         }
+    }
+
+    @FXML
+    protected void handleSigin(){
+        MainApplication.setSignIn();
     }
 }
