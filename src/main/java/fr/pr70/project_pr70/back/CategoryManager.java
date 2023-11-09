@@ -16,9 +16,9 @@ public final class CategoryManager
         }
     }
 
-    public void addCategories(Category _category) { CategoryManager.categories.add(_category); }
+    public static void addCategories(Category _category) { CategoryManager.categories.add(_category); }
 
-    public ArrayList<Category> getCategories() { return categories; }
+    public static ArrayList<Category> getCategories() { return categories; }
 
     public static void setCategories(ArrayList<Category> categories) { CategoryManager.categories = categories; }
 
