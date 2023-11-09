@@ -20,13 +20,6 @@
     </top>
     <center>
         <VBox fx:id="taskBox">
-            <HBox id="header">
-                <Label fx:id="assignedLabel">assigned</Label>
-                <Label>name</Label>
-                <Label>status</Label>
-                <Label>priority</Label>
-                <Label>deadline</Label>
-            </HBox>
             <!-- Add the content of your dashboard here -->
         </VBox>
     </center>

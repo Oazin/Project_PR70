@@ -22,9 +22,6 @@ public class DashboardController
     protected VBox taskBox;
 
     @FXML
-    protected Label assignedLabel;
-
-    @FXML
     private void handleNewTask()
     {
         MainApplication.setTaskCreation();
@@ -39,27 +36,54 @@ public class DashboardController
     @FXML
     public void updateTaskList()
     {
-        User user = MainApplication.getUserManager().getConnectedUser();
+        // clear taskList
+        taskBox.getChildren().clear();
+
+        // get Currrent User
+        User user = MainApplication.getUserManager().getUser(MainApplication.getCurrentUsername());
         if(user == null) return;
-        if(user.isConnected())
-            assignedLabel.setVisible(false);
+
+        // update header
+        HBox header = new HBox();
+        header.setId("header");
+        taskBox.getChildren().add(header);
+        if(user.isAdmin())
+        {
+            Label assigned = new Label("assigned");
+            header.getChildren().add(assigned);
+        }
+        Label name = new Label("name");
+        Label status = new Label("status");
+        Label priority = new Label("priority");
+        Label deadline = new Label("deadline");
+        header.getChildren().addAll(name, status, priority, deadline);
+
+        //update task
         TaskManager taskManager = user.getTasks();
         ArrayList<Task> tasks = taskManager.getTasks();
         for(Task task: tasks)
         {
-            Label name = new Label();
-            name.setText(task.getName());
-            Label priority = new Label();
-            if(task.getPriority() == Priority.HIGH)
-                priority.setText("HIGH");
-            else if (task.getPriority() == Priority.MEDIUM)
-                priority.setText("MEDIUM");
+            Label taskName = new Label(task.getName());
+            Label taskStatus = new Label();
+            if(task.isCompleted())
+            {
+                taskStatus.setText("completed");
+                taskStatus.setId("completed");
+            }
             else
-                priority.setText("LOW");
-            ProgressBar deadline = new ProgressBar();
-            deadline.setProgress(task.getTimePercent());
-            System.out.println(task.getTimePercent());
-            HBox hBox = new HBox(name, priority, deadline);
+            {
+                taskStatus.setText("to do");
+                taskStatus.setId("todo");
+            }
+            Label taskPriority = new Label();
+            if(task.getPriority() == Priority.HIGH)
+                taskPriority.setText("HIGH");
+            else if (task.getPriority() == Priority.MEDIUM)
+                taskPriority.setText("MEDIUM");
+            else
+                taskPriority.setText("LOW");
+            ProgressBar taskDeadline = new ProgressBar(task.getTimePercent());
+            HBox hBox = new HBox(taskName, taskStatus, taskPriority, taskDeadline);
             hBox.setId("task");
             hBox.setAlignment(Pos.CENTER_LEFT);
             //hBox.setAlignment(Pos.CENTER);
