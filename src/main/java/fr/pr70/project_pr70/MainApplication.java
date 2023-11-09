@@ -68,6 +68,8 @@ public class MainApplication extends Application
 
     public static void setDashboard()
     {
+        DashboardController dashboardController = dashboardView.getController();
+        dashboardController.updateTaskList();
         stage.setScene(dashboard);
     }
     public static void setProfile(){stage.setScene(profile);}
