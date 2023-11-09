@@ -14,6 +14,12 @@ public class User
 
     /* ----------------- Constructor ----------------- */
 
+    public User(String _username)
+    {
+        username = _username;
+        password = new Password("");
+        tasks = new TaskManager();
+    }
 
     public User(String _username, String _password)
     {

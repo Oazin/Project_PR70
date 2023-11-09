@@ -5,7 +5,7 @@ import java.util.List;
 
 public class UserManager
 {
-    private List<User> users;
+    private final List<User> users;
     
     /* ----------------- Constructor ----------------- */
     public UserManager()
@@ -14,6 +14,11 @@ public class UserManager
     }
     
     /* ----------------- Methods ----------------- */
+
+    public List<User> getUsers()
+    {
+        return users;
+    }
 
     /*! @brief : Ajoute l'utilisateur
      *  @param user ; Utilisateur à ajouter
