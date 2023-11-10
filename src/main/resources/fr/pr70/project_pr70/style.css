@@ -18,3 +18,40 @@
 {
     -fx-spacing: 20;
 }
+
+#header
+{
+    -fx-border-bottom: solid;
+    -fx-border-color: transparent transparent #B0B0B0 transparent;
+}
+
+#header .label
+{
+    -fx-padding: 10 20 10 20;
+}
+
+#task .label
+{
+    -fx-padding: 10 20 10 20;
+}
+
+#task:hover
+{
+    -fx-background-color: #D0D0D0;
+}
+
+#task #completed
+{
+    -fx-background-insets: 5, 0, 5, 0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color: #D2DE32;
+}
+
+#task #todo
+{
+    -fx-background-insets: 5, 0, 5, 0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color: #D80032;
+}
