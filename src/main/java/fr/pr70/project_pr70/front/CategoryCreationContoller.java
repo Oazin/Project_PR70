@@ -22,25 +22,49 @@ public class CategoryCreationContoller {
     @FXML
     private Label invalidText;
 
+
+    /*! @brief : Action lier au bouton "create category" sur l'affichage graffique
+     *
+     *  Behaviour : Permet a l'utilisateur de créer une nouvel categorie
+     */
     @FXML
     public void handleCreateCategory(ActionEvent e)
     {
+        // Si le champs nom ou le champs color n'est pas remplis la creation ne peut pas s'effectuer donc un message previent l'utilisateur
         if (nameField.getText().trim().isEmpty() ||
                 colorComboBox.getValue() == null)
         {
+            // Message de prevention
             invalidText.setText("All field need to be completed");
         }
+
+        // Sinon la categorie est créée
         else
         {
+            // Récuprération des champs
             String name = nameField.getText();
             Color color = Color.valueOf(colorComboBox.getValue());
+
+            // Récupération du category manager
             CategoryManager categoryManager = MainApplication.getCategoryManager();
+
+            // Créer la categorie avec les informations rentré par l'utilisateur
             Category category = new Category(name, color);
+
+            // Ajoute la categorie au category manager
             categoryManager.addCategories(category);
+
+            // Charge le dashboard
             MainApplication.setDashboard();
         }
 
     }
+
+    /*! @brief : Action lier au bouton cancel sur l'affichage graffique
+     *
+     *  Behaviour : Permet a l'utilisateur de retourner sur le dashboard
+     *  lorsqu'il decide de ne pas créer une categorie
+     */
     @FXML
     public void handleCancel()
     {

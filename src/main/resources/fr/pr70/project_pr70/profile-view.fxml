@@ -1,26 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="fr.pr70.project_pr70.front.ProfileController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
 
-    <Label fx:id="userLabel"/>
-
-    <Label  text="Old Password:"/>
-    <TextField fx:id="OldpasswordTextField"/>
-
-    <Label text="Password:"/>
-    <TextField fx:id="passwordTextField"/>
-
-    <Label  text="Confirm Password:"/>
-    <TextField fx:id="confirmPasswordTextField"/>
-
-    <Button text="Edit" onAction="#handleEdit"/>
-    <Button text="Cancel" onAction="#handleCancel"/>
+<VBox fx:id="profileBox" xmlns:fx="http://javafx.com/fxml" fx:controller="fr.pr70.project_pr70.front.ProfileController" alignment="CENTER" spacing="10">
+    <!--  -->
 </VBox>

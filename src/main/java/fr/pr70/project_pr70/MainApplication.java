@@ -3,6 +3,7 @@ package fr.pr70.project_pr70;
 import fr.pr70.project_pr70.back.CategoryManager;
 import fr.pr70.project_pr70.back.UserManager;
 import fr.pr70.project_pr70.front.DashboardController;
+import fr.pr70.project_pr70.front.ProfileController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,7 +73,12 @@ public class MainApplication extends Application
         dashboardController.updateTaskList();
         stage.setScene(dashboard);
     }
-    public static void setProfile(){stage.setScene(profile);}
+    public static void setProfile()
+    {
+        ProfileController profileController = profileView.getController();
+        profileController.updateProfile();
+        stage.setScene(profile);
+    }
 
     public static void setTaskCreation() {stage.setScene(taskCreation);}
 

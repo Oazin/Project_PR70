@@ -28,6 +28,7 @@ public class User
         tasks = new TaskManager();
     }
 
+
     /* ----------------- Getters ----------------- */
 
     public String getUsername()
@@ -44,6 +45,8 @@ public class User
     {
         return password;
     }
+
+
     /* ----------------- Setters ----------------- */
 
     public void setPassword(Password _password)
@@ -70,6 +73,7 @@ public class User
     {
         connected = _connected;
     }
+
 
     /* ----------------- Methods ----------------- */
     
@@ -112,7 +116,7 @@ public class User
     /*! @brief : Appel la fonction createTask de TaskManager
     *  @param String _name ; chaîne de charactère correspondant au nom de la tâche
     *  @param _description ; chaîne de charactère correspondant à la description de la tâche
-    *  @param _deadline ; Date de debut optimal de la tâche
+    *  @param _startDate ; Date de debut optimal de la tâche
     *  @param _deadline ; Date de fin optimal de la tâche
     *  @param _priority ; Priorité associée à la tâche
     *

@@ -7,15 +7,21 @@ public class TaskManager
 {
     protected ArrayList<Task> tasks;
 
+
+    /* ----------------- Constructor ----------------- */
     public TaskManager()
     {
         tasks = new ArrayList<>();
     }
 
+
+    /* ----------------- Getters ----------------- */
     public ArrayList<Task> getTasks() {
         return tasks;
     }
 
+
+    /* ----------------- Methods ----------------- */
     /*! @brief : Ajouter la tâche à la liste de tâches
      *  @param _task ; Tâche que l'utilisateur veux ajouter à sont gestionnaire
      */
@@ -25,8 +31,13 @@ public class TaskManager
         tasks.add(newTask);
     }
 
-    /*! @brief : Supprimer la tâche de la liste de tâches
-     *  @param _tack ; tâche que l'utilisateur souhaite supprimer
+    /*! @brief : Modifie une tache déjà existante
+     *  @param _tack ; tâche que l'utilisateur souhaite modifier
+     *  @param _name ; chaîne de charactère correspondant au nom de la tâche
+     *  @param _description ; chaîne de charactère correspondant a la description de la tâche
+     *  @param _startDate ; Date de debut de la task
+     *  @param _deadline ;  Deadline de la task
+     *  @param _priority ; Priorité de la task
      */
     public void editTask(Task _task, String _name, String _description, Date _startDate, Date _deadline, Priority _priority)
     {

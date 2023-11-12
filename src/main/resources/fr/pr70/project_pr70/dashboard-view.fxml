@@ -19,7 +19,7 @@
     </top>
     <center>
         <VBox fx:id="taskBox">
-            <!-- Add the content of your dashboard here -->
+            <!-- Content of dashboard-->
         </VBox>
     </center>
 </BorderPane>

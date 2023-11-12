@@ -29,6 +29,6 @@
     </ComboBox>
 
     <Label fx:id="invalidText" textFill="RED" />
-    <Button text="Create task" onAction="#handleCreateCategory"/>
+    <Button text="Create category" onAction="#handleCreateCategory"/>
     <Button text="Cancel" onAction="#handleCancel"/>
 </VBox>

@@ -6,20 +6,23 @@ import java.util.List;
 public class UserManager
 {
     private final List<User> users;
+
     
     /* ----------------- Constructor ----------------- */
     public UserManager()
     {
         users = new ArrayList<>();
     }
-    
-    /* ----------------- Methods ----------------- */
 
+
+    /* ----------------- Getters ----------------- */
     public List<User> getUsers()
     {
         return users;
     }
 
+    
+    /* ----------------- Methods ----------------- */
     /*! @brief : Ajoute l'utilisateur
      *  @param user ; Utilisateur à ajouter
      *
@@ -140,6 +143,8 @@ public class UserManager
         return false; // Aucun utilisateur trouvé avec ce nom d'utilisateur
     }
 
+   /*! @brief : reset le fait que l'utilisateur est conneter lorsqu'il se deconnecte
+    */
     public void resetConnectedUser()
     {
         for (User user : users)
@@ -151,6 +156,8 @@ public class UserManager
         }
     }
 
+    /*! @brief : Revoie l'utilisateur connecter
+     */
     public User getConnectedUser()
     {
         for (User user : users)

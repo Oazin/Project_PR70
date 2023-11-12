@@ -13,7 +13,6 @@ public class Task
 
     /* ----------------- Constructor ----------------- */
 
-
     public Task()
     {
         name = "";
@@ -117,6 +116,8 @@ public class Task
         return completed;
     }
 
+    /*! @brief : Transforme en String les variables propre à la tâche
+     */
     @Override
     public String toString()
     {
