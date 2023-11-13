@@ -6,11 +6,13 @@ import fr.pr70.project_pr70.back.Priority;
 import fr.pr70.project_pr70.back.Task;
 import fr.pr70.project_pr70.back.TaskManager;
 import fr.pr70.project_pr70.back.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -55,10 +57,32 @@ public class DashboardController
         User user = MainApplication.getUserManager().getUser(MainApplication.getCurrentUsername());
         if(user == null) return;
 
+        TableView<Task> tableView = new TableView<Task>();
+        tableView.setId("header");
+        taskBox.getChildren().add(tableView);
+        if(user.isAdmin())
+        {
+            TableColumn<Task, String> assignedCol = new TableColumn<Task, String>("assigned");
+            tableView.getColumns().add(assignedCol);
+        }
+        TableColumn<Task, String> nameCol = new TableColumn<Task, String>("name");
+        TableColumn<Task, String> statusCol = new TableColumn<Task, String>("status");
+        TableColumn<Task, String> priorityCol = new TableColumn<Task, String>("priority");
+        TableColumn<Task, String> deadlineCol = new TableColumn<Task, String>("deadline");
+        tableView.getColumns().addAll(nameCol, statusCol, priorityCol, deadlineCol);
+
+        nameCol.setCellFactory(new PropertyValueFactory<>("name"));
+        statusCol.setCellFactory(new PropertyValueFactory<>("status"));
+
+        TaskManager taskManager = user.getTasks();
+        ArrayList<Task> tasks = taskManager.getTasks();
+        ObservableList<Task> list = FXCollections.observableArrayList(tasks);
+        tableView.setItems(list);
+
         // update header
         HBox header = new HBox();
         header.setId("header");
-        taskBox.getChildren().add(header);
+        //taskBox.getChildren().add(header);
         if(user.isAdmin())
         {
             Label assigned = new Label("assigned");
@@ -75,6 +99,7 @@ public class DashboardController
         ArrayList<Task> tasks = taskManager.getTasks();
         for(Task task: tasks)
         {
+            Label taskAssigned = new Label("you");
             Label taskName = new Label(task.getName());
             Label taskStatus = new Label();
             if(task.isCompleted())
@@ -95,7 +120,7 @@ public class DashboardController
             else
                 taskPriority.setText("LOW");
             ProgressBar taskDeadline = new ProgressBar(task.getTimePercent());
-            HBox hBox = new HBox(taskName, taskStatus, taskPriority, taskDeadline);
+            HBox hBox = new HBox(taskAssigned, taskName, taskStatus, taskPriority, taskDeadline);
             hBox.setId("task");
             hBox.setAlignment(Pos.CENTER_LEFT);
             //hBox.setAlignment(Pos.CENTER);
