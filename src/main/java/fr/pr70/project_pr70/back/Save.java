@@ -4,6 +4,9 @@ import fr.pr70.project_pr70.MainApplication;
 import javafx.scene.paint.Color;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -14,15 +17,17 @@ public class Save {
     public File tasksData;
 
     public Save() throws IOException {
-        usersData = new File("src/main/resources/fr/pr70/project_pr70/users.data");
+        Path path = Paths.get("src/main/resources/fr/pr70/project_pr70/save/");
+        Files.createDirectories(path);
+        usersData = new File("src/main/resources/fr/pr70/project_pr70/save/users.data");
         if(!usersData.exists())
             if(!usersData.createNewFile())
                 return;
-        categoriesData = new File("src/main/resources/fr/pr70/project_pr70/categories.data");
+        categoriesData = new File("src/main/resources/fr/pr70/project_pr70/save/categories.data");
         if(!categoriesData.exists())
             if(!categoriesData.createNewFile())
                 return;
-        tasksData = new File("src/main/resources/fr/pr70/project_pr70/tasks.data");
+        tasksData = new File("src/main/resources/fr/pr70/project_pr70/save/tasks.data");
         if(!tasksData.exists())
             tasksData.createNewFile();
     }

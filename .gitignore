@@ -4,9 +4,9 @@ target/
 !**/src/test/**/target/
 
 ### Save ###
-src/main/resources/fr/pr70/project_pr70/users.data
-src/main/resources/fr/pr70/project_pr70/categories.data
-src/main/resources/fr/pr70/project_pr70/tasks.data
+src/main/resources/fr/pr70/project_pr70/save/users.data
+src/main/resources/fr/pr70/project_pr70/save/categories.data
+src/main/resources/fr/pr70/project_pr70/save/tasks.data
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
