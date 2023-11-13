@@ -106,7 +106,7 @@ public class UserManager
     {
         User user = getUser(_username);
         if (user == null) return false; // L'utilisateur n'existe pas
-        if (!user.getPassword().equals(_password)) return false; // Le mot de passe est incorrect
+        if (!user.getPassword().checkPassword(_password)) return false; // Le mot de passe est incorrect
         user.setConnected(true);
         return true; // L'utilisateur a été connecté avec succès
     }
