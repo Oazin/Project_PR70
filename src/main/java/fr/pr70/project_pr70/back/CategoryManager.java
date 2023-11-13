@@ -6,30 +6,27 @@ import java.util.ArrayList;
 
 public final class CategoryManager
 {
-    private static ArrayList<Category> categories;
+    private ArrayList<Category> categories;
 
 
     /* ----------------- Constructor ----------------- */
-    public static void Init()
+    public CategoryManager()
     {
-        if(categories == null)
-        {
-            categories = new ArrayList<>();
-        }
+        categories = new ArrayList<>();
     }
 
 
     /* ----------------- Getter ----------------- */
-    public static ArrayList<Category> getCategories() { return categories; }
+    public ArrayList<Category> getCategories() { return categories; }
 
 
     /* ----------------- Setter ----------------- */
-    public static void setCategories(ArrayList<Category> categories) { CategoryManager.categories = categories; }
+    public void setCategories(ArrayList<Category> _categories) { categories = _categories; }
 
 
     /* ----------------- Methods ----------------- */
     /*! @brief : Ajout une categorie à la liste des categories
      */
-    public static void addCategories(Category _category) { CategoryManager.categories.add(_category); }
+    public void addCategories(Category _category) { categories.add(_category); }
 
 }

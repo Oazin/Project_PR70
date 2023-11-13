@@ -1,5 +1,6 @@
 package fr.pr70.project_pr70.back;
 
+import fr.pr70.project_pr70.MainApplication;
 import javafx.scene.paint.Color;
 
 import java.io.*;
@@ -8,26 +9,25 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Save {
-    public static File usersData;
-    public static File categoriesData;
-    public static File tasksData;
+    public File usersData;
+    public File categoriesData;
+    public File tasksData;
 
-    public static boolean init() throws IOException {
+    public Save() throws IOException {
         usersData = new File("src/main/resources/fr/pr70/project_pr70/users.data");
         if(!usersData.exists())
             if(!usersData.createNewFile())
-                return false;
+                return;
         categoriesData = new File("src/main/resources/fr/pr70/project_pr70/categories.data");
         if(!categoriesData.exists())
             if(!categoriesData.createNewFile())
-                return false;
+                return;
         tasksData = new File("src/main/resources/fr/pr70/project_pr70/tasks.data");
         if(!tasksData.exists())
-            return tasksData.createNewFile();
-        return true;
+            tasksData.createNewFile();
     }
 
-    public static void saveTask(int userId, Task task) throws IOException
+    public void saveTask(int userId, Task task) throws IOException
     {
         if(tasksData == null) return;
         String string = userId+", "+task.getName()+", "+task.getDescription()+", "+task.getStartDate()+", "+task.getDeadline()+", "+task.getPriority()+", "+task.isCompleted()+"\n";
@@ -36,7 +36,7 @@ public class Save {
         writer.close();
     }
 
-    public static void saveTasks(FileWriter writer, int userId, TaskManager taskManager) throws IOException
+    public void saveTasks(FileWriter writer, int userId, TaskManager taskManager) throws IOException
     {
         for(Task task: taskManager.getTasks())
         {
@@ -45,7 +45,7 @@ public class Save {
         }
     }
 
-    public static void loadTasks(UserManager userManager) throws FileNotFoundException
+    public void loadTasks(UserManager userManager) throws FileNotFoundException
     {
         if(tasksData == null) return;
         List<User> userList = userManager.getUsers();
@@ -65,7 +65,7 @@ public class Save {
         }
     }
 
-    public static void saveUsers(UserManager userManager) throws IOException
+    public void saveUsers(UserManager userManager) throws IOException
     {
         if(usersData == null) return;
         FileWriter writer = new FileWriter(usersData);
@@ -77,7 +77,7 @@ public class Save {
         writer.close();
     }
 
-    public static UserManager loadUsers() throws FileNotFoundException
+    public UserManager loadUsers() throws FileNotFoundException
     {
         if(usersData == null) return null;
         UserManager userManager = new UserManager();
@@ -93,11 +93,11 @@ public class Save {
         return userManager;
     }
 
-    public static void saveCategories() throws IOException
+    public void saveCategories() throws IOException
     {
         if(categoriesData == null) return;
         FileWriter writer = new FileWriter(categoriesData);
-        for(Category category: CategoryManager.getCategories())
+        for(Category category: MainApplication.getCategoryManager().getCategories())
         {
             String string = category.getName()+", "+category.getColor()+"\n";
             writer.append(string);
@@ -105,21 +105,21 @@ public class Save {
         writer.close();
     }
 
-    public static void loadCategories() throws FileNotFoundException
+    public void loadCategories() throws FileNotFoundException
     {
         if(categoriesData == null) return;
-        CategoryManager.Init();
         Scanner scanner = new Scanner(categoriesData);
         while(scanner.hasNextLine())
         {
             String[] categoryInfo = scanner.nextLine().split(", ");
             Category category = new Category(categoryInfo[0], Color.web(categoryInfo[1]));
-            CategoryManager.addCategories(category);
+            MainApplication.getCategoryManager().addCategories(category);
         }
     }
 
-    public static void save(UserManager userManager) throws IOException
+    public void save() throws IOException
     {
+        UserManager userManager = MainApplication.getUserManager();
         //save all tasks
         List<User> userList = userManager.getUsers();
         FileWriter writer = new FileWriter(tasksData);
@@ -133,7 +133,7 @@ public class Save {
         saveUsers(userManager);
     }
 
-    public static UserManager load() throws FileNotFoundException
+    public UserManager load() throws FileNotFoundException
     {
         //load all users
         UserManager userManager = loadUsers();

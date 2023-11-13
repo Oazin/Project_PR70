@@ -1,6 +1,7 @@
 package fr.pr70.project_pr70;
 
 import fr.pr70.project_pr70.back.CategoryManager;
+import fr.pr70.project_pr70.back.Save;
 import fr.pr70.project_pr70.back.UserManager;
 import fr.pr70.project_pr70.front.DashboardController;
 import fr.pr70.project_pr70.front.ProfileController;
@@ -24,6 +25,8 @@ public class MainApplication extends Application
     private static String currentUsername;
 
     private static CategoryManager categoryManager;
+
+    private static Save save;
 
     private static Stage stage;
 
@@ -132,10 +135,17 @@ public class MainApplication extends Application
         stage.show();
     }
 
-    public static void main(String[] args)
-    {
-        userManager = new UserManager();
+    @Override
+    public void stop() throws IOException {
+        save.saveCategories();
+        save.save();
+    }
+
+    public static void main(String[] args) throws IOException {
+        save = new Save();
+        userManager = save.load();
         categoryManager = new CategoryManager();
+        save.loadCategories();
         launch();
     }
 }
