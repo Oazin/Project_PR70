@@ -11,6 +11,8 @@ public class Task
     protected Priority priority;
     protected boolean completed;
 
+    protected boolean reported;
+
     /* ----------------- Constructor ----------------- */
 
     public Task()
@@ -21,6 +23,7 @@ public class Task
         deadline = new Date();
         priority = Priority.LOW;
         completed = false;
+        reported = false;
     }
 
     public Task(String _name, String _description, Date _startDate, Date _deadline, Priority _priority)
@@ -31,6 +34,7 @@ public class Task
         deadline = _deadline;
         priority = _priority;
         completed = false;
+        reported = false;
     }
 
 
@@ -80,6 +84,11 @@ public class Task
         completed = _completed;
     }
 
+    public void setReported(boolean _reported)
+    {
+        reported = _reported;
+    }
+
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
@@ -105,8 +114,6 @@ public class Task
     }
 
 
-
-
     /* ----------------- Methods ----------------- */
 
     /*! @brief : Revoie le status de la tâche
@@ -114,6 +121,11 @@ public class Task
     public boolean isCompleted()
     {
         return completed;
+    }
+
+    public boolean isReported()
+    {
+        return reported;
     }
 
     /*! @brief : Transforme en String les variables propre à la tâche

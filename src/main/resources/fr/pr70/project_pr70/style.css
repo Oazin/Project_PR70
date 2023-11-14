@@ -28,11 +28,25 @@
 #header .label
 {
     -fx-padding: 10 20 10 20;
+    -fx-min-width: 100;
 }
 
 #task .label
 {
     -fx-padding: 10 20 10 20;
+    -fx-min-width: 100;
+}
+
+#task .progress-bar
+{
+    -fx-padding: 10 0 10 0;
+    -fx-min-width: 100;
+}
+
+#task .button
+{
+    -fx-padding: 10 20 10 20;
+    -fx-min-width: 100;
 }
 
 #task:hover
