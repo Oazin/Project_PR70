@@ -60,10 +60,12 @@ public class DashboardController
         TableView<Task> tableView = new TableView<Task>();
         tableView.setId("header");
         taskBox.getChildren().add(tableView);
+        TableColumn<User, String> assignedCol;
         if(user.isAdmin())
         {
-            TableColumn<Task, String> assignedCol = new TableColumn<Task, String>("assigned");
+            assignedCol = new TableColumn<User, String>("assigned");
             tableView.getColumns().add(assignedCol);
+            assignedCol.setCellValueFactory(new PropertyValueFactory<>("assigned"));
         }
         TableColumn<Task, String> nameCol = new TableColumn<Task, String>("name");
         TableColumn<Task, String> statusCol = new TableColumn<Task, String>("status");
@@ -71,8 +73,10 @@ public class DashboardController
         TableColumn<Task, String> deadlineCol = new TableColumn<Task, String>("deadline");
         tableView.getColumns().addAll(nameCol, statusCol, priorityCol, deadlineCol);
 
-        nameCol.setCellFactory(new PropertyValueFactory<>("name"));
-        statusCol.setCellFactory(new PropertyValueFactory<>("status"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+        priorityCol.setCellValueFactory(new PropertyValueFactory<>("priority"));
+        deadlineCol.setCellValueFactory(new PropertyValueFactory<>("deadline"));
 
         TaskManager taskManager = user.getTasks();
         ArrayList<Task> tasks = taskManager.getTasks();
@@ -80,6 +84,7 @@ public class DashboardController
         tableView.setItems(list);
 
         // update header
+        /**
         HBox header = new HBox();
         header.setId("header");
         //taskBox.getChildren().add(header);
@@ -125,6 +130,6 @@ public class DashboardController
             hBox.setAlignment(Pos.CENTER_LEFT);
             //hBox.setAlignment(Pos.CENTER);
             taskBox.getChildren().add(hBox);
-        }
+        }**/
     }
 }

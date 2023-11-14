@@ -60,6 +60,8 @@ public class Task
         return deadline;
     }
 
+    public Boolean getStatus() { return completed; }
+
     public double getTimePercent()
     {
         long duration = deadline.getTime() - startDate.getTime();
