@@ -2,8 +2,10 @@ package fr.pr70.project_pr70;
 
 import fr.pr70.project_pr70.back.CategoryManager;
 import fr.pr70.project_pr70.back.Save;
+import fr.pr70.project_pr70.back.Task;
 import fr.pr70.project_pr70.back.UserManager;
 import fr.pr70.project_pr70.front.DashboardController;
+import fr.pr70.project_pr70.front.DetailController;
 import fr.pr70.project_pr70.front.ProfileController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -42,6 +44,10 @@ public class MainApplication extends Application
 
     private static FXMLLoader profileView;
 
+    private static FXMLLoader detailView;
+
+    private static FXMLLoader editView;
+
     private static Scene login;
 
     private static Scene signIn;
@@ -52,6 +58,10 @@ public class MainApplication extends Application
     private static Scene taskCreation;
 
     private static Scene categoryCreation;
+
+    private static Scene detail;
+
+    private static Scene edit;
 
     public static void setCurrentUsername(String _currentUsername) {
         MainApplication.currentUsername = _currentUsername;
@@ -97,6 +107,18 @@ public class MainApplication extends Application
         stage.setScene(signIn);
     }
 
+    public static void setDetail(Task task)
+    {
+        DetailController detailController = detailView.getController();
+        detailController.updateDetail(task);
+        stage.setScene(detail);
+    }
+
+    public static void setEdit()
+    {
+        stage.setScene(edit);
+    }
+
     @Override
     public void start(Stage _stage) throws IOException
     {
@@ -109,13 +131,18 @@ public class MainApplication extends Application
         profileView = new FXMLLoader(MainApplication.class.getResource("profile-view.fxml"));
         taskCreationView = new FXMLLoader(MainApplication.class.getResource("task-creation-view.fxml"));
         categoryCreationView = new FXMLLoader(MainApplication.class.getResource("category-creation-view.fxml"));
+        editView = new FXMLLoader(MainApplication.class.getResource("edit-view.fxml"));
+        detailView = new FXMLLoader(MainApplication.class.getResource("detail-view.fxml"));
+
         signIn = new Scene(signInView.load(), 400, 600);
         login = new Scene(loginView.load(), 400, 600);
         dashboard = new Scene(dashboardView.load(), 960, 540);
-
         profile = new Scene(profileView.load(), 400, 600);
         taskCreation = new Scene(taskCreationView.load(), 400, 600);
         categoryCreation = new Scene(categoryCreationView.load(), 400, 600);
+        edit = new Scene(editView.load(), 400, 600);
+        detail = new Scene(detailView.load(), 400, 600);
+
         //import style.css
         URL url = this.getClass().getResource("style.css");
         if (url == null) {

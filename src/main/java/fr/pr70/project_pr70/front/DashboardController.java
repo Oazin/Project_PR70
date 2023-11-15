@@ -3,15 +3,18 @@ package fr.pr70.project_pr70.front;
 
 import fr.pr70.project_pr70.MainApplication;
 import fr.pr70.project_pr70.back.*;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -146,7 +149,7 @@ public class DashboardController
             }
             Button taskEdit = new Button("Edit");
             taskEdit.setOnAction(actionEvent -> {
-                System.out.println("Edit");
+                MainApplication.setEdit();
             });
             Button taskDelete = new Button("Delete");
             taskDelete.setOnAction(actionEvent -> {
@@ -159,6 +162,16 @@ public class DashboardController
             {
                 hBox.setStyle("-fx-background-color: red");
             }
+            hBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+                        if(mouseEvent.getClickCount() == 2){
+                            MainApplication.setDetail(task);
+                        }
+                    }
+                }
+            });
             //hBox.setAlignment(Pos.CENTER_LEFT);
             taskBox.getChildren().add(hBox);
         }
