@@ -27,6 +27,18 @@ public final class CategoryManager
     /* ----------------- Methods ----------------- */
     /*! @brief : Ajout une categorie à la liste des categories
      */
+
+    public Category getCategory(String _categoryName)
+    {
+        for(Category category:categories)
+        {
+            if(category.name.equals(_categoryName))
+            {
+                return category;
+            }
+        }
+        return null;
+    }
     public void addCategories(Category _category) { categories.add(_category); }
 
 }

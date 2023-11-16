@@ -45,7 +45,7 @@ public class Save {
     {
         for(Task task: taskManager.getTasks())
         {
-            String string = userId+", "+task.getName()+", "+task.getDescription()+", "+task.getStartDate().getTime()+", "+task.getDeadline().getTime()+", "+task.getPriority()+", "+task.isCompleted()+"\n";
+            String string = userId+", "+task.getName()+", "+task.getDescription()+", "+task.getStartDate().getTime()+", "+task.getDeadline().getTime()+", "+task.getPriority()+", "+task.getCategory()+", "+task.isCompleted()+", "+task.isReported()+"\n";
             writer.append(string);
         }
     }
@@ -65,7 +65,9 @@ public class Save {
             task.setStartDate(new Date(Long.parseLong(taskInfo[3])));
             task.setDeadline(new Date(Long.parseLong(taskInfo[4])));
             task.setPriority(Priority.valueOf(taskInfo[5]));
-            task.setCompleted(Boolean.parseBoolean(taskInfo[6]));
+            task.setCategory(MainApplication.getCategoryManager().getCategory(taskInfo[6]));
+            task.setCompleted(Boolean.parseBoolean(taskInfo[7]));
+            task.setReported(Boolean.parseBoolean(taskInfo[8]));
             user.getTasks().getTasks().add(task);
         }
     }

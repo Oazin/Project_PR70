@@ -25,14 +25,32 @@
     -fx-border-color: transparent transparent #B0B0B0 transparent;
 }
 
-#header .label
+#taskTable .label
 {
     -fx-padding: 10 20 10 20;
+    -fx-min-width: 100;
+    -fx-max-width: 100;
 }
 
-#task .label
+#taskTable #bigLabel
 {
     -fx-padding: 10 20 10 20;
+    -fx-min-width: 120;
+    -fx-max-width: 120;
+}
+
+#task .progress-bar
+{
+    -fx-padding: 10 0 10 0;
+    -fx-min-width: 100;
+    -fx-max-width: 100;
+}
+
+#task .button
+{
+    -fx-padding: 10 20 10 20;
+    -fx-min-width: 100;
+    -fx-max-width: 100;
 }
 
 #task:hover
@@ -42,14 +60,20 @@
 
 #task #completed
 {
+    -fx-padding: 10 20 10 20;
+    -fx-min-width: 120;
+    -fx-max-width: 120;
     -fx-background-insets: 5, 0, 5, 0;
-    -fx-text-fill: white;
+    -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
-    -fx-background-color: #D2DE32;
+    -fx-background-color: rgb(11, 98, 11);
 }
 
 #task #todo
 {
+    -fx-padding: 10 20 10 20;
+    -fx-min-width: 120;
+    -fx-max-width: 120;
     -fx-background-insets: 5, 0, 5, 0;
     -fx-text-fill: white;
     -fx-font-weight: bold;

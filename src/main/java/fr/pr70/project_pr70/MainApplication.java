@@ -2,9 +2,9 @@ package fr.pr70.project_pr70;
 
 import fr.pr70.project_pr70.back.CategoryManager;
 import fr.pr70.project_pr70.back.Save;
+import fr.pr70.project_pr70.back.Task;
 import fr.pr70.project_pr70.back.UserManager;
-import fr.pr70.project_pr70.front.DashboardController;
-import fr.pr70.project_pr70.front.ProfileController;
+import fr.pr70.project_pr70.front.*;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +42,10 @@ public class MainApplication extends Application
 
     private static FXMLLoader profileView;
 
+    private static FXMLLoader detailView;
+
+    private static FXMLLoader editView;
+
     private static Scene login;
 
     private static Scene signIn;
@@ -52,6 +56,10 @@ public class MainApplication extends Application
     private static Scene taskCreation;
 
     private static Scene categoryCreation;
+
+    private static Scene detail;
+
+    private static Scene edit;
 
     public static void setCurrentUsername(String _currentUsername) {
         MainApplication.currentUsername = _currentUsername;
@@ -73,7 +81,7 @@ public class MainApplication extends Application
     public static void setDashboard()
     {
         DashboardController dashboardController = dashboardView.getController();
-        dashboardController.updateTaskList();
+        dashboardController.updateTaskTable();
         stage.setScene(dashboard);
     }
     public static void setProfile()
@@ -83,7 +91,12 @@ public class MainApplication extends Application
         stage.setScene(profile);
     }
 
-    public static void setTaskCreation() {stage.setScene(taskCreation);}
+    public static void setTaskCreation()
+    {
+        TaskCreationController taskCreationController = taskCreationView.getController();
+        taskCreationController.updateCategoryComboBox();
+        stage.setScene(taskCreation);
+    }
 
     public static void setCategoryCreation() {
         stage.setScene(categoryCreation);
@@ -95,6 +108,20 @@ public class MainApplication extends Application
 
     public static void setSignIn(){
         stage.setScene(signIn);
+    }
+
+    public static void setDetail(Task _task)
+    {
+        DetailController detailController = detailView.getController();
+        detailController.updateDetail(_task);
+        stage.setScene(detail);
+    }
+
+    public static void setEdit(Task _task)
+    {
+        EditController editController = editView.getController();
+        editController.updateEdit(_task);
+        stage.setScene(edit);
     }
 
     @Override
@@ -109,13 +136,18 @@ public class MainApplication extends Application
         profileView = new FXMLLoader(MainApplication.class.getResource("profile-view.fxml"));
         taskCreationView = new FXMLLoader(MainApplication.class.getResource("task-creation-view.fxml"));
         categoryCreationView = new FXMLLoader(MainApplication.class.getResource("category-creation-view.fxml"));
+        editView = new FXMLLoader(MainApplication.class.getResource("edit-view.fxml"));
+        detailView = new FXMLLoader(MainApplication.class.getResource("detail-view.fxml"));
+
         signIn = new Scene(signInView.load(), 400, 600);
         login = new Scene(loginView.load(), 400, 600);
         dashboard = new Scene(dashboardView.load(), 960, 540);
-
         profile = new Scene(profileView.load(), 400, 600);
         taskCreation = new Scene(taskCreationView.load(), 400, 600);
         categoryCreation = new Scene(categoryCreationView.load(), 400, 600);
+        edit = new Scene(editView.load(), 400, 600);
+        detail = new Scene(detailView.load(), 400, 600);
+
         //import style.css
         URL url = this.getClass().getResource("style.css");
         if (url == null) {
@@ -143,9 +175,9 @@ public class MainApplication extends Application
 
     public static void main(String[] args) throws IOException {
         save = new Save();
-        userManager = save.load();
         categoryManager = new CategoryManager();
         save.loadCategories();
+        userManager = save.load();
         launch();
     }
 }

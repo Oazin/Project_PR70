@@ -34,24 +34,30 @@ public class SignInController
     protected void onSubmitClicked()
     {
         UserManager userManager = MainApplication.getUserManager();
-        if (!userManager.alreadyExist(userTextField.getText())){
-            User user = new User(userTextField.getText(), passwordTextField.getText());
-            user.setConnected(true);
-            if(userManager.isEmpty())
-            {
-                user.setAdmin(true);
-            }
-            MainApplication.setCurrentUsername(user.getUsername());
-            userManager.addUser(user);
-            MainApplication.setDashboard();
-        } else {
+        if(userManager.alreadyExist(userTextField.getText()))
+        {
             invalidText.setText("This username already exist");
+            return;
         }
-
+        if(!userManager.confirmPassword(passwordTextField.getText(), confirmPasswordTextField.getText()))
+        {
+            invalidText.setText("Password and Confirm Password are different");
+            return;
+        }
+        User user = new User(userTextField.getText(), passwordTextField.getText());
+        user.setConnected(true);
+        if(userManager.isEmpty())
+        {
+            user.setAdmin(true);
+        }
+        MainApplication.setCurrentUsername(user.getUsername());
+        userManager.addUser(user);
+        MainApplication.setDashboard();
     }
 
     @FXML
-    protected void handleLogin(){
+    protected void handleLogin()
+    {
         MainApplication.setLogin();
     }
 }

@@ -124,9 +124,9 @@ public class User
     *  Passer le gestionnaire de tâche associés à l'utilisateur pour
     *  créer et ajouter la tâche à la liste de l'utilisateur
     */
-    public void addTask(String _name, String _description,Date _startDate, Date _deadline, Priority _priority)
+    public void addTask(String _name, String _description,Date _startDate, Date _deadline, Priority _priority, Category _category)
     {
-        tasks.createTask(_name, _description, _startDate, _deadline, _priority);
+        tasks.createTask(_name, _description, _startDate, _deadline, _priority, _category);
     }
     
     /*! @brief : Appel la fonction deleteTask de TaskManager
