@@ -5,6 +5,7 @@ import fr.pr70.project_pr70.back.User;
 import fr.pr70.project_pr70.back.UserManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class SignInController
@@ -13,22 +14,13 @@ public class SignInController
     private Label invalidText;
 
     @FXML
-    private Label userLabel;
-
-    @FXML
-    private Label passwordLabel;
-
-    @FXML
-    private Label confirmPasswordLabel;
-
-    @FXML
     private TextField userTextField;
 
     @FXML
-    private TextField passwordTextField;
+    private PasswordField passwordTextField;
 
     @FXML
-    private TextField confirmPasswordTextField;
+    private PasswordField confirmPasswordTextField;
 
     @FXML
     protected void onSubmitClicked()
