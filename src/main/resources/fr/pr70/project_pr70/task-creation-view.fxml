@@ -33,6 +33,9 @@
             </FXCollections>
         </items>
     </ComboBox>
+    <ComboBox fx:id="categoryComboBox">
+
+    </ComboBox>
 
     <Label fx:id="invalidText" textFill="RED" />
     <Button text="Create task" onAction="#handleCreateTask"/>

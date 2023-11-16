@@ -1,14 +1,13 @@
 package fr.pr70.project_pr70.front;
 
 import fr.pr70.project_pr70.MainApplication;
-import fr.pr70.project_pr70.back.Priority;
-import fr.pr70.project_pr70.back.Task;
-import fr.pr70.project_pr70.back.User;
-import fr.pr70.project_pr70.back.UserManager;
+import fr.pr70.project_pr70.back.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class TaskCreationController {
@@ -29,6 +28,9 @@ public class TaskCreationController {
     private ComboBox<String> priorityComboBox;
 
     @FXML
+    private ComboBox<Category> categoryComboBox;
+
+    @FXML
     private Label invalidText;
 
     @FXML
@@ -39,7 +41,8 @@ public class TaskCreationController {
                 descriptionArea.getText().trim().isEmpty() ||
                 startDatePicker.getValue() == null ||
                 deadlinePicker.getValue() == null ||
-                priorityComboBox.getValue() == null)
+                priorityComboBox.getValue() == null ||
+                categoryComboBox.getValue() == null)
         {
             // Message de prevention
             invalidText.setText("All field need to be completed");
@@ -51,9 +54,10 @@ public class TaskCreationController {
             // Récuprération des champs
             String name = nameField.getText();
             String description = descriptionArea.getText();
-            Date startdDate = java.sql.Date.valueOf(startDatePicker.getValue());
-            Date deadline = java.sql.Date.valueOf(deadlinePicker.getValue());
+            Date startDate = Date.from(startDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            Date deadline = Date.from(deadlinePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
             Priority priority = Priority.valueOf(priorityComboBox.getValue());
+            Category category = categoryComboBox.getValue();
 
             // Récupération de la liste des utilisateurs
             UserManager userManager = MainApplication.getUserManager();
@@ -62,7 +66,7 @@ public class TaskCreationController {
             User user = userManager.getUser(MainApplication.getCurrentUsername());
 
             // Création de la task
-            user.addTask(name, description, startdDate, deadline, priority);
+            user.addTask(name, description, startDate, deadline, priority, category);
 
             //Charge le dashboard
             MainApplication.setDashboard();
@@ -81,4 +85,14 @@ public class TaskCreationController {
         MainApplication.setDashboard();
     }
 
+    public void updateCategoryComboBox()
+    {
+        categoryComboBox.getItems().clear();
+        ArrayList<Category> categories = MainApplication.getCategoryManager().getCategories();
+        if(!categories.isEmpty())
+        {
+            categoryComboBox.setValue(categories.get(0));
+        }
+        categoryComboBox.getItems().addAll(categories);
+    }
 }

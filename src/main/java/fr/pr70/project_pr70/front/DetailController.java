@@ -18,10 +18,14 @@ public class DetailController {
     }
 
     @FXML
-    public void updateDetail(Task task)
+    public void updateDetail(Task _task)
     {
         infoBox.getChildren().clear();
-        Label description = new Label(task.getDescription());
-        infoBox.getChildren().add(description);
+        Label name = new Label(_task.getName());
+        name.setStyle("-fx-font-weight: bold");
+        Label description = new Label(_task.getDescription());
+        Label priority = new Label(_task.getPriority().toString());
+        Label deadLine = new Label(_task.getDeadline().toString());
+        infoBox.getChildren().addAll(name, description, priority, deadLine);
     }
 }

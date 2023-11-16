@@ -25,9 +25,9 @@ public class TaskManager
     /*! @brief : Ajouter la tâche à la liste de tâches
      *  @param _task ; Tâche que l'utilisateur veux ajouter à sont gestionnaire
      */
-    public void createTask(String _name, String _description,Date _startDate, Date _deadline, Priority _priority)
+    public void createTask(String _name, String _description,Date _startDate, Date _deadline, Priority _priority, Category _category)
     {
-        Task newTask = new Task(_name, _description, _startDate,_deadline, _priority);
+        Task newTask = new Task(_name, _description, _startDate,_deadline, _priority, _category);
         tasks.add(newTask);
     }
 

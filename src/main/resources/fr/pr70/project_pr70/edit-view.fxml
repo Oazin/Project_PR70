@@ -7,11 +7,33 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="fr.pr70.project_pr70.front.EditController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
+
+    <TextField fx:id="nameField" promptText="Task name" />
+
+    <TextArea fx:id="descriptionArea" promptText="Task description"/>
+
+    <DatePicker fx:id="startDatePicker" promptText="Start date"/>
+
+    <DatePicker fx:id="deadlinePicker" promptText="Deadline"/>
+
+    <ComboBox fx:id="priorityComboBox" value="LOW">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="HIGH"/>
+                <String fx:value="MEDIUM"/>
+                <String fx:value="LOW"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+    <Label fx:id="invalidText" textFill="RED" />
+    <Button fx:id="saveTaskButton" text="Save task"/>
     <Button text="Cancel" onAction="#handleCancel"/>
 </VBox>
 

@@ -1,11 +1,10 @@
 package fr.pr70.project_pr70.back;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class UserManager
 {
-    private final List<User> users;
+    private final ArrayList<User> users;
 
     
     /* ----------------- Constructor ----------------- */
@@ -16,7 +15,7 @@ public class UserManager
 
 
     /* ----------------- Getters ----------------- */
-    public List<User> getUsers()
+    public ArrayList<User> getUsers()
     {
         return users;
     }

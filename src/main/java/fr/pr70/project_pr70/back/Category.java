@@ -7,6 +7,12 @@ public class Category {
     protected Color color;
 
     /* ----------------- Constructor ----------------- */
+
+    public Category()
+    {
+        name = "";
+        color = Color.WHITE;
+    }
     public Category(String _name,Color _color)
     {
         name = _name;
@@ -21,5 +27,11 @@ public class Category {
 
     public Color getColor() {
         return color;
+    }
+
+    @Override
+    public String toString()
+    {
+        return name;
     }
 }

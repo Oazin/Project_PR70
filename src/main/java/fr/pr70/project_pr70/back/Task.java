@@ -9,6 +9,7 @@ public class Task
     protected Date startDate;
     protected Date deadline;
     protected Priority priority;
+    protected Category category;
     protected boolean completed;
 
     protected boolean reported;
@@ -22,17 +23,19 @@ public class Task
         startDate = new Date();
         deadline = new Date();
         priority = Priority.LOW;
+        category = new Category();
         completed = false;
         reported = false;
     }
 
-    public Task(String _name, String _description, Date _startDate, Date _deadline, Priority _priority)
+    public Task(String _name, String _description, Date _startDate, Date _deadline, Priority _priority, Category _category)
     {
         name = _name;
         description = _description;
         startDate = _startDate;
         deadline = _deadline;
         priority = _priority;
+        category = _category;
         completed = false;
         reported = false;
     }
@@ -55,6 +58,11 @@ public class Task
         return priority;
     }
 
+    public Category getCategory()
+    {
+        return category;
+    }
+
     public Date getStartDate() {
         return startDate;
     }
@@ -63,18 +71,6 @@ public class Task
     {
         return deadline;
     }
-
-    public double getTimePercent()
-    {
-        long duration = deadline.getTime() - startDate.getTime();
-        Date currentDate = new Date();
-        long currentPoint = currentDate.getTime() - startDate.getTime();
-
-        return (double)currentPoint / (double)duration;
-
-    }
-
-
 
 
     /* ----------------- Setters ----------------- */
@@ -113,8 +109,22 @@ public class Task
         priority = _priority;
     }
 
+    public void setCategory(Category _category)
+    {
+        category = _category;
+    }
 
     /* ----------------- Methods ----------------- */
+
+    public double getTimePercent()
+    {
+        long duration = deadline.getTime() - startDate.getTime();
+        Date currentDate = new Date();
+        long currentPoint = currentDate.getTime() - startDate.getTime();
+
+        return (double)currentPoint / (double)duration;
+
+    }
 
     /*! @brief : Revoie le status de la tâche
      */

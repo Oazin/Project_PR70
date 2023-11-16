@@ -37,6 +37,10 @@ public final class Password
         return this.passwordHash.equals(hashPassword(password));
     }
 
+    /*! @brief : hash a clean password
+     *  @param password ; clean password to hash
+     *  @return hashed password
+     */
     private String hashPassword(String password)
     {
         // Hash the password with PBKDF2

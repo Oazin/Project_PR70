@@ -5,25 +5,23 @@ import fr.pr70.project_pr70.MainApplication;
 import fr.pr70.project_pr70.back.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.MouseEvent;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DashboardController
 {
     @FXML
-    protected VBox taskBox;
+    protected VBox taskTable;
 
     @FXML
     private void handleNewTask()
@@ -49,11 +47,34 @@ public class DashboardController
         MainApplication.setLogin();
     }
 
+    private void handleTaskReport(Task _task)
+    {
+        _task.setReported(true);
+        updateTaskTable();
+    }
+
+    private void handleTaskEdit(Task _task)
+    {
+        MainApplication.setEdit(_task);
+    }
+
+    private void handleTaskDelete(UserManager _userManager, Task _task, String _userName)
+    {
+        _userManager.getUser(_userName).removeTask(_task);
+        updateTaskTable();
+    }
+
+    private void handleTaskStatus(Task _task)
+    {
+        _task.setCompleted(!_task.isCompleted());
+        updateTaskTable();
+    }
+
     @FXML
-    public void updateTaskList()
+    public void updateTaskTable()
     {
         // clear taskList
-        taskBox.getChildren().clear();
+        taskTable.getChildren().clear();
 
         // get Currrent User
         UserManager userManager = MainApplication.getUserManager();
@@ -61,7 +82,7 @@ public class DashboardController
         User currentUser = userManager.getUser(MainApplication.getCurrentUsername());
         if(currentUser == null) return;
 
-        List<User> users;
+        ArrayList<User> users;
         if(currentUser.isAdmin())
         {
             users = userManager.getUsers();
@@ -74,13 +95,15 @@ public class DashboardController
         // update header
         HBox header = new HBox();
         header.setId("header");
-        taskBox.getChildren().add(header);
+        taskTable.getChildren().add(header);
         Label assigned = new Label("assigned");
         Label name = new Label("name");
         Label status = new Label("status");
+        status.setId("bigLabel");
         Label priority = new Label("priority");
         Label deadline = new Label("deadline");
-        header.getChildren().addAll(assigned, name, status, priority, deadline);
+        Label category = new Label("category");
+        header.getChildren().addAll(assigned, name, status, priority, deadline, category);
 
         //update task
         ArrayList<String> userNames = new ArrayList<>();
@@ -117,45 +140,26 @@ public class DashboardController
             Label taskAssigned = new Label(userNames.get(i));
             Label taskName = new Label(task.getName());
             Label taskStatus = new Label();
-            if(task.isCompleted())
-            {
-                taskStatus.setText("completed");
-                taskStatus.setId("completed");
-            }
-            else
-            {
-                taskStatus.setText("to do");
-                taskStatus.setId("todo");
-            }
+            taskStatus.setText(task.isCompleted()?"completed":"to do");
+            taskStatus.setId(task.isCompleted()?"completed":"todo");
+            taskStatus.setOnMouseClicked(eventHandle -> { handleTaskStatus(task); });
             Label taskPriority = new Label();
-            if(task.getPriority() == Priority.HIGH)
-                taskPriority.setText("HIGH");
-            else if (task.getPriority() == Priority.MEDIUM)
-                taskPriority.setText("MEDIUM");
-            else
-                taskPriority.setText("LOW");
+            taskPriority.setText(task.getPriority().toString());
             ProgressBar taskDeadline = new ProgressBar(task.getTimePercent());
+            Label taskCategory = new Label(task.getCategory().toString());
             Region region = new Region();
-            HBox.setHgrow(region, javafx.scene.layout.Priority.ALWAYS);
-            HBox hBox = new HBox(taskAssigned, taskName, taskStatus, taskPriority, taskDeadline, region);
+            HBox.setHgrow(region, Priority.ALWAYS);
+            HBox hBox = new HBox(taskAssigned, taskName, taskStatus, taskPriority, taskDeadline, taskCategory, region);
             if(currentUser.isAdmin())
             {
                 Button taskReport = new Button("Report");
-                taskReport.setOnAction(actionEvent -> {
-                    task.setReported(true);
-                    updateTaskList();
-                });
+                taskReport.setOnAction(actionEvent -> { handleTaskReport(task); });
                 hBox.getChildren().add(taskReport);
             }
             Button taskEdit = new Button("Edit");
-            taskEdit.setOnAction(actionEvent -> {
-                MainApplication.setEdit();
-            });
+            taskEdit.setOnAction(actionEvent -> { handleTaskEdit(task); });
             Button taskDelete = new Button("Delete");
-            taskDelete.setOnAction(actionEvent -> {
-                userManager.getUser(userName).removeTask(task);
-                updateTaskList();
-            });
+            taskDelete.setOnAction(actionEvent -> { handleTaskDelete(userManager, task, userName); });
             hBox.getChildren().addAll(taskEdit, taskDelete);
             hBox.setId("task");
             if(task.isReported())
@@ -173,7 +177,7 @@ public class DashboardController
                 }
             });
             //hBox.setAlignment(Pos.CENTER_LEFT);
-            taskBox.getChildren().add(hBox);
+            taskTable.getChildren().add(hBox);
         }
     }
 }

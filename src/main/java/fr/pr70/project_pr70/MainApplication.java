@@ -4,9 +4,7 @@ import fr.pr70.project_pr70.back.CategoryManager;
 import fr.pr70.project_pr70.back.Save;
 import fr.pr70.project_pr70.back.Task;
 import fr.pr70.project_pr70.back.UserManager;
-import fr.pr70.project_pr70.front.DashboardController;
-import fr.pr70.project_pr70.front.DetailController;
-import fr.pr70.project_pr70.front.ProfileController;
+import fr.pr70.project_pr70.front.*;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -83,7 +81,7 @@ public class MainApplication extends Application
     public static void setDashboard()
     {
         DashboardController dashboardController = dashboardView.getController();
-        dashboardController.updateTaskList();
+        dashboardController.updateTaskTable();
         stage.setScene(dashboard);
     }
     public static void setProfile()
@@ -93,7 +91,12 @@ public class MainApplication extends Application
         stage.setScene(profile);
     }
 
-    public static void setTaskCreation() {stage.setScene(taskCreation);}
+    public static void setTaskCreation()
+    {
+        TaskCreationController taskCreationController = taskCreationView.getController();
+        taskCreationController.updateCategoryComboBox();
+        stage.setScene(taskCreation);
+    }
 
     public static void setCategoryCreation() {
         stage.setScene(categoryCreation);
@@ -107,15 +110,17 @@ public class MainApplication extends Application
         stage.setScene(signIn);
     }
 
-    public static void setDetail(Task task)
+    public static void setDetail(Task _task)
     {
         DetailController detailController = detailView.getController();
-        detailController.updateDetail(task);
+        detailController.updateDetail(_task);
         stage.setScene(detail);
     }
 
-    public static void setEdit()
+    public static void setEdit(Task _task)
     {
+        EditController editController = editView.getController();
+        editController.updateEdit(_task);
         stage.setScene(edit);
     }
 
@@ -170,9 +175,9 @@ public class MainApplication extends Application
 
     public static void main(String[] args) throws IOException {
         save = new Save();
-        userManager = save.load();
         categoryManager = new CategoryManager();
         save.loadCategories();
+        userManager = save.load();
         launch();
     }
 }
