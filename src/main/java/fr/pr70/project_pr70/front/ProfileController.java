@@ -10,6 +10,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,13 +33,13 @@ public class ProfileController {
     private Label userLabel;
 
     @FXML
-    private TextField oldPasswordTextField;
+    private PasswordField oldPasswordTextField;
 
     @FXML
-    private TextField passwordTextField;
+    private PasswordField passwordTextField;
 
     @FXML
-    private TextField confirmPasswordTextField;
+    private PasswordField confirmPasswordTextField;
 
     @FXML
     private Button editButton;
@@ -116,11 +117,11 @@ public class ProfileController {
         userLabel.setStyle("-fx-font-weight: bold");
 
         // Creation des champs d'information à entrer par l'utilisateur
-        oldPasswordTextField = new TextField();
+        oldPasswordTextField = new PasswordField();
         oldPasswordTextField.setPromptText("Enter your old password");
-        passwordTextField = new TextField();
+        passwordTextField = new PasswordField();
         passwordTextField.setPromptText("Enter your new password");
-        confirmPasswordTextField = new TextField();
+        confirmPasswordTextField = new PasswordField();
         confirmPasswordTextField.setPromptText("Confirm your password");
 
         // Invalide text
