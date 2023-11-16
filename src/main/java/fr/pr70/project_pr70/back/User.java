@@ -59,11 +59,6 @@ public class User
         tasks = _tasks;
     }
 
-    public void setUsername(String _username)
-    {
-        username = _username;
-    }
-
     public void setAdmin(boolean _admin)
     {
         admin = _admin;

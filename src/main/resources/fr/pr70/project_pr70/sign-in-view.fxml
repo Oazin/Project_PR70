@@ -4,11 +4,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="fr.pr70.project_pr70.front.SignInController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
+
+    <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@./icon/software-logo.png" />
+        </image>
+    </ImageView>
 
     <Label fx:id="userLabel" text="Username:"/>
     <TextField fx:id="userTextField"/>
@@ -19,6 +27,6 @@
 
 
     <Label fx:id="invalidText" textFill="RED" />
-    <Button text="SignIn" onAction="#onSubmitClicked"/>
-    <Button text="Login" onAction="#handleLogin"/>
+    <Button id="button" text="SignIn" onAction="#onSubmitClicked"/>
+    <Button id="button" text="Login" onAction="#handleLogin"/>
 </VBox>

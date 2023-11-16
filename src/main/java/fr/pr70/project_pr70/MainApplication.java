@@ -61,29 +61,56 @@ public class MainApplication extends Application
 
     private static Scene edit;
 
-    public static void setCurrentUsername(String _currentUsername) {
-        MainApplication.currentUsername = _currentUsername;
-    }
+    /* ----------------- Getters ----------------- */
 
+    /*! @brief : Revoie le nom de l'utilisateur courant
+     */
     public static String getCurrentUsername() {
         return currentUsername;
     }
 
+    /*! @brief : Revoie la liste des users enregistrer dans la base de l'application
+     */
     public static UserManager getUserManager()
     {
         return userManager;
     }
 
+    /*! @brief : Revoie la liste des categories
+     */
     public static CategoryManager getCategoryManager() {
         return categoryManager;
     }
 
+    /* ----------------- Setters ----------------- */
+
+    /*! @brief : Defini l'utilisateur courant
+     */
+    public static void setCurrentUsername(String _currentUsername) {
+        MainApplication.currentUsername = _currentUsername;
+    }
+
+    /* ----------------- Methods ----------------- */
+
+    /*! @brief : Met à jour et affiche la scene du dashbord
+     *
+     *  Behaviour: Assigne le controller à la view
+     *      Met à jour la information dynamique du dashboard
+     *      Affiche la scene dans la fenêtre
+     */
     public static void setDashboard()
     {
         DashboardController dashboardController = dashboardView.getController();
         dashboardController.updateTaskTable();
         stage.setScene(dashboard);
     }
+
+    /*! @brief : Met à jour et affiche la scene du porfile de l'utilisateur
+     *
+     *  Behaviour: Assigne le controller à la view
+     *      Met à jour la information dynamique du profile
+     *      Affiche la scene dans la fenêtre
+     */
     public static void setProfile()
     {
         ProfileController profileController = profileView.getController();
@@ -91,6 +118,8 @@ public class MainApplication extends Application
         stage.setScene(profile);
     }
 
+    /*! @brief : Affiche la scene de la creation de tâches
+     */
     public static void setTaskCreation()
     {
         TaskCreationController taskCreationController = taskCreationView.getController();
@@ -98,14 +127,20 @@ public class MainApplication extends Application
         stage.setScene(taskCreation);
     }
 
+    /*! @brief : Affiche la scene de la creation de categorie
+     */
     public static void setCategoryCreation() {
         stage.setScene(categoryCreation);
     }
 
+    /*! @brief : Affiche la scene de la connexion
+     */
     public static void setLogin(){
         stage.setScene(login);
     }
 
+    /*! @brief : Affiche la scene d'inscription
+     */
     public static void setSignIn(){
         stage.setScene(signIn);
     }
@@ -123,6 +158,27 @@ public class MainApplication extends Application
         editController.updateEdit(_task);
         stage.setScene(edit);
     }
+
+
+    /*! @brief : Assigne le style au differente scene du logiciel
+     */
+    private void setStyle()
+    {
+        //import style.css
+        URL url = this.getClass().getResource("style.css");
+        if (url == null) {
+            System.out.println("Resource not found. Aborting.");
+            System.exit(-1);
+        }
+        String css = url.toExternalForm();
+        dashboard.getStylesheets().add(css);
+        signIn.getStylesheets().add(css);
+        login.getStylesheets().add(css);
+        profile.getStylesheets().add(css);
+        taskCreation.getStylesheets().add(css);
+        categoryCreation.getStylesheets().add(css);
+    }
+
 
     @Override
     public void start(Stage _stage) throws IOException
@@ -149,13 +205,8 @@ public class MainApplication extends Application
         detail = new Scene(detailView.load(), 400, 600);
 
         //import style.css
-        URL url = this.getClass().getResource("style.css");
-        if (url == null) {
-            System.out.println("Resource not found. Aborting.");
-            System.exit(-1);
-        }
-        String css = url.toExternalForm();
-        dashboard.getStylesheets().add(css);
+        setStyle();
+
         if(userManager.isEmpty())
         {
             stage.setScene(signIn);
