@@ -4,6 +4,7 @@ import fr.pr70.project_pr70.MainApplication;
 import fr.pr70.project_pr70.back.UserManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class LoginController
@@ -12,16 +13,10 @@ public class LoginController
     private Label invalidText;
 
     @FXML
-    private Label userLabel;
-
-    @FXML
-    private Label passwordLabel;
-
-    @FXML
     private TextField userTextField;
 
     @FXML
-    private TextField passwordTextField;
+    private PasswordField passwordTextField;
 
     @FXML
     protected void onSubmitClicked()

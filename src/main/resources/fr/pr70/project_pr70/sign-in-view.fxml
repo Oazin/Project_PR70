@@ -21,9 +21,9 @@
     <Label fx:id="userLabel" text="Username:"/>
     <TextField fx:id="userTextField"/>
     <Label fx:id="passwordLabel" text="Password:"/>
-    <TextField fx:id="passwordTextField"/>
+    <PasswordField fx:id="passwordTextField"/>
     <Label fx:id="confirmPasswordLabel" text="Confirm Password:"/>
-    <TextField fx:id="confirmPasswordTextField"/>
+    <PasswordField fx:id="confirmPasswordTextField"/>
 
 
     <Label fx:id="invalidText" textFill="RED" />
