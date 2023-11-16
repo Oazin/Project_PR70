@@ -87,6 +87,8 @@ public class TaskCreationController {
 
     public void updateCategoryComboBox()
     {
+        clearField();
+
         categoryComboBox.getItems().clear();
         ArrayList<Category> categories = MainApplication.getCategoryManager().getCategories();
         if(!categories.isEmpty())
@@ -94,5 +96,16 @@ public class TaskCreationController {
             categoryComboBox.setValue(categories.get(0));
         }
         categoryComboBox.getItems().addAll(categories);
+    }
+
+
+    /*! @brief : vide les champs remplissable et les messages de prévension
+     */
+    private void clearField(){
+        invalidText.setText("");
+        nameField.clear();
+        descriptionArea.clear();
+        startDatePicker.setValue(null);
+        deadlinePicker.setValue(null);
     }
 }

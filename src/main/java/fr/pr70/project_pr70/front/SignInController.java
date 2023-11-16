@@ -25,6 +25,9 @@ public class SignInController
     @FXML
     protected void onSubmitClicked()
     {
+        // Vider les champs
+        clearField();
+
         UserManager userManager = MainApplication.getUserManager();
         if(userManager.alreadyExist(userTextField.getText()))
         {
@@ -47,9 +50,20 @@ public class SignInController
         MainApplication.setDashboard();
     }
 
+    /*! @brief : charge la page de connexion
+     */
     @FXML
     protected void handleLogin()
     {
         MainApplication.setLogin();
+    }
+
+    /*! @brief : vide les champs remplissable et les messages de prévension
+     */
+    private void clearField(){
+        invalidText.setText("");
+        userTextField.clear();
+        passwordTextField.clear();
+        confirmPasswordTextField.clear();
     }
 }

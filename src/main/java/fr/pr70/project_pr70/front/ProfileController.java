@@ -93,6 +93,9 @@ public class ProfileController {
      */
     @FXML
     public void updateProfile() {
+        // Vider les champs
+        clearField();
+
         // clear profile
         profileBox.getChildren().clear();
 
@@ -143,4 +146,12 @@ public class ProfileController {
         profileBox.setSpacing(10);
     }
 
+    /*! @brief : vide les champs remplissable et les messages de prévension
+     */
+    private void clearField(){
+        invalidText.setText("");
+        oldPasswordTextField.clear();
+        passwordTextField.clear();
+        confirmPasswordTextField.clear();
+    }
 }

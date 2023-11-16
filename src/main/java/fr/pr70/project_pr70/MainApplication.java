@@ -168,7 +168,7 @@ public class MainApplication extends Application
     public static void setAddAdmin()
     {
         AddAdminController addAdminController = addadminView.getController();
-        addAdminController.updateCategoryComboBox();
+        addAdminController.updateUserComboBox();
         stage.setScene(addadmin);
     }
 

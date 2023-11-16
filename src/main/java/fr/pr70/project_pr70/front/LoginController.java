@@ -21,6 +21,9 @@ public class LoginController
     @FXML
     protected void onSubmitClicked()
     {
+        // Vider les champs
+        clearField();
+
         UserManager userManager = MainApplication.getUserManager();
         boolean connected = userManager.connectUser(userTextField.getText(), passwordTextField.getText());
         if(connected)
@@ -32,8 +35,18 @@ public class LoginController
         }
     }
 
+    /*! @brief : Charge la page d'inscription
+     */
     @FXML
     protected void handleSigin(){
         MainApplication.setSignIn();
+    }
+
+    /*! @brief : vide les champs remplissable et les messages de prévension
+     */
+    private void clearField(){
+        invalidText.setText("");
+        userTextField.clear();
+        passwordTextField.clear();
     }
 }

@@ -58,6 +58,9 @@ public class EditController {
     @FXML
     public void updateEdit(Task _task)
     {
+        // Vider les champs
+        clearField();
+
         nameField.setText(_task.getName());
         descriptionArea.setText(_task.getDescription());
         LocalDate startDate = _task.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -67,5 +70,16 @@ public class EditController {
         priorityComboBox.setValue(_task.getPriority());
         invalidText.setTextFill(Color.RED);
         saveTaskButton.setOnAction(actionEvent -> { handleSaveTask(_task); });
+    }
+
+
+    /*! @brief : vide les champs remplissable et les messages de prévension
+     */
+    private void clearField(){
+        invalidText.setText("");
+        nameField.clear();
+        descriptionArea.clear();
+        startDatePicker.setValue(null);
+        deadlinePicker.setValue(null);
     }
 }

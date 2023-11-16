@@ -30,6 +30,9 @@ public class CategoryCreationContoller {
     @FXML
     public void handleCreateCategory(ActionEvent e)
     {
+        // Vider les champs
+        clearField();
+
         // Si le champs nom ou le champs color n'est pas remplis la creation ne peut pas s'effectuer donc un message previent l'utilisateur
         if (nameField.getText().trim().isEmpty() ||
                 colorComboBox.getValue() == null)
@@ -69,5 +72,13 @@ public class CategoryCreationContoller {
     public void handleCancel()
     {
         MainApplication.setDashboard();
+    }
+
+
+    /*! @brief : vide les champs remplissable et les messages de prévension
+     */
+    private void clearField(){
+        invalidText.setText("");
+        nameField.clear();
     }
 }
