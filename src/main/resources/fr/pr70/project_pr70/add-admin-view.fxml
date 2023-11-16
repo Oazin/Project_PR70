@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="fr.pr70.project_pr70.front.AddAdminController">
+
+    <center>
+        <VBox fx:id="adminTable">
+            <!-- Content of dashboard-->
+        </VBox>
+    </center>
+</BorderPane>

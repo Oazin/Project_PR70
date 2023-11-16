@@ -132,6 +132,8 @@ public class ProfileController {
         editButton = new Button("Edit");
         editButton.setOnAction(this::handleEdit);
         editButton.setId("button");
+
+
         cancelButton = new Button("Cancel");
         cancelButton.setOnAction(this::handleCancel);
         cancelButton.setId("button");

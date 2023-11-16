@@ -46,6 +46,8 @@ public class MainApplication extends Application
 
     private static FXMLLoader editView;
 
+    private static FXMLLoader addadminView;
+
     private static Scene login;
 
     private static Scene signIn;
@@ -60,6 +62,7 @@ public class MainApplication extends Application
     private static Scene detail;
 
     private static Scene edit;
+    private static Scene addadmin;
 
     /* ----------------- Getters ----------------- */
 
@@ -101,6 +104,7 @@ public class MainApplication extends Application
     public static void setDashboard()
     {
         DashboardController dashboardController = dashboardView.getController();
+        dashboardController.createToolBar();
         dashboardController.updateTaskTable();
         stage.setScene(dashboard);
     }
@@ -159,6 +163,15 @@ public class MainApplication extends Application
         stage.setScene(edit);
     }
 
+    /*! @brief : Affiche la scene avec la liste des administrateur
+     */
+    public static void setAddAdmin()
+    {
+        AddAdminController addAdminController = addadminView.getController();
+        addAdminController.updateCategoryComboBox();
+        stage.setScene(addadmin);
+    }
+
 
     /*! @brief : Assigne le style au differente scene du logiciel
      */
@@ -194,6 +207,7 @@ public class MainApplication extends Application
         categoryCreationView = new FXMLLoader(MainApplication.class.getResource("category-creation-view.fxml"));
         editView = new FXMLLoader(MainApplication.class.getResource("edit-view.fxml"));
         detailView = new FXMLLoader(MainApplication.class.getResource("detail-view.fxml"));
+        addadminView = new FXMLLoader(MainApplication.class.getResource("add-admin-view.fxml"));
 
         signIn = new Scene(signInView.load(), 400, 600);
         login = new Scene(loginView.load(), 400, 600);
@@ -203,6 +217,7 @@ public class MainApplication extends Application
         categoryCreation = new Scene(categoryCreationView.load(), 400, 600);
         edit = new Scene(editView.load(), 400, 600);
         detail = new Scene(detailView.load(), 400, 600);
+        addadmin = new Scene(addadminView.load(), 400, 600);
 
         //import style.css
         setStyle();

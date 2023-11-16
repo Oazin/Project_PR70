@@ -5,21 +5,27 @@ import fr.pr70.project_pr70.MainApplication;
 import fr.pr70.project_pr70.back.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.control.ToolBar;
 
 import java.util.ArrayList;
 
 public class DashboardController
 {
+    @FXML
+    protected ToolBar toolBar;
+
     @FXML
     protected VBox taskTable;
 
@@ -70,9 +76,72 @@ public class DashboardController
         updateTaskTable();
     }
 
+    private void handleAddAdmin() {
+        MainApplication.setAddAdmin();
+    }
+
+    @FXML
+    public void createToolBar()
+    {
+        toolBar.getItems().clear();
+
+        // Définir les marges pour la barre d'outils
+        toolBar.setPadding(new Insets(20.0));
+
+        // Créer les boutons et leurs actions associées
+        Button newTaskButton = new Button("New task");
+        newTaskButton.setOnAction(event -> handleNewTask());
+        newTaskButton.setId("button");
+        toolBar.getItems().add(newTaskButton);
+
+        // Seul un administrateur peut créer des categories et ajouter des administrateur
+        User currentUser = MainApplication.getUserManager().getUser(MainApplication.getCurrentUsername());
+        if(currentUser.isAdmin())
+        {
+            // Boutton pour acceder à la page de creation de categorie
+            Button newCategoryButton = new Button("New category");
+            newCategoryButton.setOnAction(event -> handleNewCategory());
+            newCategoryButton.setId("button");
+
+            // Boutton pour acceder à la page d'ajoute d'administrateur
+            Button addAdminButton = new Button();
+            addAdminButton.setOnAction(event -> handleAddAdmin());
+            ImageView addAdminImage = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/admin-add-logo.png").toString()));
+            addAdminImage.setFitHeight(20);
+            addAdminImage.setPreserveRatio(true);
+            addAdminButton.setGraphic(addAdminImage);
+            addAdminButton.setId("button");
+
+
+            toolBar.getItems().addAll(newCategoryButton, addAdminButton);
+        }
+
+
+
+        Button profileButton = new Button();
+        profileButton.setOnAction(event -> handleProfile());
+        ImageView profileImage = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/profile-logo.png").toString()));
+        profileImage.setFitHeight(20);
+        profileImage.setPreserveRatio(true);
+        profileButton.setGraphic(profileImage);
+        profileButton.setId("button");
+
+        Button logoutButton = new Button();
+        logoutButton.setOnAction(event -> handleLogout());
+        ImageView logoutImage = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/log-out-logo.png").toString()));
+        logoutImage.setFitHeight(20);
+        logoutImage.setPreserveRatio(true);
+        logoutButton.setGraphic(logoutImage);
+        logoutButton.setId("button");
+
+        toolBar.getItems().addAll(profileButton, logoutButton);
+    }
+
+
     @FXML
     public void updateTaskTable()
     {
+
         // clear taskList
         taskTable.getChildren().clear();
 
@@ -152,16 +221,35 @@ public class DashboardController
             HBox hBox = new HBox(taskAssigned, taskName, taskStatus, taskPriority, taskDeadline, taskCategory, region);
             if(currentUser.isAdmin())
             {
-                Button taskReport = new Button("Report");
+                ImageView reportLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/alarm-logo.png").toString()));
+                reportLogo.setFitHeight(20);
+                reportLogo.setPreserveRatio(true);
+                Button taskReport = new Button();
+                taskReport.setGraphic(reportLogo);
                 taskReport.setOnAction(actionEvent -> { handleTaskReport(task); });
                 hBox.getChildren().add(taskReport);
             }
-            Button taskEdit = new Button("Edit");
+
+            ImageView editLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/edit-logo.png").toString()));
+            editLogo.setFitHeight(20);
+            editLogo.setPreserveRatio(true);
+            Button taskEdit = new Button();
+            taskEdit.setGraphic(editLogo);
             taskEdit.setOnAction(actionEvent -> { handleTaskEdit(task); });
-            Button taskDelete = new Button("Delete");
+
+
+            ImageView trashLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/trash-logo.png").toString()));
+            trashLogo.setFitHeight(20);
+            trashLogo.setPreserveRatio(true);
+            Button taskDelete = new Button();
+            taskDelete.setGraphic(trashLogo);
             taskDelete.setOnAction(actionEvent -> { handleTaskDelete(userManager, task, userName); });
+
+
             hBox.getChildren().addAll(taskEdit, taskDelete);
             hBox.setId("task");
+
+
             if(task.isReported())
             {
                 hBox.setStyle("-fx-background-color: red");
