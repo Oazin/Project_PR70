@@ -199,6 +199,7 @@ public class MainApplication extends Application
         stage = _stage;
         stage.setTitle("YO Task Manager");
 
+        // Definition des view des page de l'application 
         signInView = new FXMLLoader(MainApplication.class.getResource("sign-in-view.fxml"));
         loginView = new FXMLLoader(MainApplication.class.getResource("login-view.fxml"));
         dashboardView = new FXMLLoader(MainApplication.class.getResource("dashboard-view.fxml"));
@@ -209,6 +210,7 @@ public class MainApplication extends Application
         detailView = new FXMLLoader(MainApplication.class.getResource("detail-view.fxml"));
         addadminView = new FXMLLoader(MainApplication.class.getResource("add-admin-view.fxml"));
 
+        // Definition des scènes de l'application 
         signIn = new Scene(signInView.load(), 400, 600);
         login = new Scene(loginView.load(), 400, 600);
         dashboard = new Scene(dashboardView.load(), 960, 540);
@@ -222,6 +224,7 @@ public class MainApplication extends Application
         //import style.css
         setStyle();
 
+        // Si il n'y a pas encore d'utilisation enregistrer le premier doit s'inscrire 
         if(userManager.isEmpty())
         {
             stage.setScene(signIn);
