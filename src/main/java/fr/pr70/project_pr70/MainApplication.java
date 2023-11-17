@@ -122,7 +122,11 @@ public class MainApplication extends Application
         stage.setScene(profile);
     }
 
-    /*! @brief : Affiche la scene de la creation de tâches
+    /*! @brief : Met à jour et affiche la scene de création des taches
+     *
+     *  Behaviour: Assigne le controller à la view
+     *      Met à jour la information dynamique de la page
+     *      Affiche la scene dans la fenêtre
      */
     public static void setTaskCreation()
     {
@@ -149,6 +153,12 @@ public class MainApplication extends Application
         stage.setScene(signIn);
     }
 
+    /*! @brief : Met à jour et affiche la scene qui affiche les détails de la tache
+     *
+     *  Behaviour: Assigne le controller à la view
+     *      Met à jour la information dynamique de la page
+     *      Affiche la scene dans la fenêtre
+     */
     public static void setDetail(Task _task)
     {
         DetailController detailController = detailView.getController();
@@ -156,6 +166,12 @@ public class MainApplication extends Application
         stage.setScene(detail);
     }
 
+    /*! @brief : Met à jour et affiche la scene de modification de tache
+     *
+     *  Behaviour: Assigne le controller à la view
+     *      Met à jour la information dynamique de la page 
+     *      Affiche la scene dans la fenêtre
+     */
     public static void setEdit(Task _task)
     {
         EditController editController = editView.getController();
