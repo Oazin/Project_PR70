@@ -18,6 +18,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ToolBar;
+import javafx.scene.paint.Color;
+
 import java.util.ArrayList;
 
 
@@ -107,6 +109,10 @@ public class DashboardController
     private void handleTaskStatus(Task _task)
     {
         _task.setCompleted(!_task.isCompleted());
+        if(_task.isCompleted())
+        {
+            _task.setReported(false);
+        }
         updateTaskTable();
     }
 
@@ -284,6 +290,10 @@ public class DashboardController
             taskPriority.setText(task.getPriority().toString());
             ProgressBar taskDeadline = new ProgressBar(task.getTimePercent());
             Label taskCategory = new Label(task.getCategory().toString());
+            taskCategory.setId("category");
+            Color categoryColor = task.getCategory().getColor();
+            System.out.println(categoryColor.getBlue());
+            taskCategory.setStyle("-fx-background-color: rgb("+categoryColor.getRed()*255+", "+categoryColor.getGreen()*255+", "+categoryColor.getBlue()*255+")");
             Region region1 = new Region();
             HBox.setHgrow(region1, Priority.ALWAYS);
             HBox hBox = new HBox(taskAssigned, taskName, taskStatus, taskPriority, taskDeadline, taskCategory, region1);
