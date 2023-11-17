@@ -292,7 +292,6 @@ public class DashboardController
             Label taskCategory = new Label(task.getCategory().toString());
             taskCategory.setId("category");
             Color categoryColor = task.getCategory().getColor();
-            System.out.println(categoryColor.getBlue());
             taskCategory.setStyle("-fx-background-color: rgb("+categoryColor.getRed()*255+", "+categoryColor.getGreen()*255+", "+categoryColor.getBlue()*255+")");
             Region region1 = new Region();
             HBox.setHgrow(region1, Priority.ALWAYS);
