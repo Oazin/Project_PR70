@@ -72,6 +72,7 @@ public class RemoveAdminController {
         ArrayList<User> users = MainApplication.getUserManager().getUsers();
 
         for (User u : users){
+            // Remplis la drop down liste avec le nom des administrateurs qui ne sont pas l'admin connecter
             if (u.isAdmin() && !u.getUsername().equals(getCurrentUsername())){
                 adminsComboBox.getItems().add(u.getUsername());
             }

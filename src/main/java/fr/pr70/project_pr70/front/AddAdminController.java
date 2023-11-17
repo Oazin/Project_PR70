@@ -63,6 +63,7 @@ public class AddAdminController {
 
         ArrayList<User> users = MainApplication.getUserManager().getUsers();
 
+        // Remplis la drop down liste avec le nom des utilisteurs qui ne sont pas administrateur
         for (User u : users){
             if (!u.isAdmin()){
                 userComboBox.getItems().add(u.getUsername());
