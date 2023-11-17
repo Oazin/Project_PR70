@@ -25,9 +25,6 @@ public class SignInController
     @FXML
     protected void onSubmitClicked()
     {
-        // Vider les champs
-        clearField();
-
         UserManager userManager = MainApplication.getUserManager();
         if(userManager.alreadyExist(userTextField.getText()))
         {
@@ -47,6 +44,10 @@ public class SignInController
         }
         MainApplication.setCurrentUsername(user.getUsername());
         userManager.addUser(user);
+
+        // Vider les champs
+        clearField();
+
         MainApplication.setDashboard();
     }
 
@@ -55,6 +56,8 @@ public class SignInController
     @FXML
     protected void handleLogin()
     {
+        // Vider les champs
+        clearField();
         MainApplication.setLogin();
     }
 

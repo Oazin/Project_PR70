@@ -29,9 +29,6 @@ public class CategoryCreationContoller {
     @FXML
     public void handleCreateCategory(ActionEvent e)
     {
-        // Vider les champs
-        clearField();
-
         // Si le champs nom ou le champs color n'est pas remplis la creation ne peut pas s'effectuer donc un message previent l'utilisateur
         if (nameField.getText().trim().isEmpty() ||
                 colorComboBox.getValue() == null)
@@ -56,6 +53,9 @@ public class CategoryCreationContoller {
             // Ajoute la categorie au category manager
             categoryManager.addCategories(category);
 
+            // Vider les champs
+            clearField();
+
             // Charge le dashboard
             MainApplication.setDashboard();
         }
@@ -70,6 +70,8 @@ public class CategoryCreationContoller {
     @FXML
     public void handleCancel()
     {
+        // Vider les champs
+        clearField();
         MainApplication.setDashboard();
     }
 

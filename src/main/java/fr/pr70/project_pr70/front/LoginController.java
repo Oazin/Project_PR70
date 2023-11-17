@@ -21,14 +21,13 @@ public class LoginController
     @FXML
     protected void onSubmitClicked()
     {
-        // Vider les champs
-        clearField();
-
         UserManager userManager = MainApplication.getUserManager();
         boolean connected = userManager.connectUser(userTextField.getText(), passwordTextField.getText());
         if(connected)
         {
             MainApplication.setCurrentUsername(userTextField.getText());
+            // Vider les champs
+            clearField();
             MainApplication.setDashboard();
         } else {
             invalidText.setText("Wrong username or password");
@@ -39,6 +38,8 @@ public class LoginController
      */
     @FXML
     protected void handleSigin(){
+        // Vider les champs
+        clearField();
         MainApplication.setSignIn();
     }
 
