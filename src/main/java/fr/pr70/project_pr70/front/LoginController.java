@@ -26,14 +26,28 @@ public class LoginController
         if(connected)
         {
             MainApplication.setCurrentUsername(userTextField.getText());
+            // Vider les champs
+            clearField();
             MainApplication.setDashboard();
         } else {
             invalidText.setText("Wrong username or password");
         }
     }
 
+    /*! @brief : Action lier au bouton Signin permetant de charger la page d'inscription
+     */
     @FXML
     protected void handleSigin(){
+        // Vider les champs
+        clearField();
         MainApplication.setSignIn();
+    }
+
+    /*! @brief : vide les champs remplissable et les messages de prévension
+     */
+    private void clearField(){
+        invalidText.setText("");
+        userTextField.clear();
+        passwordTextField.clear();
     }
 }

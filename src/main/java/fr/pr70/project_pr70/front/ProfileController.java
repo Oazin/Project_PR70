@@ -2,16 +2,13 @@ package fr.pr70.project_pr70.front;
 
 import fr.pr70.project_pr70.MainApplication;
 import fr.pr70.project_pr70.back.User;
-import fr.pr70.project_pr70.back.UserManager;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -27,7 +24,6 @@ public class ProfileController {
 
     @FXML
     protected VBox profileBox;
-
 
     @FXML
     private Label userLabel;
@@ -77,10 +73,10 @@ public class ProfileController {
         }
     }
 
-    /*! @brief : Action lier au bouton cancel sur l'affichage graffique
+    /*! @brief : Action lier au bouton Cancel sur l'affichage graphique
      *
-     *  Behaviour : Permet a l'utilisateur de retourner sur le dashboard
-     *  lorsqu'il decide de ne pas modifier son mot de passe
+     *  Behaviour : Permet à l'utilisateur de retourner sur le dashboard
+     *  lorsqu'il decide de ne pas créer de nouvelle tâches
      */
     @FXML
     public void handleCancel(ActionEvent actionEvent)
@@ -93,6 +89,7 @@ public class ProfileController {
      */
     @FXML
     public void updateProfile() {
+
         // clear profile
         profileBox.getChildren().clear();
 
@@ -132,6 +129,8 @@ public class ProfileController {
         editButton = new Button("Edit");
         editButton.setOnAction(this::handleEdit);
         editButton.setId("button");
+
+
         cancelButton = new Button("Cancel");
         cancelButton.setOnAction(this::handleCancel);
         cancelButton.setId("button");
@@ -141,4 +140,12 @@ public class ProfileController {
         profileBox.setSpacing(10);
     }
 
+    /*! @brief : vide les champs remplissable et les messages de prévension
+     */
+    private void clearField(){
+        invalidText.setText("");
+        oldPasswordTextField.clear();
+        passwordTextField.clear();
+        confirmPasswordTextField.clear();
+    }
 }

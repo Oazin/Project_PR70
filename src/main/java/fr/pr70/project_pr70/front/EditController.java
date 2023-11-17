@@ -5,8 +5,6 @@ import fr.pr70.project_pr70.back.Priority;
 import fr.pr70.project_pr70.back.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import java.util.Date;
@@ -49,6 +47,11 @@ public class EditController {
         MainApplication.setDashboard();
     }
 
+    /*! @brief : Action lier au bouton Cancel sur l'affichage graphique
+     *
+     *  Behaviour : Permet à l'utilisateur de retourner sur le dashboard
+     *  lorsqu'il decide de ne pas créer de nouvelle tâches
+     */
     @FXML
     public void handleCancel()
     {
@@ -58,6 +61,9 @@ public class EditController {
     @FXML
     public void updateEdit(Task _task)
     {
+        // Vider les champs
+        clearField();
+
         nameField.setText(_task.getName());
         descriptionArea.setText(_task.getDescription());
         LocalDate startDate = _task.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -67,5 +73,16 @@ public class EditController {
         priorityComboBox.setValue(_task.getPriority());
         invalidText.setTextFill(Color.RED);
         saveTaskButton.setOnAction(actionEvent -> { handleSaveTask(_task); });
+    }
+
+
+    /*! @brief : vide les champs remplissable et les messages de prévension
+     */
+    private void clearField(){
+        invalidText.setText("");
+        nameField.clear();
+        descriptionArea.clear();
+        startDatePicker.setValue(null);
+        deadlinePicker.setValue(null);
     }
 }
