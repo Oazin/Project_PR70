@@ -9,8 +9,6 @@
     -fx-padding: 10 20 10 20;
 }
 
-
-
 #button:hover
 {
     -fx-background-color: #A9A9A9;
@@ -50,9 +48,13 @@
 
 #task .button
 {
-    -fx-padding: 10 20 10 20;
-    -fx-min-width: 100;
-    -fx-max-width: 100;
+    -fx-padding: 10 10 10 10;
+}
+
+#task #spacer
+{
+    -fx-max-width: 10;
+    -fx-min-width: 10;
 }
 
 #task:hover

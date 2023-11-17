@@ -284,37 +284,44 @@ public class DashboardController
             taskPriority.setText(task.getPriority().toString());
             ProgressBar taskDeadline = new ProgressBar(task.getTimePercent());
             Label taskCategory = new Label(task.getCategory().toString());
-            Region region = new Region();
-            HBox.setHgrow(region, Priority.ALWAYS);
-            HBox hBox = new HBox(taskAssigned, taskName, taskStatus, taskPriority, taskDeadline, taskCategory, region);
+            Region region1 = new Region();
+            HBox.setHgrow(region1, Priority.ALWAYS);
+            HBox hBox = new HBox(taskAssigned, taskName, taskStatus, taskPriority, taskDeadline, taskCategory, region1);
             if(currentUser.isAdmin())
             {
                 ImageView reportLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/alarm-logo.png").toString()));
                 reportLogo.setFitHeight(20);
                 reportLogo.setPreserveRatio(true);
                 Button taskReport = new Button();
+                taskReport.setId("button");
                 taskReport.setGraphic(reportLogo);
                 taskReport.setOnAction(actionEvent -> { handleTaskReport(task); });
-                hBox.getChildren().add(taskReport);
+                Region spacer1 = new Region();
+                spacer1.setId("spacer");
+                hBox.getChildren().addAll(taskReport, spacer1);
             }
 
             ImageView editLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/edit-logo.png").toString()));
             editLogo.setFitHeight(20);
             editLogo.setPreserveRatio(true);
             Button taskEdit = new Button();
+            taskEdit.setId("button");
             taskEdit.setGraphic(editLogo);
             taskEdit.setOnAction(actionEvent -> { handleTaskEdit(task); });
-
+            Region spacer2 = new Region();
+            spacer2.setId("spacer");
 
             ImageView trashLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/trash-logo.png").toString()));
             trashLogo.setFitHeight(20);
             trashLogo.setPreserveRatio(true);
             Button taskDelete = new Button();
+            taskDelete.setId("button");
             taskDelete.setGraphic(trashLogo);
             taskDelete.setOnAction(actionEvent -> { handleTaskDelete(userManager, task, userName); });
+            Region spacer3 = new Region();
+            spacer3.setId("spacer");
 
-
-            hBox.getChildren().addAll(taskEdit, taskDelete);
+            hBox.getChildren().addAll(taskEdit, spacer2, taskDelete, spacer3);
             hBox.setId("task");
 
 
