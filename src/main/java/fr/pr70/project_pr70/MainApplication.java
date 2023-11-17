@@ -6,13 +6,8 @@ import fr.pr70.project_pr70.back.Task;
 import fr.pr70.project_pr70.back.UserManager;
 import fr.pr70.project_pr70.front.*;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ToolBar;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -46,7 +41,9 @@ public class MainApplication extends Application
 
     private static FXMLLoader editView;
 
-    private static FXMLLoader addadminView;
+    private static FXMLLoader addAdminView;
+
+    private static FXMLLoader removeAdminView;
 
     private static Scene login;
 
@@ -62,7 +59,10 @@ public class MainApplication extends Application
     private static Scene detail;
 
     private static Scene edit;
-    private static Scene addadmin;
+
+    private static Scene addAdmin;
+
+    private static Scene removeAdmin;
 
     /* ----------------- Getters ----------------- */
 
@@ -179,13 +179,21 @@ public class MainApplication extends Application
         stage.setScene(edit);
     }
 
-    /*! @brief : Affiche la scene avec la liste des administrateur
+    /*! @brief : Affiche la scene avec la liste des utilisateurs non administrateur
      */
     public static void setAddAdmin()
     {
-        AddAdminController addAdminController = addadminView.getController();
+        AddAdminController addAdminController = addAdminView.getController();
         addAdminController.updateUserComboBox();
-        stage.setScene(addadmin);
+        stage.setScene(addAdmin);
+    }
+
+    /*! @brief : Affiche la scene avec la liste des administrateurs
+     */
+    public static void setRemoveAdmin() {
+        RemoveAdminController removeAdminController = removeAdminView.getController();
+        removeAdminController.updateAdminComboBox();
+        stage.setScene(removeAdmin);
     }
 
 
@@ -206,6 +214,8 @@ public class MainApplication extends Application
         profile.getStylesheets().add(css);
         taskCreation.getStylesheets().add(css);
         categoryCreation.getStylesheets().add(css);
+        addAdmin.getStylesheets().add(css);
+        removeAdmin.getStylesheets().add(css);
     }
 
 
@@ -224,7 +234,8 @@ public class MainApplication extends Application
         categoryCreationView = new FXMLLoader(MainApplication.class.getResource("category-creation-view.fxml"));
         editView = new FXMLLoader(MainApplication.class.getResource("edit-view.fxml"));
         detailView = new FXMLLoader(MainApplication.class.getResource("detail-view.fxml"));
-        addadminView = new FXMLLoader(MainApplication.class.getResource("add-admin-view.fxml"));
+        addAdminView = new FXMLLoader(MainApplication.class.getResource("add-admin-view.fxml"));
+        removeAdminView = new FXMLLoader((MainApplication.class.getResource("remove-admin-view.fxml")));
 
         // Definition des scènes de l'application 
         signIn = new Scene(signInView.load(), 400, 600);
@@ -235,7 +246,8 @@ public class MainApplication extends Application
         categoryCreation = new Scene(categoryCreationView.load(), 400, 600);
         edit = new Scene(editView.load(), 400, 600);
         detail = new Scene(detailView.load(), 400, 600);
-        addadmin = new Scene(addadminView.load(), 400, 600);
+        addAdmin = new Scene(addAdminView.load(), 400, 600);
+        removeAdmin = new Scene(removeAdminView.load(), 400, 600);
 
         //import style.css
         setStyle();

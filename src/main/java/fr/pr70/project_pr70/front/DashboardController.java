@@ -18,8 +18,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ToolBar;
-
 import java.util.ArrayList;
+
 
 public class DashboardController
 {
@@ -29,57 +29,113 @@ public class DashboardController
     @FXML
     protected VBox taskTable;
 
+    /* ---------------- Button' handles -----------------*/
+
+    /*! @brief : Action lier au bouton New task sur l'affichage graphique
+     *
+     *  Behaviour : Permet à l'utilisateur de charger la page de creation de tache
+     */
     @FXML
     private void handleNewTask()
     {
         MainApplication.setTaskCreation();
     }
 
+    /*! @brief : Action lier au bouton New Category sur l'affichage graphique
+     *
+     *  Behaviour : Permet à l'utilisateur de charger la page de creation de categorie
+     */
     @FXML
     private void handleNewCategory()
     {
         MainApplication.setCategoryCreation();
     }
 
+    /*! @brief : Action lier au bouton Profile sur l'affichage graphique
+     *
+     *  Behaviour : Permet à l'utilisateur de charger sa page de profile
+     */
     @FXML
     private void handleProfile()
     {
         MainApplication.setProfile();
     }
 
+    /*! @brief : Action lier au bouton logout sur l'affichage graphique
+     *
+     *  Behaviour : Permet à l'utilisateur de se deconnecter et charge la page de login
+     */
     @FXML
     private void handleLogout(){
         MainApplication.setCurrentUsername("");
         MainApplication.setLogin();
     }
 
+    /*! @brief : Action lier au bouton task Report sur l'affichage graphique
+     *
+     *  Behaviour : Permet à l'utilisateur de mettre en évidance une tache qui doit être fait
+     */
     private void handleTaskReport(Task _task)
     {
         _task.setReported(true);
         updateTaskTable();
     }
 
+    /*! @brief : Action lier au bouton Edit sur l'affichage graphique
+     *
+     *  Behaviour : Permet à l'utilisateur de charger la page de modification de la tache associer
+     */
     private void handleTaskEdit(Task _task)
     {
         MainApplication.setEdit(_task);
     }
 
+    /*! @brief : Action lier au bouton Delete sur l'affichage graphique
+     *
+     *  Behaviour : Permet à l'utilisateur de supprimer la tache s'associer
+     */
     private void handleTaskDelete(UserManager _userManager, Task _task, String _userName)
     {
         _userManager.getUser(_userName).removeTask(_task);
         updateTaskTable();
     }
 
+    /*! @brief : Action lier au bouton Task Status sur l'affichage graphique
+     *
+     *  Behaviour : Permet à l'utilisateur de changer le status de la tache associer
+     */
     private void handleTaskStatus(Task _task)
     {
         _task.setCompleted(!_task.isCompleted());
         updateTaskTable();
     }
 
+    /*! @brief : Action lier au bouton Add Admin sur l'affichage graphique
+     *
+     *  Behaviour : Permet à l'utilisateur de charger la page d'ajout d'un administrateur
+     */
     private void handleAddAdmin() {
         MainApplication.setAddAdmin();
     }
 
+    /*! @brief : Action lier au bouton Remove Admin sur l'affichage graphique
+     *
+     *  Behaviour : Permet à l'utilisateur de charger la page de suppression des droits d'un administrateur
+     */
+    private void handleRemoveAdmin() {
+        MainApplication.setRemoveAdmin();
+    }
+
+
+
+
+    /*! @brief : Methode de creation dynamique de la tool bar du dashboard
+     *
+     *  Behaviour : Défini l'ensemble des propriétés fxml, de la tool bar,
+     *  en code permetant de faire évoluer dynamiquement les éléments de la page.
+     *  Ce principe permet d'afficher uniquement certain élément au utilisateur
+     *  et des éléments suplémentaires aux administrateurs permettant d'administrer l'application
+     */
     @FXML
     public void createToolBar()
     {
@@ -89,6 +145,8 @@ public class DashboardController
         toolBar.setPadding(new Insets(20.0));
 
         // Créer les boutons et leurs actions associées
+
+        // Boutton pour acceder à la page de creation d'une nouvelle taches
         Button newTaskButton = new Button("New task");
         newTaskButton.setOnAction(event -> handleNewTask());
         newTaskButton.setId("button");
@@ -103,7 +161,7 @@ public class DashboardController
             newCategoryButton.setOnAction(event -> handleNewCategory());
             newCategoryButton.setId("button");
 
-            // Boutton pour acceder à la page d'ajoute d'administrateur
+            // Boutton pour acceder à la page d'ajoute d'un administrateur
             Button addAdminButton = new Button();
             addAdminButton.setOnAction(event -> handleAddAdmin());
             ImageView addAdminImage = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/admin-add-logo.png").toString()));
@@ -112,12 +170,21 @@ public class DashboardController
             addAdminButton.setGraphic(addAdminImage);
             addAdminButton.setId("button");
 
+            // Boutton pour acceder à la page de suppression d"un administrateur
+            Button removeAdminButton = new Button();
+            removeAdminButton.setOnAction(event -> handleRemoveAdmin());
+            ImageView removeAdminImage = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/remove-admin-logo.png").toString()));
+            removeAdminImage.setFitHeight(20);
+            removeAdminImage.setPreserveRatio(true);
+            removeAdminButton.setGraphic(removeAdminImage);
+            removeAdminButton.setId("button");
 
-            toolBar.getItems().addAll(newCategoryButton, addAdminButton);
+
+            toolBar.getItems().addAll(newCategoryButton, addAdminButton, removeAdminButton);
         }
 
 
-
+        // Boutton pour acceder à la page profile
         Button profileButton = new Button();
         profileButton.setOnAction(event -> handleProfile());
         ImageView profileImage = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/profile-logo.png").toString()));
@@ -126,6 +193,7 @@ public class DashboardController
         profileButton.setGraphic(profileImage);
         profileButton.setId("button");
 
+        // Boutton pour se deconnecter
         Button logoutButton = new Button();
         logoutButton.setOnAction(event -> handleLogout());
         ImageView logoutImage = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/log-out-logo.png").toString()));
