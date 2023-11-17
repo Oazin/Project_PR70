@@ -50,7 +50,7 @@ public class SignInController
         MainApplication.setDashboard();
     }
 
-    /*! @brief : charge la page de connexion
+    /*! @brief : Action lier au bouton Login qui charge la page pour se connenecter
      */
     @FXML
     protected void handleLogin()

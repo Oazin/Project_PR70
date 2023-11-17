@@ -35,7 +35,7 @@ public class LoginController
         }
     }
 
-    /*! @brief : Charge la page d'inscription
+    /*! @brief : Action lier au bouton Signin permetant de charger la page d'inscription
      */
     @FXML
     protected void handleSigin(){

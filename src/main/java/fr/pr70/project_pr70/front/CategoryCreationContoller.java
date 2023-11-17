@@ -4,7 +4,6 @@ import fr.pr70.project_pr70.MainApplication;
 import fr.pr70.project_pr70.back.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -23,9 +22,9 @@ public class CategoryCreationContoller {
     private Label invalidText;
 
 
-    /*! @brief : Action lier au bouton "create category" sur l'affichage graffique
+    /*! @brief : Action lier au bouton New category sur l'affichage graphique
      *
-     *  Behaviour : Permet a l'utilisateur de créer une nouvel categorie
+     *  Behaviour : Permet à l'utilisateur de créer une nouvel categorie
      */
     @FXML
     public void handleCreateCategory(ActionEvent e)
