@@ -7,6 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import java.util.ArrayList;
+import java.util.Objects;
+
+import static fr.pr70.project_pr70.MainApplication.getCurrentUsername;
 
 public class RemoveAdminController {
 
@@ -69,7 +72,7 @@ public class RemoveAdminController {
         ArrayList<User> users = MainApplication.getUserManager().getUsers();
 
         for (User u : users){
-            if (u.isAdmin()){
+            if (u.isAdmin() && !u.getUsername().equals(getCurrentUsername())){
                 adminsComboBox.getItems().add(u.getUsername());
             }
         }
