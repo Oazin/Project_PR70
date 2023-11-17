@@ -36,6 +36,10 @@ public class SignInController
             invalidText.setText("Password and Confirm Password are different");
             return;
         }
+        if (userTextField.getText().trim().isEmpty() || passwordTextField.getText().trim().isEmpty() || confirmPasswordTextField.getText().trim().isEmpty()){
+            invalidText.setText("All fields need to be completed");
+            return;
+        }
         User user = new User(userTextField.getText(), passwordTextField.getText());
         user.setConnected(true);
         if(userManager.isEmpty())
