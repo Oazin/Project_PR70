@@ -74,9 +74,9 @@ public class TaskCreationController {
 
     }
 
-    /*! @brief : Action lier au bouton cancel sur l'affichage graffique
+    /*! @brief : Action lier au bouton Cancel sur l'affichage graphique
      *
-     *  Behaviour : Permet a l'utilisateur de retourner sur le dashboard
+     *  Behaviour : Permet à l'utilisateur de retourner sur le dashboard
      *  lorsqu'il decide de ne pas créer de nouvelle tâches
      */
     @FXML
@@ -85,8 +85,12 @@ public class TaskCreationController {
         MainApplication.setDashboard();
     }
 
+    /*! @brief : Remplis la drop down list des categories en fonction des categories existantent
+     */
     public void updateCategoryComboBox()
     {
+        clearField();
+
         categoryComboBox.getItems().clear();
         ArrayList<Category> categories = MainApplication.getCategoryManager().getCategories();
         if(!categories.isEmpty())
@@ -94,5 +98,16 @@ public class TaskCreationController {
             categoryComboBox.setValue(categories.get(0));
         }
         categoryComboBox.getItems().addAll(categories);
+    }
+
+
+    /*! @brief : vide les champs remplissable et les messages de prévension
+     */
+    private void clearField(){
+        invalidText.setText("");
+        nameField.clear();
+        descriptionArea.clear();
+        startDatePicker.setValue(null);
+        deadlinePicker.setValue(null);
     }
 }

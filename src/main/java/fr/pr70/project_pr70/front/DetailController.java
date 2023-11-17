@@ -11,6 +11,11 @@ public class DetailController {
     @FXML
     protected VBox infoBox;
 
+    /*! @brief : Action lier au bouton Exit sur l'affichage graphique
+     *
+     *  Behaviour : Permet à l'utilisateur de retourner sur le dashboard
+     *  lorsqu'il decide de ne pas créer de nouvelle tâches
+     */
     @FXML
     public void handleExit()
     {
