@@ -11,11 +11,13 @@ public final class Password
 {
     private String passwordHash;
 
+    /* ----------------- Constructor ----------------- */
     public Password(String password)
     {
         this.passwordHash = hashPassword(password);
     }
 
+    /* ----------------- Getters ----------------- */
     public String getPasswordHash()
     {
         return passwordHash;
@@ -26,24 +28,35 @@ public final class Password
         this.passwordHash = passwordHash;
     }
 
+    /* ----------------- Methods ----------------- */
+    /*!
+     * @brief : Change le mot de passe de l'utilisateur
+     * @param password ; nouveau mot de passe
+     */
     public void setPassword(String password)
     {
         this.passwordHash = hashPassword(password);
     }
 
+    /*!
+     * @brief : Vérifie si le mot de passe est correct
+     * @param password ; mot de passe à vérifier
+     * @return true si le mot de passe est correct, false sinon
+     */
     public boolean checkPassword(String password)
     {
         // Check if the hash of the password is the same as the stored hash
         return this.passwordHash.equals(hashPassword(password));
     }
 
-    /*! @brief : hash a clean password
-     *  @param password ; clean password to hash
-     *  @return hashed password
+    /*!
+     * @brief : Hash le mot de passe
+     * @param password ; mot de passe à hasher
+     * @return le mot de passe hashé
      */
     private String hashPassword(String password)
     {
-        // Hash the password with PBKDF2
+        // Hash le mdp avec PBKDF2
         byte[] salt = new byte[16];
         for (int i = 0; i < salt.length; i++)
         {
@@ -60,5 +73,4 @@ public final class Password
         }
         return "";
     }
-
 }
