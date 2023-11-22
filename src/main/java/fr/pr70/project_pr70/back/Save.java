@@ -16,6 +16,7 @@ public class Save {
     public File categoriesData;
     public File tasksData;
 
+    /* ----------------- Constructor ----------------- */
     public Save() throws IOException {
         Path path = Paths.get("src/main/resources/fr/pr70/project_pr70/save/");
         Files.createDirectories(path);
@@ -32,15 +33,13 @@ public class Save {
             tasksData.createNewFile();
     }
 
-    public void saveTask(int userId, Task task) throws IOException
-    {
-        if(tasksData == null) return;
-        String string = userId+", "+task.getName()+", "+task.getDescription()+", "+task.getStartDate()+", "+task.getDeadline()+", "+task.getPriority()+", "+task.isCompleted()+"\n";
-        FileWriter writer = new FileWriter(tasksData);
-        writer.append(string);
-        writer.close();
-    }
-
+    /* ----------------- Methods ----------------- */
+    /*!
+     * @brief : Sauvegarde les tâches de l'utilisateur dans un fichier
+     * @param _writer ; Fichier dans lequel on sauvegarde les tâches
+     * @param _userId ; Id de l'utilisateur dont on sauvegarde les tâches
+     * @param _taskManager ; Gestionnaire de tâches de l'utilisateur
+     */
     public void saveTasks(FileWriter writer, int userId, TaskManager taskManager) throws IOException
     {
         for(Task task: taskManager.getTasks())
@@ -50,6 +49,10 @@ public class Save {
         }
     }
 
+    /*!
+     * @brief : Charge les tâches des utilisateurs depuis un fichier
+     * @param _userManager ; Gestionnaire d'utilisateurs
+     */
     public void loadTasks(UserManager userManager) throws FileNotFoundException
     {
         if(tasksData == null) return;
@@ -72,6 +75,10 @@ public class Save {
         }
     }
 
+    /*!
+     * @brief : Sauvegarde les utilisateurs dans un fichier
+     * @param _userManager ; Gestionnaire d'utilisateurs
+     */
     public void saveUsers(UserManager userManager) throws IOException
     {
         if(usersData == null) return;
@@ -84,6 +91,10 @@ public class Save {
         writer.close();
     }
 
+    /*!
+     * @brief : Charge les utilisateurs depuis un fichier
+     * @return Gestionnaire d'utilisateurs
+     */
     public UserManager loadUsers() throws FileNotFoundException
     {
         if(usersData == null) return null;
@@ -100,11 +111,15 @@ public class Save {
         return userManager;
     }
 
-    public void saveCategories() throws IOException
+    /*!
+     * @brief : Sauvegarde les catégories dans un fichier
+     * @param _categoryManager ; Gestionnaire de catégories
+     */
+    public void saveCategories(CategoryManager _categoryManager) throws IOException
     {
         if(categoriesData == null) return;
         FileWriter writer = new FileWriter(categoriesData);
-        for(Category category: MainApplication.getCategoryManager().getCategories())
+        for(Category category: _categoryManager.getCategories())
         {
             String string = category.getName()+", "+category.getColor()+"\n";
             writer.append(string);
@@ -112,23 +127,32 @@ public class Save {
         writer.close();
     }
 
-    public void loadCategories() throws FileNotFoundException
+    /*!
+     * @brief : Charge les catégories depuis un fichier
+     * @return Gestionnaire de catégories
+     */
+    public CategoryManager loadCategories() throws FileNotFoundException
     {
-        if(categoriesData == null) return;
+        if(categoriesData == null) return null;
+        CategoryManager categoryManager = new CategoryManager();
         Scanner scanner = new Scanner(categoriesData);
         while(scanner.hasNextLine())
         {
             String[] categoryInfo = scanner.nextLine().split(", ");
             Category category = new Category(categoryInfo[0], Color.web(categoryInfo[1]));
-            MainApplication.getCategoryManager().addCategories(category);
+            categoryManager.addCategories(category);
         }
+        return categoryManager;
     }
 
-    public void save() throws IOException
+    /*!
+     * @brief : Sauvegarde les utilisateurs et les tâches dans des fichiers
+     * @param _userManager ; Gestionnaire d'utilisateurs
+     */
+    public void save(UserManager _userManager) throws IOException
     {
-        UserManager userManager = MainApplication.getUserManager();
         //save all tasks
-        List<User> userList = userManager.getUsers();
+        List<User> userList = _userManager.getUsers();
         FileWriter writer = new FileWriter(tasksData);
         for(int i = 0; i < userList.size(); i++)
         {
@@ -137,9 +161,13 @@ public class Save {
         writer.close();
 
         //save all users
-        saveUsers(userManager);
+        saveUsers(_userManager);
     }
 
+    /*!
+     * @brief : Charge les utilisateurs et les tâches depuis des fichiers
+     * @return Gestionnaire d'utilisateurs
+     */
     public UserManager load() throws FileNotFoundException
     {
         //load all users
