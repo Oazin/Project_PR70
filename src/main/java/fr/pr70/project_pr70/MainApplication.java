@@ -266,14 +266,13 @@ public class MainApplication extends Application
 
     @Override
     public void stop() throws IOException {
-        save.saveCategories();
-        save.save();
+        save.saveCategories(categoryManager);
+        save.save(userManager);
     }
 
     public static void main(String[] args) throws IOException {
         save = new Save();
-        categoryManager = new CategoryManager();
-        save.loadCategories();
+        categoryManager = save.loadCategories();
         userManager = save.load();
         launch();
     }
