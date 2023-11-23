@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"fr.pr70.project_pr70","l":"fr.pr70.project_pr70"},{"m":"fr.pr70.project_pr70","l":"fr.pr70.project_pr70.back"},{"m":"fr.pr70.project_pr70","l":"fr.pr70.project_pr70.front"}];updateSearchResults();
