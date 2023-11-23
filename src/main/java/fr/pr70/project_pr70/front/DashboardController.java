@@ -3,6 +3,7 @@ package fr.pr70.project_pr70.front;
 
 import fr.pr70.project_pr70.MainApplication;
 import fr.pr70.project_pr70.back.*;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -154,8 +155,8 @@ public class DashboardController
 
         // Boutton pour acceder à la page de creation d'une nouvelle taches
         Button newTaskButton = new Button("New task");
-        newTaskButton.setOnAction(event -> handleNewTask());
-        newTaskButton.setId("button");
+        setToolBarButton(event -> handleNewTask(), newTaskButton);
+
         toolBar.getItems().add(newTaskButton);
 
         // Seul un administrateur peut créer des categories et ajouter des administrateur
@@ -164,27 +165,15 @@ public class DashboardController
         {
             // Boutton pour acceder à la page de creation de categorie
             Button newCategoryButton = new Button("New category");
-            newCategoryButton.setOnAction(event -> handleNewCategory());
-            newCategoryButton.setId("button");
+            setToolBarButton(event -> handleNewCategory(), newCategoryButton);
 
             // Boutton pour acceder à la page d'ajoute d'un administrateur
             Button addAdminButton = new Button();
-            addAdminButton.setOnAction(event -> handleAddAdmin());
-            ImageView addAdminImage = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/admin-add-logo.png").toString()));
-            addAdminImage.setFitHeight(20);
-            addAdminImage.setPreserveRatio(true);
-            addAdminButton.setGraphic(addAdminImage);
-            addAdminButton.setId("button");
+            setToolBarButton(event -> handleAddAdmin(), "/fr/pr70/project_pr70/icon/admin-add-logo.png", addAdminButton);
 
             // Boutton pour acceder à la page de suppression d"un administrateur
             Button removeAdminButton = new Button();
-            removeAdminButton.setOnAction(event -> handleRemoveAdmin());
-            ImageView removeAdminImage = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/remove-admin-logo.png").toString()));
-            removeAdminImage.setFitHeight(20);
-            removeAdminImage.setPreserveRatio(true);
-            removeAdminButton.setGraphic(removeAdminImage);
-            removeAdminButton.setId("button");
-
+            setToolBarButton(event -> handleRemoveAdmin(), "/fr/pr70/project_pr70/icon/remove-admin-logo.png", removeAdminButton);
 
             toolBar.getItems().addAll(newCategoryButton, addAdminButton, removeAdminButton);
         }
@@ -192,23 +181,44 @@ public class DashboardController
 
         // Boutton pour acceder à la page profile
         Button profileButton = new Button();
-        profileButton.setOnAction(event -> handleProfile());
-        ImageView profileImage = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/profile-logo.png").toString()));
-        profileImage.setFitHeight(20);
-        profileImage.setPreserveRatio(true);
-        profileButton.setGraphic(profileImage);
-        profileButton.setId("button");
+        setToolBarButton(event -> handleProfile(), "/fr/pr70/project_pr70/icon/profile-logo.png", profileButton);
 
         // Boutton pour se deconnecter
         Button logoutButton = new Button();
-        logoutButton.setOnAction(event -> handleLogout());
-        ImageView logoutImage = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/log-out-logo.png").toString()));
-        logoutImage.setFitHeight(20);
-        logoutImage.setPreserveRatio(true);
-        logoutButton.setGraphic(logoutImage);
-        logoutButton.setId("button");
+        setToolBarButton(event -> handleLogout(),"/fr/pr70/project_pr70/icon/log-out-logo.png", logoutButton );
 
         toolBar.getItems().addAll(profileButton, logoutButton);
+    }
+
+    /*! @brief : Defini l'ensemble des propriétés d'un boutton
+     *  @param _handler ; le event handler associer au bouton
+     *  @param _logoPath ; le chemin du logo associer au bouton
+     *  @param _button ; le bouton que l'on souhaite paramètré
+     *
+     *  @behaviour :
+     *  Defini l'action et le logo assossiés au bouton
+     */
+    private void setToolBarButton(EventHandler<ActionEvent> _handler, String _logoPath, Button _button)
+    {
+        _button.setOnAction(_handler);
+        ImageView buttonImage = new ImageView(new Image(getClass().getResource(_logoPath).toString()));
+        buttonImage.setFitHeight(20);
+        buttonImage.setPreserveRatio(true);
+        _button.setGraphic(buttonImage);
+        _button.setId("button");
+    }
+
+    /*! @brief : Defini l'ensemble des propriétés d'un boutton
+     *  @param _handler ; le event handler associer au bouton
+     *  @param _button ; le bouton que l'on souhaite paramètré
+     *
+     *  @behaviour :
+     *  Defini l'action assossiés au bouton
+     */
+    private void setToolBarButton(EventHandler<ActionEvent> _handler, Button _button)
+    {
+        _button.setOnAction(_handler);
+        _button.setId("button");
     }
 
     private void updateHeader()
