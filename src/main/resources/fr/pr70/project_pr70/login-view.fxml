@@ -24,6 +24,6 @@
     <PasswordField fx:id="passwordTextField"/>
 
     <Label fx:id="invalidText" textFill="RED" />
-    <Button id="button" text="Login" onAction="#onSubmitClicked"/>
+    <Button id="button" text="Login" onAction="#handleSubmit"/>
     <Button id="button" text="Sigin" onAction="#handleSigin"/>
 </VBox>

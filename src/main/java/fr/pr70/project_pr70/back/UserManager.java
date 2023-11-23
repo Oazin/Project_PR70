@@ -1,35 +1,42 @@
 package fr.pr70.project_pr70.back;
 
-import fr.pr70.project_pr70.MainApplication;
-
 import java.util.ArrayList;
-import java.util.Collection;
 
+/**
+ * The type User manager.
+ */
 public class UserManager
 {
     private final ArrayList<User> users;
 
-    
+
     /* ----------------- Constructor ----------------- */
-    public UserManager()
-    {
+
+    /**
+     * Constructeur par défaut initialisant une liste d'utilisateurs vide.
+     */
+    public UserManager() {
         users = new ArrayList<>();
     }
 
-
     /* ----------------- Getters ----------------- */
-    public ArrayList<User> getUsers()
-    {
+
+    /**
+     * Renvoie la liste des utilisateurs actuellement gérés par le gestionnaire d'utilisateurs.
+     * @return La liste des utilisateurs
+     */
+    public ArrayList<User> getUsers() {
         return users;
     }
 
-    
+
     /* ----------------- Methods ----------------- */
-    /*! @brief : Ajoute l'utilisateur
-     *  @param user ; Utilisateur à ajouter
+    /**
+     * Ajoute l'utilisateur
+     * @param user ; Utilisateur à ajouter
      *
-     *  @behaviour
-     *  Ajoute l'utilisateur à la liste
+     * @behaviour
+     * Ajoute l'utilisateur à la liste
      */
     public void addUser(User user)
     {
@@ -37,11 +44,9 @@ public class UserManager
         users.add(user);
     }
 
-    /*! @brief : Supprime l'utilisateur
-     *  @param user ; Utilisateur à supprimer
-     *
-     *  @behaviour
-     *  Supprime l'utilisateur de la liste
+    /**
+     * Supprime l'utilisateur
+     * @param user ; Utilisateur à supprimer
      */
     public void removeUser(User user)
     {
@@ -49,11 +54,10 @@ public class UserManager
         users.remove(user);
     }
     
-    /*! @brief : Retourne l'utilisateur
-     *  @param _username ; Nom d'utilisateur qui a été entrer
-     *
-     *  @behaviour
-     *  Renvoie l'utilisateur correspondant au nom d'utilisateur entré
+    /**
+     * Retourne l'utilisateur
+     * @param _username ; Nom d'utilisateur qui a été entrer
+     * @return l'utilisateur correspondant
      */
     public User getUser(String _username)
     {
@@ -67,42 +71,23 @@ public class UserManager
         return null; // Aucun utilisateur trouvé avec ce nom d'utilisateur
     }
 
-    /*! @brief : Verifie si la liste d'utilisateur est vide
-     *
-     *  @behaviour
-     *  Renvoie un boolean correspondant au résultat de la vérification
+    /**
+     * Verifie si la liste d'utilisateur est vide
+     * @return un boolean
      */
     public boolean isEmpty()
     {
         return users.isEmpty();
     }
-    
-    /*! @brief : Cree le nouveau user
-     *  @param _username ; Nom d'utilisateur qui a été entrer
-     *  @param _password ; mot de passe qui a été entrer
-     *  @param _confirmPass ; Mot de passe de confirmation
-     *
-     *  @behaviour
-     *  Creer un nouvel utilistateur et retroune un boolean si celui a été créé
-     *  Il faut verifier que l'utilisateur n'existe pas deja et que le mot de passe de confrimation est identique au mot de passe voulu par l'utilisateur
-     */
-    public boolean createUser(String _username, String _password, String _confirmPass)
-    {
-        if (alreadyExist(_username)) return false; // L'utilisateur existe déjà, la création a échoué
-        if (!confirmPassword(_password,_confirmPass)) return false; // Le mot de passe de confirmation n'est pas identique au mot de passe rentré en premier lieu
 
-        User newUser = new User(_username, _password);
-        users.add(newUser);
-        return true; // L'utilisateur a été créé avec succès
-    }
-
-    /*! @brief : Connecte l'utilisateur
-     *  @param _username ; Nom d'utilisateur qui a été entrer
-     *  @param _password ; mot de passe qui a été entrer
+    /**
+     * Connecte l'utilisateur
+     * @param _username ; Nom d'utilisateur qui a été entrer
+     * @param _password ; mot de passe qui a été entrer
+     * @return un boolean correspondant au résultat de la connexion
      *
-     *  @behaviour
-     *  Renvoie un boolean correspondant au résultat de la connexion
-     *  Il faut verifier que l'utilisateur existe et que le mot de passe est correct
+     * @behaviour
+     * Il faut verifier que l'utilisateur existe et que le mot de passe est correct
      */
     public boolean connectUser(String _username, String _password)
     {
@@ -113,25 +98,30 @@ public class UserManager
         return true; // L'utilisateur a été connecté avec succès
     }
 
-    /*! @brief : Verifie l'égaliter des deux mots de passes rentré par l'utilisateur
-     *  @param _password ; mot de passe qui a été entrer
-     *  @param _confirmPass ; Mot de passe de confirmation
-     *
-     *  @behaviour
-     *  Renvoie un boolean correspondant au résultat de l'égalité
+    /**
+     * Verifie l'égaliter des deux mots de passes rentré par l'utilisateur
+     * @param _password ; mot de passe qui a été entrer
+     * @param _confirmPass ; Mot de passe de confirmation
+     * @return un boolean correspondant au résultat de l'égalité
      */
 
+    /**
+     * Confirm password boolean.
+     *
+     * @param _password    the password
+     * @param _confirmPass the confirm pass
+     * @return the boolean
+     */
     public boolean confirmPassword(String _password, String _confirmPass)
     {
         return _password.equals(_confirmPass);
     }
 
 
-    /*! @brief : Verifie l'existance de l'utilisateur
-     *  @param _username ; Nom d'utilisateur qui a été entrer
-     *
-     *  @behaviour
-     *  Renvoie true si l'utilisateur existe déjà et false dans le cas contraire
+    /**
+     * Verifie l'existance de l'utilisateur
+     * @param _username ; Nom d'utilisateur qui a été entrer
+     * @return  Renvoie true si l'utilisateur existe déjà et false dans le cas contraire
      */
     public boolean alreadyExist(String _username)
     {
@@ -145,9 +135,10 @@ public class UserManager
         return false; // Aucun utilisateur trouvé avec ce nom d'utilisateur
     }
 
-    /*! @brief : Retourne les utilisateurs autorisés en lecture/écriture par l'utilisateur
-    *   @param userName ; Nom de l'utilisateur dont on veut les utilisateurs autorisés
-    *   @return ArrayList<User> ; Liste des utilisateurs autorisés
+    /**
+     * Retourne les utilisateurs autorisés en lecture/écriture par l'utilisateur
+    *  @param _user ; Nom de l'utilisateur dont on veut les utilisateurs autorisés
+    *  @return ArrayList<User> ; Liste des utilisateurs autorisés
     */
     public ArrayList<User> getAllowedUsers(User _user)
     {

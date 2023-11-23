@@ -18,10 +18,9 @@ public class AddAdminController implements Cancelable {
     private Label invalidText;
 
 
-    /*! @brief : Action lier au bouton Cancel sur l'affichage graphique
-     *
-     *  Behaviour : Permet à l'utilisateur de retourner sur le dashboard
-     *  lorsqu'il decide de ne pas créer de nouvelle tâches
+    /**
+     *  Action lier au bouton Cancel sur l'affichage graphique
+     *  @param actionEvent ; Action lier au bouton Cancel sur l'affichage graphique
      */
     @FXML
     public void handleCancel(ActionEvent actionEvent)
@@ -29,8 +28,13 @@ public class AddAdminController implements Cancelable {
         MainApplication.setDashboard();
     }
 
+    /**
+     *  Ajoute les droits administrateurs à un utilisateur
+     *  @behaviour : Permet à un administrateur d'ajouter les droits
+     *  administrateurs à un autre utilisateur qui n'était pas administrateur
+     */
     @FXML
-    public void handleAdd(ActionEvent actionEvent)
+    public void handleAdd()
     {
         // Si l'un des champs est vide la creation ne peut pas s'effectuer donc un message previent l'utilisateur
         if (userComboBox.getValue() == null)
@@ -45,14 +49,16 @@ public class AddAdminController implements Cancelable {
 
     }
 
-    /*! @brief : vide les champs remplissable et les messages de prévension
+    /**
+     *  Vide les champs remplissable et les messages de prévension
      */
     private void clearField(){
         invalidText.setText("");
     }
 
 
-    /*! @brief : Permet de mettre à jour et afficher la liste des utilisateurs non admin
+    /**
+     *  Permet de mettre à jour et afficher la liste des utilisateurs non admin
      */
     public void updateUserComboBox()
     {

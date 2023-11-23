@@ -17,9 +17,10 @@ public class RemoveAdminController implements Cancelable{
     private Label invalidText;
 
 
-    /*! @brief : Action lier au bouton cancel sur l'affichage graphique
-     *
-     *  Behaviour : Permet a l'utilisateur de retourner sur le dashboard
+    /**
+     *  Action lier au bouton cancel sur l'affichage graphique
+     *  @param actionEvent ; Action lier au bouton cancel sur l'affichage graphique
+     *  @behaviour : Permet a l'utilisateur de retourner sur le dashboard
      *  lorsqu'il decide de ne pas créer de nouvelle tâches
      */
     @FXML
@@ -29,13 +30,13 @@ public class RemoveAdminController implements Cancelable{
     }
 
 
-    /*! @brief : Action lier au bouton cancel sur l'affichage graphique
-     *
-     *  Behaviour : Permet à un administrateur de retirer les droits
+    /**
+     *  Action lier au bouton remove sur l'affichage graphique
+     *  @behaviour : Permet à un administrateur de retirer les droits
      *  administrateurs à un autre utilisateur qui était administrateur
      */
     @FXML
-    public void handleRemove(ActionEvent actionEvent)
+    public void handleRemove()
     {
         // Si l'un des champs est vide la creation ne peut pas s'effectuer donc un message previent l'utilisateur
         if (adminsComboBox.getValue() == null)
@@ -50,14 +51,16 @@ public class RemoveAdminController implements Cancelable{
 
     }
 
-    /*! @brief : vide les champs remplissable et les messages de prévension
+    /**
+     *  Vide les champs remplissable et les messages de prévension
      */
     private void clearField(){
         invalidText.setText("");
     }
 
 
-    /*! @brief : Permet de mettre à jour et afficher la liste des administrateurs
+    /**
+     *  Permet de mettre à jour et afficher la liste des administrateurs
      */
     public void updateAdminComboBox()
     {

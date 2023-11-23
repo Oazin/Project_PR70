@@ -21,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ToolBar;
 import javafx.scene.paint.Color;
 
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -34,9 +35,9 @@ public class DashboardController
 
     /* ---------------- Button' handles -----------------*/
 
-    /*! @brief : Action lier au bouton New task sur l'affichage graphique
-     *
-     *  Behaviour : Permet à l'utilisateur de charger la page de creation de tache
+    /**
+     *  Action lier au bouton New task sur l'affichage graphique
+     *  @behaviour : Permet à l'utilisateur de charger la page de creation de tache
      */
     @FXML
     private void handleNewTask()
@@ -44,9 +45,9 @@ public class DashboardController
         MainApplication.setTaskCreation();
     }
 
-    /*! @brief : Action lier au bouton New Category sur l'affichage graphique
-     *
-     *  Behaviour : Permet à l'utilisateur de charger la page de creation de categorie
+    /**
+     *  Action lier au bouton New Category sur l'affichage graphique
+     *  @behaviour : Permet à l'utilisateur de charger la page de creation de categorie
      */
     @FXML
     private void handleNewCategory()
@@ -54,9 +55,9 @@ public class DashboardController
         MainApplication.setCategoryCreation();
     }
 
-    /*! @brief : Action lier au bouton Profile sur l'affichage graphique
-     *
-     *  Behaviour : Permet à l'utilisateur de charger sa page de profile
+    /**
+     *  Action lier au bouton Profile sur l'affichage graphique
+     *  @behaviour : Permet à l'utilisateur de charger sa page de profile
      */
     @FXML
     private void handleProfile()
@@ -64,9 +65,9 @@ public class DashboardController
         MainApplication.setProfile();
     }
 
-    /*! @brief : Action lier au bouton logout sur l'affichage graphique
-     *
-     *  Behaviour : Permet à l'utilisateur de se deconnecter et charge la page de login
+    /**
+     *  Action lier au bouton logout sur l'affichage graphique
+     *  @behaviour : Permet à l'utilisateur de se deconnecter et charge la page de login
      */
     @FXML
     private void handleLogout(){
@@ -74,9 +75,9 @@ public class DashboardController
         MainApplication.setLogin();
     }
 
-    /*! @brief : Action lier au bouton task Report sur l'affichage graphique
-     *
-     *  Behaviour : Permet à l'utilisateur de mettre en évidance une tache qui doit être fait
+    /**
+     *  Action lier au bouton task Report sur l'affichage graphique
+     *  @behaviour : Permet à l'utilisateur de mettre en évidance une tache qui doit être fait
      */
     private void handleTaskReport(Task _task)
     {
@@ -84,18 +85,20 @@ public class DashboardController
         updateTaskTable();
     }
 
-    /*! @brief : Action lier au bouton Edit sur l'affichage graphique
-     *
-     *  Behaviour : Permet à l'utilisateur de charger la page de modification de la tache associer
+    /**
+     *  Action lier au bouton Edit sur l'affichage graphique
+     *  @behaviour : Permet à l'utilisateur de charger la page de modification de la tache associer
      */
     private void handleTaskEdit(Task _task)
     {
         MainApplication.setEdit(_task);
     }
 
-    /*! @brief : Action lier au bouton Delete sur l'affichage graphique
-     *
-     *  Behaviour : Permet à l'utilisateur de supprimer la tache s'associer
+    /**
+     *  Action lier au bouton Delete sur l'affichage graphique
+     *  @param _task : la tache que l'on souhaite supprimer
+     *  @param _userName : le nom de l'utilisateur associé à la tache
+     *  @behaviour : Permet à l'utilisateur de supprimer la tache s'associer
      */
     private void handleTaskDelete(Task _task, String _userName)
     {
@@ -103,9 +106,10 @@ public class DashboardController
         updateTaskTable();
     }
 
-    /*! @brief : Action lier au bouton Task Status sur l'affichage graphique
-     *
-     *  Behaviour : Permet à l'utilisateur de changer le status de la tache associer
+    /**
+     *  Action lier au bouton Task Status sur l'affichage graphique
+     *  @param _task : la tache que l'on souhaite modifier
+     *  @behaviour : Permet à l'utilisateur de changer le status de la tache associer
      */
     private void handleTaskStatus(Task _task)
     {
@@ -117,24 +121,26 @@ public class DashboardController
         updateTaskTable();
     }
 
-    /*! @brief : Action lier au bouton Add Admin sur l'affichage graphique
-     *
-     *  Behaviour : Permet à l'utilisateur de charger la page d'ajout d'un administrateur
+    /**
+     *  Action lier au bouton Add Admin sur l'affichage graphique
+     *  @behaviour : Permet à l'utilisateur de charger la page d'ajout d'un administrateur
      */
     private void handleAddAdmin() {
         MainApplication.setAddAdmin();
     }
 
-    /*! @brief : Action lier au bouton Remove Admin sur l'affichage graphique
-     *
-     *  Behaviour : Permet à l'utilisateur de charger la page de suppression des droits d'un administrateur
+    /**
+     *  Action lier au bouton Remove Admin sur l'affichage graphique
+     *  @behaviour : Permet à l'utilisateur de charger la page de suppression des droits d'un administrateur
      */
     private void handleRemoveAdmin() {
         MainApplication.setRemoveAdmin();
     }
 
-    /*!
-    * @brief : ajoute un handle pour l'ouverture de la page de detail de la tache
+    /**
+    *  Ajoute un handle pour l'ouverture de la page de detail de la tache
+    *  @param hBox : le HBox que l'on souhaite paramètré
+    *  @param task : la tache que l'on souhaite afficher
     */
     private void setHandleDetail(HBox hBox, Task task)
     {
@@ -150,9 +156,9 @@ public class DashboardController
         });
     }
 
-    /*! @brief : Methode de creation dynamique de la tool bar du dashboard
-     *
-     *  Behaviour : Défini l'ensemble des propriétés fxml, de la tool bar,
+    /**
+     *  Methode de creation dynamique de la tool bar du dashboard
+     *  @behaviour : Défini l'ensemble des propriétés fxml, de la tool bar,
      *  en code permetant de faire évoluer dynamiquement les éléments de la page.
      *  Ce principe permet d'afficher uniquement certain élément au utilisateur
      *  et des éléments suplémentaires aux administrateurs permettant d'administrer l'application
@@ -204,7 +210,8 @@ public class DashboardController
         toolBar.getItems().addAll(profileButton, logoutButton);
     }
 
-    /*! @brief : Defini l'ensemble des propriétés d'un boutton
+    /**
+     *  Defini l'ensemble des propriétés d'un boutton
      *  @param _handler ; le event handler associer au bouton
      *  @param _logoPath ; le chemin du logo associer au bouton
      *  @param _button ; le bouton que l'on souhaite paramètré
@@ -215,19 +222,21 @@ public class DashboardController
     private void setDashboardButton(EventHandler<ActionEvent> _handler, String _logoPath, Button _button)
     {
         _button.setOnAction(_handler);
-        ImageView buttonImage = new ImageView(new Image(getClass().getResource(_logoPath).toString()));
+        URL url = getClass().getResource(_logoPath);
+        if(url == null) return;
+        ImageView buttonImage = new ImageView(new Image(url.toString()));
         buttonImage.setFitHeight(20);
         buttonImage.setPreserveRatio(true);
         _button.setGraphic(buttonImage);
         _button.setId("button");
     }
 
-    /*! @brief : Defini l'ensemble des propriétés d'un boutton
+    /**
+     *  Defini l'ensemble des propriétés d'un boutton
      *  @param _handler ; le event handler associer au bouton
      *  @param _button ; le bouton que l'on souhaite paramètré
      *
-     *  @behaviour :
-     *  Defini l'action assossiés au bouton
+     *  @behaviour : l'action assossiés au bouton
      */
     private void setDashboardButton(EventHandler<ActionEvent> _handler, Button _button)
     {
@@ -235,7 +244,8 @@ public class DashboardController
         _button.setId("button");
     }
 
-    /*! @brief : Methode de creation dynamique du header de la table des taches
+    /**
+     *  Methode de creation dynamique du header de la table des taches
      */
     private void updateHeader()
     {
@@ -252,18 +262,18 @@ public class DashboardController
         header.getChildren().addAll(assigned, name, status, priority, deadline, category);
     }
 
-    /*! @brief : Methode de creation dynamique d'une tache
+    /**
+     *  Methode de creation dynamique d'une tache
      *  @param _currentUser ; utilisateur courant
      *  @param _userName ; nom de l'utilisateur associé à la tache
      *  @param _task ; tache que l'on souhaite afficher
-     *  @return : HBox ; le HBox contenant l'ensemble des informations de la tache
+     *  @return le HBox contenant l'ensemble des informations de la tache
      */
     private HBox updateTask(User _currentUser, String _userName, Task _task)
     {
         // assigned label
         Label taskAssigned = new Label(_userName);
-        if(_userName.equals(_currentUser.getUsername()))
-            taskAssigned.setText("you");
+        if(_userName.equals(_currentUser.getUsername())) taskAssigned.setText("you");
 
         // name label
         Label taskName = new Label(_task.getName());
@@ -315,14 +325,13 @@ public class DashboardController
 
         hBox.getChildren().addAll(taskEdit, spacer2, taskDelete, spacer3);
         hBox.setId("task");
-        if(_task.isReported())
-            hBox.setStyle("-fx-background-color: red");
+        if(_task.isReported()) hBox.setStyle("-fx-background-color: red");
         setHandleDetail(hBox, _task);
         return hBox;
     }
 
-    /*!
-     * @brief : Methode de creation dynamique de la table des taches du dashboard
+    /**
+     *  Methode de creation dynamique de la table des taches du dashboard
      */
     @FXML
     public void updateTaskTable()
@@ -345,13 +354,14 @@ public class DashboardController
         for(User user : users)
         {
             TaskManager taskManager = user.getTasks();
-            for(Task task : taskManager.getTasks())
+            for(Task ignored : taskManager.getTasks())
             {
                 userNames.add(user.getUsername());
             }
             tasks.addAll(taskManager.getTasks());
         }
 
+        // afficher les taches
         for(int i = 0; i < tasks.size(); i++)
         {
             String userName = userNames.get(i);

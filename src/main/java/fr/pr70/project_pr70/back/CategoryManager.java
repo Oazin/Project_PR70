@@ -1,44 +1,60 @@
 package fr.pr70.project_pr70.back;
 
-import javafx.scene.paint.Color;
-
 import java.util.ArrayList;
 
+/**
+ * The type Category manager.
+ */
 public final class CategoryManager
 {
     private ArrayList<Category> categories;
 
 
+    /**
+     * Instantiates a new Category manager.
+     */
     /* ----------------- Constructor ----------------- */
-    public CategoryManager()
-    {
+
+    /**
+     * Constructeur par défaut initialisant une liste de catégories vide.
+     */
+    public CategoryManager() {
         categories = new ArrayList<>();
     }
 
-
     /* ----------------- Getter ----------------- */
-    public ArrayList<Category> getCategories() { return categories; }
 
-
-    /* ----------------- Setter ----------------- */
-    public void setCategories(ArrayList<Category> _categories) { categories = _categories; }
-
+    /**
+     * Renvoie la liste des catégories actuellement gérées.
+     * @return La liste des catégories
+     */
+    public ArrayList<Category> getCategories() {
+        return categories;
+    }
 
     /* ----------------- Methods ----------------- */
-    /*! @brief : Ajout une categorie à la liste des categories
-     */
 
-    public Category getCategory(String _categoryName)
-    {
-        for(Category category:categories)
-        {
-            if(category.name.equals(_categoryName))
-            {
+    /**
+     * Renvoie la catégorie correspondant au nom spécifié.
+     * @param _categoryName Le nom de la catégorie recherchée
+     * @return La catégorie correspondante ou null si aucune correspondance n'est trouvée
+     */
+    public Category getCategory(String _categoryName) {
+        for(Category category : categories) {
+            if(category.getName().equals(_categoryName)) {
                 return category;
             }
         }
         return null;
     }
-    public void addCategories(Category _category) { categories.add(_category); }
+
+    /**
+     * Ajoute une catégorie à la liste des catégories gérées.
+     * @param _category La catégorie à ajouter
+     */
+    public void addCategories(Category _category) {
+        categories.add(_category);
+    }
+
 
 }

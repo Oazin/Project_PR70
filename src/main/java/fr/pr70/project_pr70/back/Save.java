@@ -11,12 +11,35 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The type Save.
+ */
 public class Save {
+    /**
+     * The Users data.
+     */
     public File usersData;
+    /**
+     * The Categories data.
+     */
     public File categoriesData;
+    /**
+     * The Tasks data.
+     */
     public File tasksData;
 
+    /**
+     * Instantiates a new Save.
+     *
+     * @throws IOException the io exception
+     */
     /* ----------------- Constructor ----------------- */
+
+    /**
+     * Constructeur de la classe Save utilisé pour initialiser les fichiers de sauvegarde s'ils n'existent pas.
+     * S'ils n'existent pas, crée les répertoires et les fichiers nécessaires pour la sauvegarde des données.
+     * @throws IOException En cas d'erreur lors de la création des fichiers de sauvegarde
+     */
     public Save() throws IOException {
         Path path = Paths.get("src/main/resources/fr/pr70/project_pr70/save/");
         Files.createDirectories(path);
@@ -33,30 +56,38 @@ public class Save {
             tasksData.createNewFile();
     }
 
+    /**
+     * Save tasks.
+     *
+     * @param writer      the writer
+     * @param userId      the user id
+     * @param taskManager the task manager
+     * @throws IOException the io exception
+     */
     /* ----------------- Methods ----------------- */
-    /*!
-     * @brief : Sauvegarde les tâches de l'utilisateur dans un fichier
+    /**
+     * Sauvegarde les tâches de l'utilisateur dans un fichier
      * @param _writer ; Fichier dans lequel on sauvegarde les tâches
      * @param _userId ; Id de l'utilisateur dont on sauvegarde les tâches
      * @param _taskManager ; Gestionnaire de tâches de l'utilisateur
      */
-    public void saveTasks(FileWriter writer, int userId, TaskManager taskManager) throws IOException
+    public void saveTasks(FileWriter _writer, int _userId, TaskManager _taskManager) throws IOException
     {
-        for(Task task: taskManager.getTasks())
+        for(Task task: _taskManager.getTasks())
         {
-            String string = userId+", "+task.getName()+", "+task.getDescription()+", "+task.getStartDate().getTime()+", "+task.getDeadline().getTime()+", "+task.getPriority()+", "+task.getCategory()+", "+task.isCompleted()+", "+task.isReported()+"\n";
-            writer.append(string);
+            String string = _userId+", "+task.getName()+", "+task.getDescription()+", "+task.getStartDate().getTime()+", "+task.getDeadline().getTime()+", "+task.getPriority()+", "+task.getCategory()+", "+task.isCompleted()+", "+task.isReported()+"\n";
+            _writer.append(string);
         }
     }
 
-    /*!
-     * @brief : Charge les tâches des utilisateurs depuis un fichier
+    /**
+     * Charge les tâches des utilisateurs depuis un fichier
      * @param _userManager ; Gestionnaire d'utilisateurs
      */
-    public void loadTasks(UserManager userManager) throws FileNotFoundException
+    public void loadTasks(UserManager _userManager) throws FileNotFoundException
     {
         if(tasksData == null) return;
-        List<User> userList = userManager.getUsers();
+        List<User> userList = _userManager.getUsers();
         Scanner scanner = new Scanner(tasksData);
         while(scanner.hasNextLine())
         {
@@ -75,15 +106,15 @@ public class Save {
         }
     }
 
-    /*!
-     * @brief : Sauvegarde les utilisateurs dans un fichier
+    /**
+     * Sauvegarde les utilisateurs dans un fichier
      * @param _userManager ; Gestionnaire d'utilisateurs
      */
-    public void saveUsers(UserManager userManager) throws IOException
+    public void saveUsers(UserManager _userManager) throws IOException
     {
         if(usersData == null) return;
         FileWriter writer = new FileWriter(usersData);
-        for(User user: userManager.getUsers())
+        for(User user: _userManager.getUsers())
         {
             String string = user.getUsername()+", "+user.getPassword().getPasswordHash()+", "+user.isAdmin()+"\n";
             writer.append(string);
@@ -91,8 +122,8 @@ public class Save {
         writer.close();
     }
 
-    /*!
-     * @brief : Charge les utilisateurs depuis un fichier
+    /**
+     * Charge les utilisateurs depuis un fichier
      * @return Gestionnaire d'utilisateurs
      */
     public UserManager loadUsers() throws FileNotFoundException
@@ -111,8 +142,8 @@ public class Save {
         return userManager;
     }
 
-    /*!
-     * @brief : Sauvegarde les catégories dans un fichier
+    /**
+     * Sauvegarde les catégories dans un fichier
      * @param _categoryManager ; Gestionnaire de catégories
      */
     public void saveCategories(CategoryManager _categoryManager) throws IOException
@@ -127,8 +158,8 @@ public class Save {
         writer.close();
     }
 
-    /*!
-     * @brief : Charge les catégories depuis un fichier
+    /**
+     * Charge les catégories depuis un fichier
      * @return Gestionnaire de catégories
      */
     public CategoryManager loadCategories() throws FileNotFoundException
@@ -145,8 +176,8 @@ public class Save {
         return categoryManager;
     }
 
-    /*!
-     * @brief : Sauvegarde les utilisateurs et les tâches dans des fichiers
+    /**
+     * Sauvegarde les utilisateurs et les tâches dans des fichiers
      * @param _userManager ; Gestionnaire d'utilisateurs
      */
     public void save(UserManager _userManager) throws IOException
@@ -164,8 +195,8 @@ public class Save {
         saveUsers(_userManager);
     }
 
-    /*!
-     * @brief : Charge les utilisateurs et les tâches depuis des fichiers
+    /**
+     * Charge les utilisateurs et les tâches depuis des fichiers
      * @return Gestionnaire d'utilisateurs
      */
     public UserManager load() throws FileNotFoundException
