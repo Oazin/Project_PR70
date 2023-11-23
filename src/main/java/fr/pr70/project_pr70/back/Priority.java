@@ -6,5 +6,16 @@ package fr.pr70.project_pr70.back;
  */
 public enum Priority
 {
-    HIGH, MEDIUM, LOW
+    /**
+     * High priority.
+     */
+    HIGH,
+    /**
+     * Medium priority.
+     */
+    MEDIUM,
+    /**
+     * Low priority.
+     */
+    LOW
 }

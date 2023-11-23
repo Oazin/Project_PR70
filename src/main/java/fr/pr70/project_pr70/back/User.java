@@ -2,12 +2,30 @@ package fr.pr70.project_pr70.back;
 
 import java.util.Date;
 
+/**
+ * The type User.
+ */
 public class User
 {
+    /**
+     * The Username.
+     */
     protected String username;
+    /**
+     * The Password.
+     */
     protected Password password;
+    /**
+     * The Tasks.
+     */
     protected TaskManager tasks;
+    /**
+     * The Admin.
+     */
     protected boolean admin;
+    /**
+     * The Connected.
+     */
     protected boolean connected;
 
 

@@ -33,8 +33,11 @@ public class TaskCreationController implements Cancelable{
     @FXML
     private Label invalidText;
 
+    /**
+     *  Action lier au bouton Create sur l'affichage graphique
+     */
     @FXML
-    public void handleCreateTask(ActionEvent e)
+    public void handleCreateTask()
     {
         // Si l'un des champs est vide la creation ne peut pas s'effectuer donc un message previent l'utilisateur
         if (nameField.getText().trim().isEmpty() ||
@@ -71,9 +74,10 @@ public class TaskCreationController implements Cancelable{
 
     }
 
-    /*! @brief : Action lier au bouton Cancel sur l'affichage graphique
-     *
-     *  Behaviour : Permet à l'utilisateur de retourner sur le dashboard
+    /**
+     *  Action lier au bouton Cancel sur l'affichage graphique
+     *  @param actionEvent ; Action lier au bouton Cancel sur l'affichage graphique
+     *  @behaviour : Permet à l'utilisateur de retourner sur le dashboard
      *  lorsqu'il decide de ne pas créer de nouvelle tâches
      */
     @FXML
@@ -82,7 +86,8 @@ public class TaskCreationController implements Cancelable{
         MainApplication.setDashboard();
     }
 
-    /*! @brief : Remplis la drop down list des categories en fonction des categories existantent
+    /**
+     *  Remplis la drop down list des categories en fonction des categories existantent
      */
     public void updateCategoryComboBox()
     {
@@ -98,7 +103,8 @@ public class TaskCreationController implements Cancelable{
     }
 
 
-    /*! @brief : vide les champs remplissable et les messages de prévension
+    /**
+     *  Vide les champs remplissable et les messages de prévension
      */
     private void clearField(){
         invalidText.setText("");

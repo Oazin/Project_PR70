@@ -11,11 +11,28 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The type Save.
+ */
 public class Save {
+    /**
+     * The Users data.
+     */
     public File usersData;
+    /**
+     * The Categories data.
+     */
     public File categoriesData;
+    /**
+     * The Tasks data.
+     */
     public File tasksData;
 
+    /**
+     * Instantiates a new Save.
+     *
+     * @throws IOException the io exception
+     */
     /* ----------------- Constructor ----------------- */
 
     /**
@@ -39,6 +56,14 @@ public class Save {
             tasksData.createNewFile();
     }
 
+    /**
+     * Save tasks.
+     *
+     * @param writer      the writer
+     * @param userId      the user id
+     * @param taskManager the task manager
+     * @throws IOException the io exception
+     */
     /* ----------------- Methods ----------------- */
     /**
      * Sauvegarde les tâches de l'utilisateur dans un fichier

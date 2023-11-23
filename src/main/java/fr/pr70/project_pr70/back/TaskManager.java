@@ -3,11 +3,20 @@ package fr.pr70.project_pr70.back;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * The type Task manager.
+ */
 public class TaskManager
 {
+    /**
+     * The Tasks.
+     */
     protected ArrayList<Task> tasks;
 
 
+    /**
+     * Instantiates a new Task manager.
+     */
     /* ----------------- Constructor ----------------- */
 
     /**

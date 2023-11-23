@@ -7,10 +7,18 @@ import java.security.spec.KeySpec;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
+/**
+ * The type Password.
+ */
 public final class Password
 {
     private String passwordHash;
 
+    /**
+     * Instantiates a new Password.
+     *
+     * @param password the password
+     */
     /* ----------------- Constructor ----------------- */
 
     /**
@@ -21,6 +29,11 @@ public final class Password
         this.passwordHash = hashPassword(password);
     }
 
+    /**
+     * Gets password hash.
+     *
+     * @return the password hash
+     */
     /* ----------------- Getters ----------------- */
 
     /**

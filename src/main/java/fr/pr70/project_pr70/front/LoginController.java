@@ -18,8 +18,11 @@ public class LoginController
     @FXML
     private PasswordField passwordTextField;
 
+    /**
+     *  Action lier au bouton submit sur l'affichage graphique
+     */
     @FXML
-    protected void onSubmitClicked()
+    protected void handleSubmit()
     {
         UserManager userManager = MainApplication.getUserManager();
         boolean connected = userManager.connectUser(userTextField.getText(), passwordTextField.getText());
@@ -34,7 +37,8 @@ public class LoginController
         }
     }
 
-    /*! @brief : Action lier au bouton Signin permetant de charger la page d'inscription
+    /**
+     * Action lier au bouton Signin permetant de charger la page d'inscription
      */
     @FXML
     protected void handleSigin(){
@@ -43,7 +47,8 @@ public class LoginController
         MainApplication.setSignIn();
     }
 
-    /*! @brief : vide les champs remplissable et les messages de prévension
+    /**
+     *  Vide les champs remplissable et les messages de prévension
      */
     private void clearField(){
         invalidText.setText("");

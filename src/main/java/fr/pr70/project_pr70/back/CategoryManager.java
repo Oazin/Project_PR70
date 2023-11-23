@@ -2,11 +2,17 @@ package fr.pr70.project_pr70.back;
 
 import java.util.ArrayList;
 
+/**
+ * The type Category manager.
+ */
 public final class CategoryManager
 {
     private ArrayList<Category> categories;
 
 
+    /**
+     * Instantiates a new Category manager.
+     */
     /* ----------------- Constructor ----------------- */
 
     /**

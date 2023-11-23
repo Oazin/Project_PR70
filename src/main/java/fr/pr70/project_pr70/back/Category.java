@@ -2,8 +2,17 @@ package fr.pr70.project_pr70.back;
 
 import javafx.scene.paint.Color;
 
+/**
+ * The type Category.
+ */
 public class Category {
+    /**
+     * The Name.
+     */
     protected String name;
+    /**
+     * The Color.
+     */
     protected Color color;
 
     /* ----------------- Constructor ----------------- */
@@ -29,6 +38,11 @@ public class Category {
 
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     /* ----------------- Getters ----------------- */
 
     /**

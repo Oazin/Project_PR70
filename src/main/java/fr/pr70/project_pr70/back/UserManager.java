@@ -2,6 +2,9 @@ package fr.pr70.project_pr70.back;
 
 import java.util.ArrayList;
 
+/**
+ * The type User manager.
+ */
 public class UserManager
 {
     private final ArrayList<User> users;
@@ -102,6 +105,13 @@ public class UserManager
      * @return un boolean correspondant au résultat de l'égalité
      */
 
+    /**
+     * Confirm password boolean.
+     *
+     * @param _password    the password
+     * @param _confirmPass the confirm pass
+     * @return the boolean
+     */
     public boolean confirmPassword(String _password, String _confirmPass)
     {
         return _password.equals(_confirmPass);

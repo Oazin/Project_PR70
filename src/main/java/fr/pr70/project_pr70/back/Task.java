@@ -2,16 +2,43 @@ package fr.pr70.project_pr70.back;
 
 import java.util.Date;
 
+/**
+ * The type Task.
+ */
 public class Task
 {
+    /**
+     * The Name.
+     */
     protected String name;
+    /**
+     * The Description.
+     */
     protected String description;
+    /**
+     * The Start date.
+     */
     protected Date startDate;
+    /**
+     * The Deadline.
+     */
     protected Date deadline;
+    /**
+     * The Priority.
+     */
     protected Priority priority;
+    /**
+     * The Category.
+     */
     protected Category category;
+    /**
+     * The Completed.
+     */
     protected boolean completed;
 
+    /**
+     * The Reported.
+     */
     protected boolean reported;
 
     /* ----------------- Constructor ----------------- */

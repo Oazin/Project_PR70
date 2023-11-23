@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import java.net.URL;
 
 import static fr.pr70.project_pr70.MainApplication.*;
 
@@ -46,9 +47,9 @@ public class ProfileController implements Cancelable{
     @FXML
     private ImageView profileLogo;
 
-    /*! @brief : Modifie le mot de passe de l'utilisateur
-     *
-     *  Behaviour : Le mot de passe est modifier uniquement si l'ancien mot de passe est correct
+    /**
+     *  Modifie le mot de passe de l'utilisateur
+     *  @behaviour : Le mot de passe est modifier uniquement si l'ancien mot de passe est correct
      */
     @FXML
     public void handleEdit(ActionEvent actionEvent)
@@ -73,9 +74,9 @@ public class ProfileController implements Cancelable{
         }
     }
 
-    /*! @brief : Action lier au bouton Cancel sur l'affichage graphique
-     *
-     *  Behaviour : Permet à l'utilisateur de retourner sur le dashboard
+    /**
+     *  Action lier au bouton Cancel sur l'affichage graphique
+     *  @behaviour : Permet à l'utilisateur de retourner sur le dashboard
      *  lorsqu'il decide de ne pas créer de nouvelle tâches
      */
     @FXML
@@ -85,7 +86,8 @@ public class ProfileController implements Cancelable{
     }
 
 
-    /*! @brief : Update les informations presente sur la page à chaque chargement
+    /**
+     *  Update les informations presente sur la page à chaque chargement
      */
     @FXML
     public void updateProfile() {
@@ -106,7 +108,9 @@ public class ProfileController implements Cancelable{
         profileBox.setSpacing(10);
     }
 
-    /*! @brief : Définis l'ensemble des instances des objets de la page
+    /**
+     *  Définis l'ensemble des instances des objets de la page
+     *  @param user ; Utilisateur courant
      */
     private void defineObjects(User user)
     {
@@ -129,7 +133,8 @@ public class ProfileController implements Cancelable{
         cancelButton = new Button("Cancel");
     }
 
-    /*! @brief : Assigne leur action aux bouttons
+    /**
+     *  Assigne leur action aux boutons
      */
     private void setButtonActions()
     {
@@ -137,7 +142,8 @@ public class ProfileController implements Cancelable{
         cancelButton.setOnAction(this::handleCancel);
     }
 
-    /*! @brief : Fix le style des objets de la page
+    /**
+     *  Fix le style des objets de la page
      */
     private void setStyles()
     {
@@ -147,7 +153,9 @@ public class ProfileController implements Cancelable{
         profileBox.setAlignment(Pos.CENTER);
 
         // Definir le logo du profile
-        profileLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/profile-logo.png").toString()));
+        URL url = getClass().getResource("/fr/pr70/project_pr70/icon/profile-logo.png");
+        if(url != null) return;
+        profileLogo = new ImageView(new Image(url.toString()));
         profileLogo.setFitHeight(100);
         profileLogo.setPreserveRatio(true);
 
@@ -160,14 +168,5 @@ public class ProfileController implements Cancelable{
         // Definition des ids
         editButton.setId("button");
         cancelButton.setId("button");
-    }
-
-    /*! @brief : vide les champs remplissable et les messages de prévension
-     */
-    private void clearField(){
-        invalidText.setText("");
-        oldPasswordTextField.clear();
-        passwordTextField.clear();
-        confirmPasswordTextField.clear();
     }
 }
