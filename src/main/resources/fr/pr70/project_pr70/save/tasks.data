@@ -1,0 +1,5 @@
+0, Project, Do report and javaDoc, 1700694000000, 1701126000000, MEDIUM, PR70, false, false
+1, Final Exam, Read the lectures, 1700694000000, 1701385200000, LOW, TI72, true, false
+1, Prepare DB, The DataBase need to run during a couple of hours to generate data, 1700694000000, 1701298800000, HIGH, BD70, false, false
+2, Final Exam, Do exams of last years , 1700694000000, 1700953200000, MEDIUM, MT03, false, false
+2, Oral Exam, Make the powerpoint for the presentation, 1700694000000, 1701385200000, HIGH, LE82, true, false
