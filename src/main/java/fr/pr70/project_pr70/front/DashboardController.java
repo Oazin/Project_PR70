@@ -96,9 +96,9 @@ public class DashboardController
      *
      *  Behaviour : Permet à l'utilisateur de supprimer la tache s'associer
      */
-    private void handleTaskDelete(UserManager _userManager, Task _task, String _userName)
+    private void handleTaskDelete(Task _task, String _userName)
     {
-        _userManager.getUser(_userName).removeTask(_task);
+        MainApplication.getUserManager().getUser(_userName).removeTask(_task);
         updateTaskTable();
     }
 
@@ -132,8 +132,19 @@ public class DashboardController
         MainApplication.setRemoveAdmin();
     }
 
-
-
+    private void setHandleDetail(HBox hBox, Task task)
+    {
+        hBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+                    if(mouseEvent.getClickCount() == 2){
+                        MainApplication.setDetail(task);
+                    }
+                }
+            }
+        });
+    }
 
     /*! @brief : Methode de creation dynamique de la tool bar du dashboard
      *
@@ -211,6 +222,8 @@ public class DashboardController
         toolBar.getItems().addAll(profileButton, logoutButton);
     }
 
+    /*! @brief : Methode de creation dynamique du header de la table des taches
+     */
     private void updateHeader()
     {
         HBox header = new HBox();
@@ -226,56 +239,49 @@ public class DashboardController
         header.getChildren().addAll(assigned, name, status, priority, deadline, category);
     }
 
+    private HBox generateTaskBox()
+    {
+        return null;
+    }
 
+    /*!
+     * @brief : Methode de creation dynamique de la table des taches du dashboard
+     */
     @FXML
     public void updateTaskTable()
     {
-
         // clear taskList
         taskTable.getChildren().clear();
-
-        // get Currrent User
-        UserManager userManager = MainApplication.getUserManager();
 
         User currentUser = MainApplication.getCurrentUser();
         if(currentUser == null) return;
 
-        ArrayList<User> users = userManager.getAllowedUsers(MainApplication.getCurrentUser());
         updateHeader();
 
         //update task
+
+        // lister les taches de tous les utilisateurs associés
+        // recupérer les utilisateurs autorisés
+        ArrayList<User> users = MainApplication.getUserManager().getAllowedUsers(MainApplication.getCurrentUser());
         ArrayList<String> userNames = new ArrayList<>();
         ArrayList<Task> tasks = new ArrayList<>();
         for(User user : users)
         {
             TaskManager taskManager = user.getTasks();
-            for(int i = 0; i < taskManager.getTasks().size(); i++)
+            for(Task task : taskManager.getTasks())
             {
-                if(user.getUsername().equals(currentUser.getUsername()))
-                {
-                    userNames.add("you");
-                }
-                else
-                {
-                    userNames.add(user.getUsername());
-                }
+                userNames.add(user.getUsername());
             }
             tasks.addAll(taskManager.getTasks());
         }
 
         for(int i = 0; i < tasks.size(); i++)
         {
-            String userName;
-            if(userNames.get(i).equals("you"))
-            {
-                userName = currentUser.getUsername();
-            }
-            else
-            {
-                userName = userNames.get(i);
-            }
+            String userName = userNames.get(i);
             Task task = tasks.get(i);
-            Label taskAssigned = new Label(userNames.get(i));
+            Label taskAssigned = new Label(userName);
+            if(userName.equals(currentUser.getUsername()))
+                taskAssigned.setText("you");
             Label taskName = new Label(task.getName());
             Label taskStatus = new Label();
             taskStatus.setText(task.isCompleted()?"completed":"to do");
@@ -321,29 +327,18 @@ public class DashboardController
             Button taskDelete = new Button();
             taskDelete.setId("button");
             taskDelete.setGraphic(trashLogo);
-            taskDelete.setOnAction(actionEvent -> { handleTaskDelete(userManager, task, userName); });
+            taskDelete.setOnAction(actionEvent -> { handleTaskDelete(task, userName); });
             Region spacer3 = new Region();
             spacer3.setId("spacer");
 
             hBox.getChildren().addAll(taskEdit, spacer2, taskDelete, spacer3);
             hBox.setId("task");
 
-
             if(task.isReported())
             {
                 hBox.setStyle("-fx-background-color: red");
             }
-            hBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-                        if(mouseEvent.getClickCount() == 2){
-                            MainApplication.setDetail(task);
-                        }
-                    }
-                }
-            });
-            //hBox.setAlignment(Pos.CENTER_LEFT);
+            setHandleDetail(hBox, task);
             taskTable.getChildren().add(hBox);
         }
     }
