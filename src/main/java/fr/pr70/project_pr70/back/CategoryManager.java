@@ -1,7 +1,5 @@
 package fr.pr70.project_pr70.back;
 
-import javafx.scene.paint.Color;
-
 import java.util.ArrayList;
 
 /**
@@ -16,46 +14,34 @@ public final class CategoryManager
      * Instantiates a new Category manager.
      */
     /* ----------------- Constructor ----------------- */
-    public CategoryManager()
-    {
+
+    /**
+     * Constructeur par défaut initialisant une liste de catégories vide.
+     */
+    public CategoryManager() {
         categories = new ArrayList<>();
     }
 
-
-    /**
-     * Gets categories.
-     *
-     * @return the categories
-     */
     /* ----------------- Getter ----------------- */
-    public ArrayList<Category> getCategories() { return categories; }
-
 
     /**
-     * Sets categories.
-     *
-     * @param _categories the categories
+     * Renvoie la liste des catégories actuellement gérées.
+     * @return La liste des catégories
      */
-    /* ----------------- Setter ----------------- */
-    public void setCategories(ArrayList<Category> _categories) { categories = _categories; }
-
+    public ArrayList<Category> getCategories() {
+        return categories;
+    }
 
     /* ----------------- Methods ----------------- */
-    /*! @brief : Ajout une categorie à la liste des categories
-     */
 
     /**
-     * Gets category.
-     *
-     * @param _categoryName the category name
-     * @return the category
+     * Renvoie la catégorie correspondant au nom spécifié.
+     * @param _categoryName Le nom de la catégorie recherchée
+     * @return La catégorie correspondante ou null si aucune correspondance n'est trouvée
      */
-    public Category getCategory(String _categoryName)
-    {
-        for(Category category:categories)
-        {
-            if(category.name.equals(_categoryName))
-            {
+    public Category getCategory(String _categoryName) {
+        for(Category category : categories) {
+            if(category.getName().equals(_categoryName)) {
                 return category;
             }
         }
@@ -63,10 +49,12 @@ public final class CategoryManager
     }
 
     /**
-     * Add categories.
-     *
-     * @param _category the category
+     * Ajoute une catégorie à la liste des catégories gérées.
+     * @param _category La catégorie à ajouter
      */
-    public void addCategories(Category _category) { categories.add(_category); }
+    public void addCategories(Category _category) {
+        categories.add(_category);
+    }
+
 
 }

@@ -18,7 +18,7 @@ public class Category {
     /* ----------------- Constructor ----------------- */
 
     /**
-     * Instantiates a new Category.
+     * Représente une catégorie pour les tâches avec un nom et une couleur.
      */
     public Category()
     {
@@ -27,10 +27,9 @@ public class Category {
     }
 
     /**
-     * Instantiates a new Category.
-     *
-     * @param _name  the name
-     * @param _color the color
+     * Constructeur permettant d'initialiser la catégorie avec un nom et une couleur donnés.
+     * @param _name Le nom de la catégorie
+     * @param _color La couleur associée à la catégorie
      */
     public Category(String _name,Color _color)
     {
@@ -45,19 +44,27 @@ public class Category {
      * @return the name
      */
     /* ----------------- Getters ----------------- */
+
+    /**
+     * Renvoie le nom de la catégorie.
+     * @return Le nom de la catégorie
+     */
     public String getName() {
         return name;
     }
 
     /**
-     * Gets color.
-     *
-     * @return the color
+     * Renvoie la couleur de la catégorie.
+     * @return La couleur de la catégorie
      */
     public Color getColor() {
         return color;
     }
 
+    /**
+     * Transforme en String les variables propre à la tâche
+     * @return Le nom de la catégorie en chaîne de caratère
+     */
     @Override
     public String toString()
     {

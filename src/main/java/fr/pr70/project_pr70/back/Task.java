@@ -44,7 +44,7 @@ public class Task
     /* ----------------- Constructor ----------------- */
 
     /**
-     * Instantiates a new Task.
+     * Constructeur par défaut initialisant les valeurs par défaut
      */
     public Task()
     {
@@ -59,14 +59,13 @@ public class Task
     }
 
     /**
-     * Instantiates a new Task.
-     *
-     * @param _name        the name
-     * @param _description the description
-     * @param _startDate   the start date
-     * @param _deadline    the deadline
-     * @param _priority    the priority
-     * @param _category    the category
+     * Constructeur avec des paramètres permettant d'initialiser les valeurs
+     * @param _name : nom de la tâche
+     * @param _description : description de la tâche
+     * @param _startDate : date de depart de la tâche
+     * @param _deadline : date de fin maximal de la tâche
+     * @param _priority : status de priorité de la tâche
+     * @param _category : categorie de la tâche
      */
     public Task(String _name, String _description, Date _startDate, Date _deadline, Priority _priority, Category _category)
     {
@@ -84,9 +83,8 @@ public class Task
     /* ----------------- Getters ----------------- */
 
     /**
-     * Gets name.
-     *
-     * @return the name
+     * Renvoie le nom de la tâche
+     * @return l'attribut name
      */
     public String getName()
     {
@@ -94,9 +92,8 @@ public class Task
     }
 
     /**
-     * Gets description.
-     *
-     * @return the description
+     * Renvoie la description de la tâche
+     * @return l'attribut description
      */
     public String getDescription()
     {
@@ -104,9 +101,8 @@ public class Task
     }
 
     /**
-     * Gets priority.
-     *
-     * @return the priority
+     * Renvoie le status de priorité de la tâche
+     * @return l'attribut priority
      */
     public Priority getPriority()
     {
@@ -114,9 +110,8 @@ public class Task
     }
 
     /**
-     * Gets category.
-     *
-     * @return the category
+     * Renvoie la catégorie de la tâche
+     * @return l'attribut category
      */
     public Category getCategory()
     {
@@ -124,18 +119,16 @@ public class Task
     }
 
     /**
-     * Gets start date.
-     *
-     * @return the start date
+     * Renvoie la date de début de la tâche
+     * @return l'attribut startDate
      */
     public Date getStartDate() {
         return startDate;
     }
 
     /**
-     * Gets deadline.
-     *
-     * @return the deadline
+     * Renvoie la date de fin de la tâche
+     * @return l'attribut deadline
      */
     public Date getDeadline()
     {
@@ -146,9 +139,7 @@ public class Task
     /* ----------------- Setters ----------------- */
 
     /**
-     * Sets completed.
-     *
-     * @param _completed the completed
+     * Met à jour l'état de complétion de la tâche
      */
     public void setCompleted(boolean _completed)
     {
@@ -156,9 +147,7 @@ public class Task
     }
 
     /**
-     * Sets reported.
-     *
-     * @param _reported the reported
+     * Met à jour l'état de signalement  de la tâche
      */
     public void setReported(boolean _reported)
     {
@@ -166,18 +155,14 @@ public class Task
     }
 
     /**
-     * Sets start date.
-     *
-     * @param startDate the start date
+     * Met à jour la date de début de la tâche
      */
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
     /**
-     * Sets deadline.
-     *
-     * @param _deadline the deadline
+     * Met à jour la date de fin de la tâche
      */
     public void setDeadline(Date _deadline)
     {
@@ -185,9 +170,7 @@ public class Task
     }
 
     /**
-     * Sets description.
-     *
-     * @param _description the description
+     * Met à jour la description de la tâche
      */
     public void setDescription(String _description)
     {
@@ -195,9 +178,7 @@ public class Task
     }
 
     /**
-     * Sets name.
-     *
-     * @param _name the name
+     * Met à jour le nom de la tâche
      */
     public void setName(String _name)
     {
@@ -205,9 +186,7 @@ public class Task
     }
 
     /**
-     * Sets priority.
-     *
-     * @param _priority the priority
+     * Met à jour la priorité de la tâche
      */
     public void setPriority(Priority _priority)
     {
@@ -215,9 +194,7 @@ public class Task
     }
 
     /**
-     * Sets category.
-     *
-     * @param _category the category
+     * Met à jour la catégorie de la tâche
      */
     public void setCategory(Category _category)
     {
@@ -227,9 +204,8 @@ public class Task
     /* ----------------- Methods ----------------- */
 
     /**
-     * Gets time percent.
-     *
-     * @return the time percent
+     * Calcul du pourcentage de temps restant
+     * @return : pourcentage (entre 0 et 1)
      */
     public double getTimePercent()
     {
@@ -242,11 +218,8 @@ public class Task
     }
 
     /**
-     * Is completed boolean.
-     *
-     * @return the boolean
-     */
-    /*! @brief : Revoie le status de la tâche
+     * Revoie le status de la tâche
+     * @return : boolean
      */
     public boolean isCompleted()
     {
@@ -254,16 +227,16 @@ public class Task
     }
 
     /**
-     * Is reported boolean.
-     *
-     * @return the boolean
+     * Donne l'information de si la tâche à été mise en avant par l'admin ou non
+     * @return : boolean de mise en avant de la tâche
      */
     public boolean isReported()
     {
         return reported;
     }
 
-    /*! @brief : Transforme en String les variables propre à la tâche
+    /**
+     * Transforme en String les variables propre à la tâche
      */
     @Override
     public String toString()

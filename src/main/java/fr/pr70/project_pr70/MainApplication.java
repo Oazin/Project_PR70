@@ -63,20 +63,25 @@ public class MainApplication extends Application
 
     /* ----------------- Getters ----------------- */
 
-    /*! @brief : Renvoie l'utilisateur courant
+    /**
+     * Renvoie l'utilisateur courant.
+     * @return L'utilisateur courant
      */
     public static User getCurrentUser() {
         return userManager.getUser(currentUsername);
     }
 
-    /*! @brief : Revoie la liste des users enregistrer dans la base de l'application
+    /**
+     * Renvoie le gestionnaire d'utilisateurs de l'application.
+     * @return Le gestionnaire d'utilisateurs
      */
-    public static UserManager getUserManager()
-    {
+    public static UserManager getUserManager() {
         return userManager;
     }
 
-    /*! @brief : Revoie la liste des categories
+    /**
+     * Renvoie le gestionnaire de catégories de l'application.
+     * @return Le gestionnaire de catégories
      */
     public static CategoryManager getCategoryManager() {
         return categoryManager;
@@ -84,7 +89,9 @@ public class MainApplication extends Application
 
     /* ----------------- Setters ----------------- */
 
-    /*! @brief : Defini l'utilisateur courant
+    /**
+     * Définit le nom d'utilisateur actuel.
+     * @param _currentUsername Le nom d'utilisateur à définir comme actuel
      */
     public static void setCurrentUsername(String _currentUsername) {
         MainApplication.currentUsername = _currentUsername;
@@ -92,100 +99,107 @@ public class MainApplication extends Application
 
     /* ----------------- Methods ----------------- */
 
-    /*! @brief : Met à jour et affiche la scene du dashbord
-     *
-     *  Behaviour: Assigne le controller à la view
-     *      Met à jour la information dynamique du dashboard
-     *      Affiche la scene dans la fenêtre
+    /**
+     * Met à jour et affiche la scène du tableau de bord.
+     * @behaviour:
+     *   - Assigne le contrôleur à la vue
+     *   - Met à jour les informations dynamiques du tableau de bord
+     *   - Affiche la scène dans la fenêtre
      */
-    public static void setDashboard()
-    {
+    public static void setDashboard() {
         DashboardController dashboardController = dashboardView.getController();
         dashboardController.createToolBar();
         dashboardController.updateTaskTable();
         stage.setScene(dashboard);
     }
 
-    /*! @brief : Met à jour et affiche la scene du porfile de l'utilisateur
-     *
-     *  Behaviour: Assigne le controller à la view
-     *      Met à jour la information dynamique du profile
-     *      Affiche la scene dans la fenêtre
+    /**
+     * Met à jour et affiche la scène du profil de l'utilisateur.
+     * @behaviour:
+     *   - Assigne le contrôleur à la vue
+     *   - Met à jour les informations dynamiques du profil
+     *   - Affiche la scène dans la fenêtre
      */
-    public static void setProfile()
-    {
+    public static void setProfile() {
         ProfileController profileController = profileView.getController();
         profileController.updateProfile();
         stage.setScene(profile);
     }
 
-    /*! @brief : Met à jour et affiche la scene de création des taches
-     *
-     *  Behaviour: Assigne le controller à la view
-     *      Met à jour la information dynamique de la page
-     *      Affiche la scene dans la fenêtre
+    /**
+     * Met à jour et affiche la scène de création des tâches.
+     * @behaviour:
+     *   - Assigne le contrôleur à la vue
+     *   - Met à jour les informations dynamiques de la page
+     *   - Affiche la scène dans la fenêtre
      */
-    public static void setTaskCreation()
-    {
+    public static void setTaskCreation() {
         TaskCreationController taskCreationController = taskCreationView.getController();
         taskCreationController.updateCategoryComboBox();
         stage.setScene(taskCreation);
     }
 
-    /*! @brief : Affiche la scene de la creation de categorie
+
+    /**
+     * Affiche la scène de création de catégorie.
      */
     public static void setCategoryCreation() {
         stage.setScene(categoryCreation);
     }
 
-    /*! @brief : Affiche la scene de la connexion
+    /**
+     * Affiche la scène de connexion.
      */
-    public static void setLogin(){
+    public static void setLogin() {
         stage.setScene(login);
     }
 
-    /*! @brief : Affiche la scene d'inscription
+    /**
+     * Affiche la scène d'inscription.
      */
-    public static void setSignIn(){
+    public static void setSignIn() {
         stage.setScene(signIn);
     }
 
-    /*! @brief : Met à jour et affiche la scene qui affiche les détails de la tache
+    /**
+     * Met à jour et affiche la scène qui affiche les détails de la tâche.
      *
-     *  Behaviour: Assigne le controller à la view
-     *      Met à jour la information dynamique de la page
-     *      Affiche la scene dans la fenêtre
+     *  @behaviour:
+     *   - Assigne le contrôleur à la vue
+     *   - Met à jour les informations dynamiques de la page
+     *   - Affiche la scène dans la fenêtre
      */
-    public static void setDetail(Task _task)
-    {
+    public static void setDetail(Task _task) {
         DetailController detailController = detailView.getController();
         detailController.updateDetail(_task);
         stage.setScene(detail);
     }
 
-    /*! @brief : Met à jour et affiche la scene de modification de tache
+    /**
+     * Met à jour et affiche la scène de modification de tâche.
      *
-     *  Behaviour: Assigne le controller à la view
-     *      Met à jour la information dynamique de la page 
-     *      Affiche la scene dans la fenêtre
+     *  @behaviour:
+     *   - Assigne le contrôleur à la vue
+     *   - Met à jour les informations dynamiques de la page
+     *   - Affiche la scène dans la fenêtre
      */
-    public static void setEdit(Task _task)
-    {
+    public static void setEdit(Task _task) {
         EditController editController = editView.getController();
         editController.updateEdit(_task);
         stage.setScene(edit);
     }
 
-    /*! @brief : Affiche la scene avec la liste des utilisateurs non administrateur
+    /**
+     * Affiche la scène avec la liste des utilisateurs non administrateurs.
      */
-    public static void setAddAdmin()
-    {
+    public static void setAddAdmin() {
         AddAdminController addAdminController = addAdminView.getController();
         addAdminController.updateUserComboBox();
         stage.setScene(addAdmin);
     }
 
-    /*! @brief : Affiche la scene avec la liste des administrateurs
+    /**
+     * Affiche la scène avec la liste des administrateurs.
      */
     public static void setRemoveAdmin() {
         RemoveAdminController removeAdminController = removeAdminView.getController();
@@ -193,8 +207,8 @@ public class MainApplication extends Application
         stage.setScene(removeAdmin);
     }
 
-
-    /*! @brief : Assigne le style au differente scene du logiciel
+    /**
+     * Assigne le style au differente scene du logiciel
      */
     private void setStyle()
     {
@@ -216,6 +230,9 @@ public class MainApplication extends Application
     }
 
 
+    /**
+     * Set toutes les variables de l'application au demarrage
+     */
     @Override
     public void start(Stage _stage) throws IOException
     {
@@ -261,12 +278,21 @@ public class MainApplication extends Application
         stage.show();
     }
 
+    /**
+     * Sauvegarde lorsque l'application est fermé
+     * @throws IOException
+     */
     @Override
     public void stop() throws IOException {
         save.saveCategories(categoryManager);
         save.save(userManager);
     }
 
+    /**
+     * Main de l'application qui set les variables static et lance l'application
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         save = new Save();
         categoryManager = save.loadCategories();

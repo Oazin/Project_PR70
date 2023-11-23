@@ -18,12 +18,14 @@
 
     <TextField fx:id="nameField" promptText="Category name" />
 
-    <ComboBox fx:id="colorComboBox" value="GREEN">
+    <ComboBox fx:id="colorComboBox" value="BURLYWOOD">
         <items>
             <FXCollections fx:factory="observableArrayList">
-                <String fx:value="RED"/>
-                <String fx:value="YELLOW"/>
-                <String fx:value="GREEN"/>
+                <String fx:value="BURLYWOOD"/>
+                <String fx:value="CHARTREUSE"/>
+                <String fx:value="LIGHTGREEN"/>
+                <String fx:value="KHAKI"/>
+                <String fx:value="LAVENDER"/>
             </FXCollections>
         </items>
     </ComboBox>
