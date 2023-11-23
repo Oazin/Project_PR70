@@ -93,7 +93,6 @@ public class ProfileController implements Cancelable{
         // clear profile
         profileBox.getChildren().clear();
 
-
         // Recupere l'utilisateur courant
         User user = MainApplication.getCurrentUser();
         if(user == null) return;
