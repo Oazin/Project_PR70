@@ -26,7 +26,7 @@ public class EditController {
     protected DatePicker deadlinePicker;
 
     @FXML
-    protected ComboBox<Priority> priorityComboBox;
+    protected ComboBox<String> priorityComboBox;
 
     @FXML
     protected Label invalidText;
@@ -43,7 +43,7 @@ public class EditController {
         _task.setStartDate(startDate);
         Date deadline = Date.from(deadlinePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
         _task.setDeadline(deadline);
-        _task.setPriority(priorityComboBox.getValue());
+        _task.setPriority(Priority.valueOf(priorityComboBox.getValue()));
         MainApplication.setDashboard();
     }
 
@@ -70,7 +70,7 @@ public class EditController {
         startDatePicker.setValue(startDate);
         LocalDate deadline = _task.getDeadline().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         deadlinePicker.setValue(deadline);
-        priorityComboBox.setValue(_task.getPriority());
+        priorityComboBox.setValue(_task.getPriority().toString());
         invalidText.setTextFill(Color.RED);
         saveTaskButton.setOnAction(actionEvent -> { handleSaveTask(_task); });
     }
