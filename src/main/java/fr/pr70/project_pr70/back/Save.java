@@ -11,11 +11,28 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The type Save.
+ */
 public class Save {
+    /**
+     * The Users data.
+     */
     public File usersData;
+    /**
+     * The Categories data.
+     */
     public File categoriesData;
+    /**
+     * The Tasks data.
+     */
     public File tasksData;
 
+    /**
+     * Instantiates a new Save.
+     *
+     * @throws IOException the io exception
+     */
     /* ----------------- Constructor ----------------- */
     public Save() throws IOException {
         Path path = Paths.get("src/main/resources/fr/pr70/project_pr70/save/");
@@ -33,6 +50,14 @@ public class Save {
             tasksData.createNewFile();
     }
 
+    /**
+     * Save tasks.
+     *
+     * @param writer      the writer
+     * @param userId      the user id
+     * @param taskManager the task manager
+     * @throws IOException the io exception
+     */
     /* ----------------- Methods ----------------- */
     /*!
      * @brief : Sauvegarde les tâches de l'utilisateur dans un fichier
@@ -49,6 +74,12 @@ public class Save {
         }
     }
 
+    /**
+     * Load tasks.
+     *
+     * @param userManager the user manager
+     * @throws FileNotFoundException the file not found exception
+     */
     /*!
      * @brief : Charge les tâches des utilisateurs depuis un fichier
      * @param _userManager ; Gestionnaire d'utilisateurs
@@ -75,6 +106,12 @@ public class Save {
         }
     }
 
+    /**
+     * Save users.
+     *
+     * @param userManager the user manager
+     * @throws IOException the io exception
+     */
     /*!
      * @brief : Sauvegarde les utilisateurs dans un fichier
      * @param _userManager ; Gestionnaire d'utilisateurs
@@ -91,6 +128,12 @@ public class Save {
         writer.close();
     }
 
+    /**
+     * Load users user manager.
+     *
+     * @return the user manager
+     * @throws FileNotFoundException the file not found exception
+     */
     /*!
      * @brief : Charge les utilisateurs depuis un fichier
      * @return Gestionnaire d'utilisateurs
@@ -111,6 +154,12 @@ public class Save {
         return userManager;
     }
 
+    /**
+     * Save categories.
+     *
+     * @param _categoryManager the category manager
+     * @throws IOException the io exception
+     */
     /*!
      * @brief : Sauvegarde les catégories dans un fichier
      * @param _categoryManager ; Gestionnaire de catégories
@@ -127,6 +176,12 @@ public class Save {
         writer.close();
     }
 
+    /**
+     * Load categories category manager.
+     *
+     * @return the category manager
+     * @throws FileNotFoundException the file not found exception
+     */
     /*!
      * @brief : Charge les catégories depuis un fichier
      * @return Gestionnaire de catégories
@@ -145,6 +200,12 @@ public class Save {
         return categoryManager;
     }
 
+    /**
+     * Save.
+     *
+     * @param _userManager the user manager
+     * @throws IOException the io exception
+     */
     /*!
      * @brief : Sauvegarde les utilisateurs et les tâches dans des fichiers
      * @param _userManager ; Gestionnaire d'utilisateurs
@@ -164,6 +225,12 @@ public class Save {
         saveUsers(_userManager);
     }
 
+    /**
+     * Load user manager.
+     *
+     * @return the user manager
+     * @throws FileNotFoundException the file not found exception
+     */
     /*!
      * @brief : Charge les utilisateurs et les tâches depuis des fichiers
      * @return Gestionnaire d'utilisateurs

@@ -9,8 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 
-import java.util.Date;
-
 public class CategoryCreationContoller implements Cancelable{
     @FXML
     private TextField nameField;
@@ -22,12 +20,12 @@ public class CategoryCreationContoller implements Cancelable{
     private Label invalidText;
 
 
-    /*! @brief : Action lier au bouton New category sur l'affichage graphique
-     *
-     *  Behaviour : Permet à l'utilisateur de créer une nouvel categorie
+    /**
+     *  Action lier au bouton New category sur l'affichage graphique
+     *  @behaviour : Permet à l'utilisateur de créer une nouvel categorie
      */
     @FXML
-    public void handleCreateCategory(ActionEvent e)
+    public void handleCreateCategory()
     {
         // Si le champs nom ou le champs color n'est pas remplis la creation ne peut pas s'effectuer donc un message previent l'utilisateur
         if (nameField.getText().trim().isEmpty() ||
@@ -62,9 +60,10 @@ public class CategoryCreationContoller implements Cancelable{
 
     }
 
-    /*! @brief : Action lier au bouton cancel sur l'affichage graffique
-     *
-     *  Behaviour : Permet a l'utilisateur de retourner sur le dashboard
+    /**
+     *  Action lier au bouton cancel sur l'affichage graffique
+     *  @param actionEvent ; Action lier au bouton cancel sur l'affichage graphique
+     *  @behaviour : Permet a l'utilisateur de retourner sur le dashboard
      *  lorsqu'il decide de ne pas créer une categorie
      */
     @FXML
@@ -76,7 +75,8 @@ public class CategoryCreationContoller implements Cancelable{
     }
 
 
-    /*! @brief : vide les champs remplissable et les messages de prévension
+    /**
+     *  Vide les champs remplissable et les messages de prévension
      */
     private void clearField(){
         invalidText.setText("");

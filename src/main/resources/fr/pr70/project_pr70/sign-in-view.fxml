@@ -27,6 +27,6 @@
 
 
     <Label fx:id="invalidText" textFill="RED" />
-    <Button id="button" text="SignIn" onAction="#onSubmitClicked"/>
+    <Button id="button" text="SignIn" onAction="#handleSubmit"/>
     <Button id="button" text="Login" onAction="#handleLogin"/>
 </VBox>

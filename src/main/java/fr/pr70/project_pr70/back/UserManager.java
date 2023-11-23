@@ -1,15 +1,18 @@
 package fr.pr70.project_pr70.back;
 
-import fr.pr70.project_pr70.MainApplication;
-
 import java.util.ArrayList;
-import java.util.Collection;
 
+/**
+ * The type User manager.
+ */
 public class UserManager
 {
     private final ArrayList<User> users;
 
-    
+
+    /**
+     * Instantiates a new User manager.
+     */
     /* ----------------- Constructor ----------------- */
     public UserManager()
     {
@@ -17,13 +20,23 @@ public class UserManager
     }
 
 
+    /**
+     * Gets users.
+     *
+     * @return the users
+     */
     /* ----------------- Getters ----------------- */
     public ArrayList<User> getUsers()
     {
         return users;
     }
 
-    
+
+    /**
+     * Add user.
+     *
+     * @param user the user
+     */
     /* ----------------- Methods ----------------- */
     /*! @brief : Ajoute l'utilisateur
      *  @param user ; Utilisateur à ajouter
@@ -37,6 +50,11 @@ public class UserManager
         users.add(user);
     }
 
+    /**
+     * Remove user.
+     *
+     * @param user the user
+     */
     /*! @brief : Supprime l'utilisateur
      *  @param user ; Utilisateur à supprimer
      *
@@ -48,7 +66,13 @@ public class UserManager
         if(user == null) return;
         users.remove(user);
     }
-    
+
+    /**
+     * Gets user.
+     *
+     * @param _username the username
+     * @return the user
+     */
     /*! @brief : Retourne l'utilisateur
      *  @param _username ; Nom d'utilisateur qui a été entrer
      *
@@ -67,6 +91,11 @@ public class UserManager
         return null; // Aucun utilisateur trouvé avec ce nom d'utilisateur
     }
 
+    /**
+     * Is empty boolean.
+     *
+     * @return the boolean
+     */
     /*! @brief : Verifie si la liste d'utilisateur est vide
      *
      *  @behaviour
@@ -76,7 +105,15 @@ public class UserManager
     {
         return users.isEmpty();
     }
-    
+
+    /**
+     * Create user boolean.
+     *
+     * @param _username    the username
+     * @param _password    the password
+     * @param _confirmPass the confirm pass
+     * @return the boolean
+     */
     /*! @brief : Cree le nouveau user
      *  @param _username ; Nom d'utilisateur qui a été entrer
      *  @param _password ; mot de passe qui a été entrer
@@ -96,6 +133,13 @@ public class UserManager
         return true; // L'utilisateur a été créé avec succès
     }
 
+    /**
+     * Connect user boolean.
+     *
+     * @param _username the username
+     * @param _password the password
+     * @return the boolean
+     */
     /*! @brief : Connecte l'utilisateur
      *  @param _username ; Nom d'utilisateur qui a été entrer
      *  @param _password ; mot de passe qui a été entrer
@@ -121,12 +165,25 @@ public class UserManager
      *  Renvoie un boolean correspondant au résultat de l'égalité
      */
 
+    /**
+     * Confirm password boolean.
+     *
+     * @param _password    the password
+     * @param _confirmPass the confirm pass
+     * @return the boolean
+     */
     public boolean confirmPassword(String _password, String _confirmPass)
     {
         return _password.equals(_confirmPass);
     }
 
 
+    /**
+     * Already exist boolean.
+     *
+     * @param _username the username
+     * @return the boolean
+     */
     /*! @brief : Verifie l'existance de l'utilisateur
      *  @param _username ; Nom d'utilisateur qui a été entrer
      *
@@ -145,6 +202,12 @@ public class UserManager
         return false; // Aucun utilisateur trouvé avec ce nom d'utilisateur
     }
 
+    /**
+     * Gets allowed users.
+     *
+     * @param _user the user
+     * @return the allowed users
+     */
     /*! @brief : Retourne les utilisateurs autorisés en lecture/écriture par l'utilisateur
     *   @param userName ; Nom de l'utilisateur dont on veut les utilisateurs autorisés
     *   @return ArrayList<User> ; Liste des utilisateurs autorisés

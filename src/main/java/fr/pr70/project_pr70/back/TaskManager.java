@@ -3,11 +3,20 @@ package fr.pr70.project_pr70.back;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * The type Task manager.
+ */
 public class TaskManager
 {
+    /**
+     * The Tasks.
+     */
     protected ArrayList<Task> tasks;
 
 
+    /**
+     * Instantiates a new Task manager.
+     */
     /* ----------------- Constructor ----------------- */
     public TaskManager()
     {
@@ -15,12 +24,27 @@ public class TaskManager
     }
 
 
+    /**
+     * Gets tasks.
+     *
+     * @return the tasks
+     */
     /* ----------------- Getters ----------------- */
     public ArrayList<Task> getTasks() {
         return tasks;
     }
 
 
+    /**
+     * Create task.
+     *
+     * @param _name        the name
+     * @param _description the description
+     * @param _startDate   the start date
+     * @param _deadline    the deadline
+     * @param _priority    the priority
+     * @param _category    the category
+     */
     /* ----------------- Methods ----------------- */
     /*! @brief : Ajouter la tâche à la liste de tâches
      *  @param _task ; Tâche que l'utilisateur veux ajouter à sont gestionnaire
@@ -31,6 +55,16 @@ public class TaskManager
         tasks.add(newTask);
     }
 
+    /**
+     * Edit task.
+     *
+     * @param _task        the task
+     * @param _name        the name
+     * @param _description the description
+     * @param _startDate   the start date
+     * @param _deadline    the deadline
+     * @param _priority    the priority
+     */
     /*! @brief : Modifie une tache déjà existante
      *  @param _tack ; tâche que l'utilisateur souhaite modifier
      *  @param _name ; chaîne de charactère correspondant au nom de la tâche
@@ -48,6 +82,11 @@ public class TaskManager
         if (_priority != null) _task.setPriority(_priority);
     }
 
+    /**
+     * Delete task.
+     *
+     * @param _task the task
+     */
     /*! @brief : Supprimer la tâche de la liste de tâches
      *  @param _tack ; tâche que l'utilisateur souhaite supprimer
      */
@@ -56,6 +95,11 @@ public class TaskManager
         tasks.removeIf(item -> item.equals(_task));
     }
 
+    /**
+     * Mark task as completed.
+     *
+     * @param _task the task
+     */
     /*! @brief : Marquer la tâche comme terminée ou non terminée
      *  @param _tack ; tâche que l'utilisateur a complété
      */

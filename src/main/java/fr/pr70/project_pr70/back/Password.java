@@ -7,27 +7,50 @@ import java.security.spec.KeySpec;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
+/**
+ * The type Password.
+ */
 public final class Password
 {
     private String passwordHash;
 
+    /**
+     * Instantiates a new Password.
+     *
+     * @param password the password
+     */
     /* ----------------- Constructor ----------------- */
     public Password(String password)
     {
         this.passwordHash = hashPassword(password);
     }
 
+    /**
+     * Gets password hash.
+     *
+     * @return the password hash
+     */
     /* ----------------- Getters ----------------- */
     public String getPasswordHash()
     {
         return passwordHash;
     }
 
+    /**
+     * Sets password hash.
+     *
+     * @param passwordHash the password hash
+     */
     public void setPasswordHash(String passwordHash)
     {
         this.passwordHash = passwordHash;
     }
 
+    /**
+     * Sets password.
+     *
+     * @param password the password
+     */
     /* ----------------- Methods ----------------- */
     /*!
      * @brief : Change le mot de passe de l'utilisateur
@@ -38,6 +61,12 @@ public final class Password
         this.passwordHash = hashPassword(password);
     }
 
+    /**
+     * Check password boolean.
+     *
+     * @param password the password
+     * @return the boolean
+     */
     /*!
      * @brief : Vérifie si le mot de passe est correct
      * @param password ; mot de passe à vérifier

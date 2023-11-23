@@ -11,9 +11,9 @@ public class DetailController {
     @FXML
     protected VBox infoBox;
 
-    /*! @brief : Action lier au bouton Exit sur l'affichage graphique
-     *
-     *  Behaviour : Permet à l'utilisateur de retourner sur le dashboard
+    /**
+     *  Action lier au bouton Exit sur l'affichage graphique
+     *  @behaviour : Permet à l'utilisateur de retourner sur le dashboard
      *  lorsqu'il decide de ne pas créer de nouvelle tâches
      */
     @FXML
@@ -22,6 +22,10 @@ public class DetailController {
         MainApplication.setDashboard();
     }
 
+    /**
+     * Met à jour les informations de la tâche affichée sur l'affichage graphique
+     * @param _task; Tâche dont les informations doivent être affichées
+     */
     @FXML
     public void updateDetail(Task _task)
     {

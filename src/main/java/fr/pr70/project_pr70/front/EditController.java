@@ -35,6 +35,10 @@ public class EditController implements Cancelable{
     @FXML
     protected Button saveTaskButton;
 
+    /**
+     *  Action lier au bouton Save sur l'affichage graphique
+     *  @param _task ; Tâche à modifier
+     */
     @FXML
     public void handleSaveTask(Task _task)
     {
@@ -48,10 +52,9 @@ public class EditController implements Cancelable{
         MainApplication.setDashboard();
     }
 
-    /*! @brief : Action lier au bouton Cancel sur l'affichage graphique
-     *
-     *  Behaviour : Permet à l'utilisateur de retourner sur le dashboard
-     *  lorsqu'il decide de ne pas créer de nouvelle tâches
+    /**
+     *  Action lier au bouton Cancel sur l'affichage graphique
+     *  @param actionEvent ; Action lier au bouton Cancel sur l'affichage graphique
      */
     @FXML
     public void handleCancel(ActionEvent actionEvent)
@@ -59,6 +62,10 @@ public class EditController implements Cancelable{
         MainApplication.setDashboard();
     }
 
+    /**
+     *  Permet de mettre à jour les informations des champs de l'affichage graphique
+     *  @param _task ; Tâche à modifier
+     */
     @FXML
     public void updateEdit(Task _task)
     {
@@ -77,7 +84,8 @@ public class EditController implements Cancelable{
     }
 
 
-    /*! @brief : vide les champs remplissable et les messages de prévension
+    /**
+     *  Vide les champs remplissable et les messages de prévension
      */
     private void clearField(){
         invalidText.setText("");
