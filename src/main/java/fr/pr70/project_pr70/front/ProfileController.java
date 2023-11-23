@@ -98,20 +98,21 @@ public class ProfileController {
         User user = MainApplication.getUserManager().getUser(MainApplication.getCurrentUsername());
         if(user == null) return;
 
-        // Ajout de padding à la VBox
-        profileBox.setPadding(new Insets(20));
-        // Alignement au centre de la VBox
-        profileBox.setAlignment(Pos.CENTER);
+        defineObjects(user);
+        setButtonActions();
+        setStyles();
 
+        // Ajout sur le board
+        profileBox.getChildren().addAll(profileLogo, userLabel, oldPasswordTextField, passwordTextField, confirmPasswordTextField, invalidText, editButton, cancelButton);
+        profileBox.setSpacing(10);
+    }
 
-        // Definir le logo du profile
-        profileLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/profile-logo.png").toString()));
-        profileLogo.setFitHeight(100);
-        profileLogo.setPreserveRatio(true);
-
+    /*! @brief : Définis l'ensemble des instances des objets de la page
+     */
+    private void defineObjects(User user)
+    {
         // Creation du label avec le nom du user
         userLabel = new Label(user.getUsername());
-        userLabel.setStyle("-fx-font-weight: bold");
 
         // Creation des champs d'information à entrer par l'utilisateur
         oldPasswordTextField = new PasswordField();
@@ -123,21 +124,43 @@ public class ProfileController {
 
         // Invalide text
         invalidText = new Label();
-        invalidText.setTextFill(Color.RED);
 
         // Creation des boutons
         editButton = new Button("Edit");
-        editButton.setOnAction(this::handleEdit);
-        editButton.setId("button");
-
-
         cancelButton = new Button("Cancel");
-        cancelButton.setOnAction(this::handleCancel);
-        cancelButton.setId("button");
+    }
 
-        // Ajout sur le board
-        profileBox.getChildren().addAll(profileLogo, userLabel, oldPasswordTextField, passwordTextField, confirmPasswordTextField, invalidText, editButton, cancelButton);
-        profileBox.setSpacing(10);
+    /*! @brief : Assigne leur action aux bouttons
+     */
+    private void setButtonActions()
+    {
+        editButton.setOnAction(this::handleEdit);
+        cancelButton.setOnAction(this::handleCancel);
+    }
+
+    /*! @brief : Fix le style des objets de la page
+     */
+    private void setStyles()
+    {
+        // Ajout de padding à la VBox
+        profileBox.setPadding(new Insets(20));
+        // Alignement au centre de la VBox
+        profileBox.setAlignment(Pos.CENTER);
+
+        // Definir le logo du profile
+        profileLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/profile-logo.png").toString()));
+        profileLogo.setFitHeight(100);
+        profileLogo.setPreserveRatio(true);
+
+        // Met le username en gras
+        userLabel.setStyle("-fx-font-weight: bold");
+
+        // Met le label en rouge
+        invalidText.setTextFill(Color.RED);
+
+        // Definition des ids
+        editButton.setId("button");
+        cancelButton.setId("button");
     }
 
     /*! @brief : vide les champs remplissable et les messages de prévension
