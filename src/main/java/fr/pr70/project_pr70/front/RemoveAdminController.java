@@ -7,11 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import java.util.ArrayList;
-import java.util.Objects;
 
-import static fr.pr70.project_pr70.MainApplication.getCurrentUsername;
-
-public class RemoveAdminController {
+public class RemoveAdminController implements Cancelable{
 
     @FXML
     protected ComboBox<String> adminsComboBox;
@@ -73,7 +70,7 @@ public class RemoveAdminController {
 
         for (User u : users){
             // Remplis la drop down liste avec le nom des administrateurs qui ne sont pas l'admin connecter
-            if (u.isAdmin() && !u.getUsername().equals(getCurrentUsername())){
+            if (u.isAdmin() && !u.getUsername().equals(MainApplication.getCurrentUser().getUsername())){
                 adminsComboBox.getItems().add(u.getUsername());
             }
         }

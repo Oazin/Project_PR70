@@ -10,7 +10,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class TaskCreationController {
+public class TaskCreationController implements Cancelable{
 
     @FXML
     private TextField nameField;
@@ -59,11 +59,8 @@ public class TaskCreationController {
             Priority priority = Priority.valueOf(priorityComboBox.getValue());
             Category category = categoryComboBox.getValue();
 
-            // Récupération de la liste des utilisateurs
-            UserManager userManager = MainApplication.getUserManager();
-
             // Récupération de l'utilisateur courant et donc de ses inforamations
-            User user = userManager.getUser(MainApplication.getCurrentUsername());
+            User user = MainApplication.getCurrentUser();
 
             // Création de la task
             user.addTask(name, description, startDate, deadline, priority, category);
@@ -80,7 +77,7 @@ public class TaskCreationController {
      *  lorsqu'il decide de ne pas créer de nouvelle tâches
      */
     @FXML
-    public void handleCancel()
+    public void handleCancel(ActionEvent actionEvent)
     {
         MainApplication.setDashboard();
     }

@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 
-public class AddAdminController {
+public class AddAdminController implements Cancelable {
 
     @FXML
     protected ComboBox<String> userComboBox;

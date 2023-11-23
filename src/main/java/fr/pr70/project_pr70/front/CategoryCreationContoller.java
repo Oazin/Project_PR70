@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 
 import java.util.Date;
 
-public class CategoryCreationContoller {
+public class CategoryCreationContoller implements Cancelable{
     @FXML
     private TextField nameField;
 
@@ -68,7 +68,7 @@ public class CategoryCreationContoller {
      *  lorsqu'il decide de ne pas créer une categorie
      */
     @FXML
-    public void handleCancel()
+    public void handleCancel(ActionEvent actionEvent)
     {
         // Vider les champs
         clearField();

@@ -159,7 +159,7 @@ public class DashboardController
         toolBar.getItems().add(newTaskButton);
 
         // Seul un administrateur peut créer des categories et ajouter des administrateur
-        User currentUser = MainApplication.getUserManager().getUser(MainApplication.getCurrentUsername());
+        User currentUser = MainApplication.getCurrentUser();
         if(currentUser.isAdmin())
         {
             // Boutton pour acceder à la page de creation de categorie
@@ -211,31 +211,8 @@ public class DashboardController
         toolBar.getItems().addAll(profileButton, logoutButton);
     }
 
-
-    @FXML
-    public void updateTaskTable()
+    private void updateHeader()
     {
-
-        // clear taskList
-        taskTable.getChildren().clear();
-
-        // get Currrent User
-        UserManager userManager = MainApplication.getUserManager();
-
-        User currentUser = userManager.getUser(MainApplication.getCurrentUsername());
-        if(currentUser == null) return;
-
-        ArrayList<User> users;
-        if(currentUser.isAdmin())
-        {
-            users = userManager.getUsers();
-        }
-        else
-        {
-            users = new ArrayList<>();
-            users.add(currentUser);
-        }
-        // update header
         HBox header = new HBox();
         header.setId("header");
         taskTable.getChildren().add(header);
@@ -247,6 +224,24 @@ public class DashboardController
         Label deadline = new Label("deadline");
         Label category = new Label("category");
         header.getChildren().addAll(assigned, name, status, priority, deadline, category);
+    }
+
+
+    @FXML
+    public void updateTaskTable()
+    {
+
+        // clear taskList
+        taskTable.getChildren().clear();
+
+        // get Currrent User
+        UserManager userManager = MainApplication.getUserManager();
+
+        User currentUser = MainApplication.getCurrentUser();
+        if(currentUser == null) return;
+
+        ArrayList<User> users = userManager.getAllowedUsers(MainApplication.getCurrentUser());
+        updateHeader();
 
         //update task
         ArrayList<String> userNames = new ArrayList<>();
