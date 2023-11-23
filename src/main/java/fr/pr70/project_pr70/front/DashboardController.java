@@ -169,7 +169,7 @@ public class DashboardController
 
         // Boutton pour acceder à la page de creation d'une nouvelle taches
         Button newTaskButton = new Button("New task");
-        setToolBarButton(event -> handleNewTask(), newTaskButton);
+        setDashboardButton(event -> handleNewTask(), newTaskButton);
 
         toolBar.getItems().add(newTaskButton);
 
@@ -179,15 +179,15 @@ public class DashboardController
         {
             // Boutton pour acceder à la page de creation de categorie
             Button newCategoryButton = new Button("New category");
-            setToolBarButton(event -> handleNewCategory(), newCategoryButton);
+            setDashboardButton(event -> handleNewCategory(), newCategoryButton);
 
             // Boutton pour acceder à la page d'ajoute d'un administrateur
             Button addAdminButton = new Button();
-            setToolBarButton(event -> handleAddAdmin(), "/fr/pr70/project_pr70/icon/admin-add-logo.png", addAdminButton);
+            setDashboardButton(event -> handleAddAdmin(), "/fr/pr70/project_pr70/icon/admin-add-logo.png", addAdminButton);
 
             // Boutton pour acceder à la page de suppression d"un administrateur
             Button removeAdminButton = new Button();
-            setToolBarButton(event -> handleRemoveAdmin(), "/fr/pr70/project_pr70/icon/remove-admin-logo.png", removeAdminButton);
+            setDashboardButton(event -> handleRemoveAdmin(), "/fr/pr70/project_pr70/icon/remove-admin-logo.png", removeAdminButton);
 
             toolBar.getItems().addAll(newCategoryButton, addAdminButton, removeAdminButton);
         }
@@ -195,11 +195,11 @@ public class DashboardController
 
         // Boutton pour acceder à la page profile
         Button profileButton = new Button();
-        setToolBarButton(event -> handleProfile(), "/fr/pr70/project_pr70/icon/profile-logo.png", profileButton);
+        setDashboardButton(event -> handleProfile(), "/fr/pr70/project_pr70/icon/profile-logo.png", profileButton);
 
         // Boutton pour se deconnecter
         Button logoutButton = new Button();
-        setToolBarButton(event -> handleLogout(),"/fr/pr70/project_pr70/icon/log-out-logo.png", logoutButton );
+        setDashboardButton(event -> handleLogout(),"/fr/pr70/project_pr70/icon/log-out-logo.png", logoutButton );
 
         toolBar.getItems().addAll(profileButton, logoutButton);
     }
@@ -212,7 +212,7 @@ public class DashboardController
      *  @behaviour :
      *  Defini l'action et le logo assossiés au bouton
      */
-    private void setToolBarButton(EventHandler<ActionEvent> _handler, String _logoPath, Button _button)
+    private void setDashboardButton(EventHandler<ActionEvent> _handler, String _logoPath, Button _button)
     {
         _button.setOnAction(_handler);
         ImageView buttonImage = new ImageView(new Image(getClass().getResource(_logoPath).toString()));
@@ -229,7 +229,7 @@ public class DashboardController
      *  @behaviour :
      *  Defini l'action assossiés au bouton
      */
-    private void setToolBarButton(EventHandler<ActionEvent> _handler, Button _button)
+    private void setDashboardButton(EventHandler<ActionEvent> _handler, Button _button)
     {
         _button.setOnAction(_handler);
         _button.setId("button");
@@ -253,6 +253,10 @@ public class DashboardController
     }
 
     /*! @brief : Methode de creation dynamique d'une tache
+     *  @param _currentUser ; utilisateur courant
+     *  @param _userName ; nom de l'utilisateur associé à la tache
+     *  @param _task ; tache que l'on souhaite afficher
+     *  @return : HBox ; le HBox contenant l'ensemble des informations de la tache
      */
     private HBox updateTask(User _currentUser, String _userName, Task _task)
     {
@@ -281,7 +285,6 @@ public class DashboardController
         taskCategory.setId("category");
         Color categoryColor = _task.getCategory().getColor();
         taskCategory.setStyle("-fx-background-color: rgb("+categoryColor.getRed()*255+", "+categoryColor.getGreen()*255+", "+categoryColor.getBlue()*255+")");
-
         Region region1 = new Region();
         HBox.setHgrow(region1, Priority.ALWAYS);
 
@@ -290,45 +293,30 @@ public class DashboardController
         // report button
         if(_currentUser.isAdmin())
         {
-            ImageView reportLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/alarm-logo.png").toString()));
-            reportLogo.setFitHeight(20);
-            reportLogo.setPreserveRatio(true);
             Button taskReport = new Button();
-            taskReport.setId("button");
-            taskReport.setGraphic(reportLogo);
-            taskReport.setOnAction(actionEvent -> { handleTaskReport(_task); });
+            setDashboardButton(actionEvent -> { handleTaskReport(_task); }, "/fr/pr70/project_pr70/icon/alarm-logo.png", taskReport);
             Region spacer1 = new Region();
             spacer1.setId("spacer");
+
             hBox.getChildren().addAll(taskReport, spacer1);
         }
 
-        ImageView editLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/edit-logo.png").toString()));
-        editLogo.setFitHeight(20);
-        editLogo.setPreserveRatio(true);
+        // task edit button
         Button taskEdit = new Button();
-        taskEdit.setId("button");
-        taskEdit.setGraphic(editLogo);
-        taskEdit.setOnAction(actionEvent -> { handleTaskEdit(_task); });
+        setDashboardButton(actionEvent -> { handleTaskEdit(_task); }, "/fr/pr70/project_pr70/icon/edit-logo.png", taskEdit);
         Region spacer2 = new Region();
         spacer2.setId("spacer");
 
-        ImageView trashLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/trash-logo.png").toString()));
-        trashLogo.setFitHeight(20);
-        trashLogo.setPreserveRatio(true);
+        // task delete button
         Button taskDelete = new Button();
-        taskDelete.setId("button");
-        taskDelete.setGraphic(trashLogo);
-        taskDelete.setOnAction(actionEvent -> { handleTaskDelete(_task, _userName); });
+        setDashboardButton(actionEvent -> { handleTaskDelete(_task, _userName); }, "/fr/pr70/project_pr70/icon/trash-logo.png", taskDelete);
         Region spacer3 = new Region();
         spacer3.setId("spacer");
 
         hBox.getChildren().addAll(taskEdit, spacer2, taskDelete, spacer3);
         hBox.setId("task");
-
         if(_task.isReported())
-        {
             hBox.setStyle("-fx-background-color: red");
-        }
         setHandleDetail(hBox, _task);
         return hBox;
     }
