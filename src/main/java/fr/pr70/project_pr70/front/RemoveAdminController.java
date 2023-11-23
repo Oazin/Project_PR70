@@ -11,7 +11,7 @@ import java.util.Objects;
 
 import static fr.pr70.project_pr70.MainApplication.getCurrentUsername;
 
-public class RemoveAdminController {
+public class RemoveAdminController implements Cancelable{
 
     @FXML
     protected ComboBox<String> adminsComboBox;

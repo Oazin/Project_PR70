@@ -211,6 +211,21 @@ public class DashboardController
         toolBar.getItems().addAll(profileButton, logoutButton);
     }
 
+    private void updateHeader()
+    {
+        HBox header = new HBox();
+        header.setId("header");
+        taskTable.getChildren().add(header);
+        Label assigned = new Label("assigned");
+        Label name = new Label("name");
+        Label status = new Label("status");
+        status.setId("bigLabel");
+        Label priority = new Label("priority");
+        Label deadline = new Label("deadline");
+        Label category = new Label("category");
+        header.getChildren().addAll(assigned, name, status, priority, deadline, category);
+    }
+
 
     @FXML
     public void updateTaskTable()
@@ -225,28 +240,8 @@ public class DashboardController
         User currentUser = userManager.getUser(MainApplication.getCurrentUsername());
         if(currentUser == null) return;
 
-        ArrayList<User> users;
-        if(currentUser.isAdmin())
-        {
-            users = userManager.getUsers();
-        }
-        else
-        {
-            users = new ArrayList<>();
-            users.add(currentUser);
-        }
-        // update header
-        HBox header = new HBox();
-        header.setId("header");
-        taskTable.getChildren().add(header);
-        Label assigned = new Label("assigned");
-        Label name = new Label("name");
-        Label status = new Label("status");
-        status.setId("bigLabel");
-        Label priority = new Label("priority");
-        Label deadline = new Label("deadline");
-        Label category = new Label("category");
-        header.getChildren().addAll(assigned, name, status, priority, deadline, category);
+        ArrayList<User> users = userManager.getAllowedUsers(MainApplication.getCurrentUsername());
+        updateHeader();
 
         //update task
         ArrayList<String> userNames = new ArrayList<>();

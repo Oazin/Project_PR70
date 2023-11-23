@@ -3,6 +3,7 @@ package fr.pr70.project_pr70.front;
 import fr.pr70.project_pr70.MainApplication;
 import fr.pr70.project_pr70.back.Priority;
 import fr.pr70.project_pr70.back.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
@@ -11,7 +12,7 @@ import java.util.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
-public class EditController {
+public class EditController implements Cancelable{
 
     @FXML
     protected TextField nameField;
@@ -53,7 +54,7 @@ public class EditController {
      *  lorsqu'il decide de ne pas créer de nouvelle tâches
      */
     @FXML
-    public void handleCancel()
+    public void handleCancel(ActionEvent actionEvent)
     {
         MainApplication.setDashboard();
     }

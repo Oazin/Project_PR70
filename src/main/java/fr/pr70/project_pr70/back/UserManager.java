@@ -1,6 +1,9 @@
 package fr.pr70.project_pr70.back;
 
+import fr.pr70.project_pr70.MainApplication;
+
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class UserManager
 {
@@ -142,30 +145,17 @@ public class UserManager
         return false; // Aucun utilisateur trouvé avec ce nom d'utilisateur
     }
 
-   /*! @brief : reset le fait que l'utilisateur est conneter lorsqu'il se deconnecte
+    /*! @brief : Retourne les utilisateurs autorisés en lecture/écriture par l'utilisateur
+    *   @param userName ; Nom de l'utilisateur dont on veut les utilisateurs autorisés
+    *   @return ArrayList<User> ; Liste des utilisateurs autorisés
     */
-    public void resetConnectedUser()
+    public ArrayList<User> getAllowedUsers(String userName)
     {
-        for (User user : users)
-        {
-            if (user.isConnected())
-            {
-                user.setConnected(false);
-            }
-        }
-    }
-
-    /*! @brief : Revoie l'utilisateur connecter
-     */
-    public User getConnectedUser()
-    {
-        for (User user : users)
-        {
-            if (user.isConnected())
-            {
-                return user;
-            }
-        }
-        return null; // Aucun utilisateur trouvé avec ce nom d'utilisateur
+        User currentUser = getUser(userName);
+        if(currentUser.isAdmin())
+            return getUsers();
+        ArrayList<User> users = new ArrayList<>();
+        users.add(currentUser);
+        return users;
     }
 }

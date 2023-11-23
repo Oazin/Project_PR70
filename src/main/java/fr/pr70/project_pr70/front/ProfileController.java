@@ -17,7 +17,7 @@ import javafx.scene.paint.Color;
 import static fr.pr70.project_pr70.MainApplication.*;
 
 
-public class ProfileController {
+public class ProfileController implements Cancelable{
 
     @FXML
     private Label invalidText;

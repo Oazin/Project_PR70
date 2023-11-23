@@ -10,7 +10,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class TaskCreationController {
+public class TaskCreationController implements Cancelable{
 
     @FXML
     private TextField nameField;
@@ -80,7 +80,7 @@ public class TaskCreationController {
      *  lorsqu'il decide de ne pas créer de nouvelle tâches
      */
     @FXML
-    public void handleCancel()
+    public void handleCancel(ActionEvent actionEvent)
     {
         MainApplication.setDashboard();
     }
