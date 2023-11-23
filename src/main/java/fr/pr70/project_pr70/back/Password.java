@@ -12,49 +12,53 @@ public final class Password
     private String passwordHash;
 
     /* ----------------- Constructor ----------------- */
-    public Password(String password)
-    {
+
+    /**
+     * Constructeur de la classe Password qui prend un mot de passe en paramètre et génère son hachage.
+     * @param password Le mot de passe à hasher
+     */
+    public Password(String password) {
         this.passwordHash = hashPassword(password);
     }
 
     /* ----------------- Getters ----------------- */
-    public String getPasswordHash()
-    {
+
+    /**
+     * Renvoie le hachage du mot de passe.
+     * @return Le hachage du mot de passe
+     */
+    public String getPasswordHash() {
         return passwordHash;
     }
 
-    public void setPasswordHash(String passwordHash)
-    {
+    /**
+     * Met à jour le hachage du mot de passe.
+     * @param passwordHash Le nouveau hachage à définir
+     */
+    public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
 
-    /* ----------------- Methods ----------------- */
-    /*!
-     * @brief : Change le mot de passe de l'utilisateur
-     * @param password ; nouveau mot de passe
-     */
-    public void setPassword(String password)
-    {
-        this.passwordHash = hashPassword(password);
-    }
 
-    /*!
-     * @brief : Vérifie si le mot de passe est correct
-     * @param password ; mot de passe à vérifier
+    /* ----------------- Methods ----------------- */
+
+    /**
+     * Vérifie si le mot de passe est correct
+     * @param _password ; mot de passe à vérifier
      * @return true si le mot de passe est correct, false sinon
      */
-    public boolean checkPassword(String password)
+    public boolean checkPassword(String _password)
     {
         // Check if the hash of the password is the same as the stored hash
-        return this.passwordHash.equals(hashPassword(password));
+        return this.passwordHash.equals(hashPassword(_password));
     }
 
-    /*!
-     * @brief : Hash le mot de passe
-     * @param password ; mot de passe à hasher
+    /**
+     * Hash le mot de passe
+     * @param _password ; mot de passe à hasher
      * @return le mot de passe hashé
      */
-    private String hashPassword(String password)
+    private String hashPassword(String _password)
     {
         // Hash le mdp avec PBKDF2
         byte[] salt = new byte[16];
@@ -62,7 +66,7 @@ public final class Password
         {
             salt[i] = (byte) i;
         }
-        KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
+        KeySpec spec = new PBEKeySpec(_password.toCharArray(), salt, 65536, 128);
         try {
             SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
             byte[] hash = factory.generateSecret(spec).getEncoded();
