@@ -149,13 +149,12 @@ public class UserManager
     *   @param userName ; Nom de l'utilisateur dont on veut les utilisateurs autorisés
     *   @return ArrayList<User> ; Liste des utilisateurs autorisés
     */
-    public ArrayList<User> getAllowedUsers(String userName)
+    public ArrayList<User> getAllowedUsers(User _user)
     {
-        User currentUser = getUser(userName);
-        if(currentUser.isAdmin())
+        if(_user.isAdmin())
             return getUsers();
         ArrayList<User> users = new ArrayList<>();
-        users.add(currentUser);
+        users.add(_user);
         return users;
     }
 }

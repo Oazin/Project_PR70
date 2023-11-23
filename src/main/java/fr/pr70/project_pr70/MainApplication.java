@@ -1,9 +1,6 @@
 package fr.pr70.project_pr70;
 
-import fr.pr70.project_pr70.back.CategoryManager;
-import fr.pr70.project_pr70.back.Save;
-import fr.pr70.project_pr70.back.Task;
-import fr.pr70.project_pr70.back.UserManager;
+import fr.pr70.project_pr70.back.*;
 import fr.pr70.project_pr70.front.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -66,10 +63,10 @@ public class MainApplication extends Application
 
     /* ----------------- Getters ----------------- */
 
-    /*! @brief : Revoie le nom de l'utilisateur courant
+    /*! @brief : Renvoie l'utilisateur courant
      */
-    public static String getCurrentUsername() {
-        return currentUsername;
+    public static User getCurrentUser() {
+        return userManager.getUser(currentUsername);
     }
 
     /*! @brief : Revoie la liste des users enregistrer dans la base de l'application

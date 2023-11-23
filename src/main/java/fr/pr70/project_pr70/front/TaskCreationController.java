@@ -59,11 +59,8 @@ public class TaskCreationController implements Cancelable{
             Priority priority = Priority.valueOf(priorityComboBox.getValue());
             Category category = categoryComboBox.getValue();
 
-            // Récupération de la liste des utilisateurs
-            UserManager userManager = MainApplication.getUserManager();
-
             // Récupération de l'utilisateur courant et donc de ses inforamations
-            User user = userManager.getUser(MainApplication.getCurrentUsername());
+            User user = MainApplication.getCurrentUser();
 
             // Création de la task
             user.addTask(name, description, startDate, deadline, priority, category);

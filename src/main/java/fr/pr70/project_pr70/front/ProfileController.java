@@ -53,8 +53,8 @@ public class ProfileController implements Cancelable{
     @FXML
     public void handleEdit(ActionEvent actionEvent)
     {
-        User user = getUserManager().getUser(getCurrentUsername());
-        if (user.authenticate(getCurrentUsername(), oldPasswordTextField.getText()))
+        User user = MainApplication.getCurrentUser();
+        if (user.getPassword().checkPassword(oldPasswordTextField.getText()))
         {
             if (getUserManager().confirmPassword(passwordTextField.getText(), confirmPasswordTextField.getText()))
             {
@@ -95,7 +95,7 @@ public class ProfileController implements Cancelable{
 
 
         // Recupere l'utilisateur courant
-        User user = MainApplication.getUserManager().getUser(MainApplication.getCurrentUsername());
+        User user = MainApplication.getCurrentUser();
         if(user == null) return;
 
         // Ajout de padding à la VBox

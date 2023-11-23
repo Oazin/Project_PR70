@@ -159,7 +159,7 @@ public class DashboardController
         toolBar.getItems().add(newTaskButton);
 
         // Seul un administrateur peut créer des categories et ajouter des administrateur
-        User currentUser = MainApplication.getUserManager().getUser(MainApplication.getCurrentUsername());
+        User currentUser = MainApplication.getCurrentUser();
         if(currentUser.isAdmin())
         {
             // Boutton pour acceder à la page de creation de categorie
@@ -237,10 +237,10 @@ public class DashboardController
         // get Currrent User
         UserManager userManager = MainApplication.getUserManager();
 
-        User currentUser = userManager.getUser(MainApplication.getCurrentUsername());
+        User currentUser = MainApplication.getCurrentUser();
         if(currentUser == null) return;
 
-        ArrayList<User> users = userManager.getAllowedUsers(MainApplication.getCurrentUsername());
+        ArrayList<User> users = userManager.getAllowedUsers(MainApplication.getCurrentUser());
         updateHeader();
 
         //update task
