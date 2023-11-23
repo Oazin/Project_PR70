@@ -132,6 +132,9 @@ public class DashboardController
         MainApplication.setRemoveAdmin();
     }
 
+    /*!
+    * @brief : ajoute un handle pour l'ouverture de la page de detail de la tache
+    */
     private void setHandleDetail(HBox hBox, Task task)
     {
         hBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -239,9 +242,85 @@ public class DashboardController
         header.getChildren().addAll(assigned, name, status, priority, deadline, category);
     }
 
-    private HBox generateTaskBox()
+    /*! @brief : Methode de creation dynamique d'une tache
+     */
+    private HBox updateTask(User _currentUser, String _userName, Task _task)
     {
-        return null;
+        // assigned label
+        Label taskAssigned = new Label(_userName);
+        if(_userName.equals(_currentUser.getUsername()))
+            taskAssigned.setText("you");
+
+        // name label
+        Label taskName = new Label(_task.getName());
+
+        // status label
+        Label taskStatus = new Label();
+        taskStatus.setText(_task.isCompleted()?"completed":"to do");
+        taskStatus.setId(_task.isCompleted()?"completed":"todo");
+        taskStatus.setOnMouseClicked(eventHandle -> { handleTaskStatus(_task); });
+
+        // priority label
+        Label taskPriority = new Label(_task.getPriority().toString());
+
+        // deadline progress bar
+        ProgressBar taskDeadline = new ProgressBar(_task.getTimePercent());
+
+        // category label
+        Label taskCategory = new Label(_task.getCategory().toString());
+        taskCategory.setId("category");
+        Color categoryColor = _task.getCategory().getColor();
+        taskCategory.setStyle("-fx-background-color: rgb("+categoryColor.getRed()*255+", "+categoryColor.getGreen()*255+", "+categoryColor.getBlue()*255+")");
+
+        Region region1 = new Region();
+        HBox.setHgrow(region1, Priority.ALWAYS);
+
+        HBox hBox = new HBox(taskAssigned, taskName, taskStatus, taskPriority, taskDeadline, taskCategory, region1);
+
+        // report button
+        if(_currentUser.isAdmin())
+        {
+            ImageView reportLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/alarm-logo.png").toString()));
+            reportLogo.setFitHeight(20);
+            reportLogo.setPreserveRatio(true);
+            Button taskReport = new Button();
+            taskReport.setId("button");
+            taskReport.setGraphic(reportLogo);
+            taskReport.setOnAction(actionEvent -> { handleTaskReport(_task); });
+            Region spacer1 = new Region();
+            spacer1.setId("spacer");
+            hBox.getChildren().addAll(taskReport, spacer1);
+        }
+
+        ImageView editLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/edit-logo.png").toString()));
+        editLogo.setFitHeight(20);
+        editLogo.setPreserveRatio(true);
+        Button taskEdit = new Button();
+        taskEdit.setId("button");
+        taskEdit.setGraphic(editLogo);
+        taskEdit.setOnAction(actionEvent -> { handleTaskEdit(_task); });
+        Region spacer2 = new Region();
+        spacer2.setId("spacer");
+
+        ImageView trashLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/trash-logo.png").toString()));
+        trashLogo.setFitHeight(20);
+        trashLogo.setPreserveRatio(true);
+        Button taskDelete = new Button();
+        taskDelete.setId("button");
+        taskDelete.setGraphic(trashLogo);
+        taskDelete.setOnAction(actionEvent -> { handleTaskDelete(_task, _userName); });
+        Region spacer3 = new Region();
+        spacer3.setId("spacer");
+
+        hBox.getChildren().addAll(taskEdit, spacer2, taskDelete, spacer3);
+        hBox.setId("task");
+
+        if(_task.isReported())
+        {
+            hBox.setStyle("-fx-background-color: red");
+        }
+        setHandleDetail(hBox, _task);
+        return hBox;
     }
 
     /*!
@@ -258,7 +337,7 @@ public class DashboardController
 
         updateHeader();
 
-        //update task
+        //update tasks
 
         // lister les taches de tous les utilisateurs associés
         // recupérer les utilisateurs autorisés
@@ -279,66 +358,7 @@ public class DashboardController
         {
             String userName = userNames.get(i);
             Task task = tasks.get(i);
-            Label taskAssigned = new Label(userName);
-            if(userName.equals(currentUser.getUsername()))
-                taskAssigned.setText("you");
-            Label taskName = new Label(task.getName());
-            Label taskStatus = new Label();
-            taskStatus.setText(task.isCompleted()?"completed":"to do");
-            taskStatus.setId(task.isCompleted()?"completed":"todo");
-            taskStatus.setOnMouseClicked(eventHandle -> { handleTaskStatus(task); });
-            Label taskPriority = new Label();
-            taskPriority.setText(task.getPriority().toString());
-            ProgressBar taskDeadline = new ProgressBar(task.getTimePercent());
-            Label taskCategory = new Label(task.getCategory().toString());
-            taskCategory.setId("category");
-            Color categoryColor = task.getCategory().getColor();
-            taskCategory.setStyle("-fx-background-color: rgb("+categoryColor.getRed()*255+", "+categoryColor.getGreen()*255+", "+categoryColor.getBlue()*255+")");
-            Region region1 = new Region();
-            HBox.setHgrow(region1, Priority.ALWAYS);
-            HBox hBox = new HBox(taskAssigned, taskName, taskStatus, taskPriority, taskDeadline, taskCategory, region1);
-            if(currentUser.isAdmin())
-            {
-                ImageView reportLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/alarm-logo.png").toString()));
-                reportLogo.setFitHeight(20);
-                reportLogo.setPreserveRatio(true);
-                Button taskReport = new Button();
-                taskReport.setId("button");
-                taskReport.setGraphic(reportLogo);
-                taskReport.setOnAction(actionEvent -> { handleTaskReport(task); });
-                Region spacer1 = new Region();
-                spacer1.setId("spacer");
-                hBox.getChildren().addAll(taskReport, spacer1);
-            }
-
-            ImageView editLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/edit-logo.png").toString()));
-            editLogo.setFitHeight(20);
-            editLogo.setPreserveRatio(true);
-            Button taskEdit = new Button();
-            taskEdit.setId("button");
-            taskEdit.setGraphic(editLogo);
-            taskEdit.setOnAction(actionEvent -> { handleTaskEdit(task); });
-            Region spacer2 = new Region();
-            spacer2.setId("spacer");
-
-            ImageView trashLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/trash-logo.png").toString()));
-            trashLogo.setFitHeight(20);
-            trashLogo.setPreserveRatio(true);
-            Button taskDelete = new Button();
-            taskDelete.setId("button");
-            taskDelete.setGraphic(trashLogo);
-            taskDelete.setOnAction(actionEvent -> { handleTaskDelete(task, userName); });
-            Region spacer3 = new Region();
-            spacer3.setId("spacer");
-
-            hBox.getChildren().addAll(taskEdit, spacer2, taskDelete, spacer3);
-            hBox.setId("task");
-
-            if(task.isReported())
-            {
-                hBox.setStyle("-fx-background-color: red");
-            }
-            setHandleDetail(hBox, task);
+            HBox hBox = updateTask(currentUser, userName, task);
             taskTable.getChildren().add(hBox);
         }
     }
