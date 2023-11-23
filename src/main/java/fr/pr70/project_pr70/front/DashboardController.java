@@ -97,9 +97,9 @@ public class DashboardController
      *
      *  Behaviour : Permet à l'utilisateur de supprimer la tache s'associer
      */
-    private void handleTaskDelete(UserManager _userManager, Task _task, String _userName)
+    private void handleTaskDelete(Task _task, String _userName)
     {
-        _userManager.getUser(_userName).removeTask(_task);
+        MainApplication.getUserManager().getUser(_userName).removeTask(_task);
         updateTaskTable();
     }
 
@@ -133,8 +133,22 @@ public class DashboardController
         MainApplication.setRemoveAdmin();
     }
 
-
-
+    /*!
+    * @brief : ajoute un handle pour l'ouverture de la page de detail de la tache
+    */
+    private void setHandleDetail(HBox hBox, Task task)
+    {
+        hBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+                    if(mouseEvent.getClickCount() == 2){
+                        MainApplication.setDetail(task);
+                    }
+                }
+            }
+        });
+    }
 
     /*! @brief : Methode de creation dynamique de la tool bar du dashboard
      *
@@ -155,7 +169,7 @@ public class DashboardController
 
         // Boutton pour acceder à la page de creation d'une nouvelle taches
         Button newTaskButton = new Button("New task");
-        setToolBarButton(event -> handleNewTask(), newTaskButton);
+        setDashboardButton(event -> handleNewTask(), newTaskButton);
 
         toolBar.getItems().add(newTaskButton);
 
@@ -165,15 +179,15 @@ public class DashboardController
         {
             // Boutton pour acceder à la page de creation de categorie
             Button newCategoryButton = new Button("New category");
-            setToolBarButton(event -> handleNewCategory(), newCategoryButton);
+            setDashboardButton(event -> handleNewCategory(), newCategoryButton);
 
             // Boutton pour acceder à la page d'ajoute d'un administrateur
             Button addAdminButton = new Button();
-            setToolBarButton(event -> handleAddAdmin(), "/fr/pr70/project_pr70/icon/admin-add-logo.png", addAdminButton);
+            setDashboardButton(event -> handleAddAdmin(), "/fr/pr70/project_pr70/icon/admin-add-logo.png", addAdminButton);
 
             // Boutton pour acceder à la page de suppression d"un administrateur
             Button removeAdminButton = new Button();
-            setToolBarButton(event -> handleRemoveAdmin(), "/fr/pr70/project_pr70/icon/remove-admin-logo.png", removeAdminButton);
+            setDashboardButton(event -> handleRemoveAdmin(), "/fr/pr70/project_pr70/icon/remove-admin-logo.png", removeAdminButton);
 
             toolBar.getItems().addAll(newCategoryButton, addAdminButton, removeAdminButton);
         }
@@ -181,11 +195,11 @@ public class DashboardController
 
         // Boutton pour acceder à la page profile
         Button profileButton = new Button();
-        setToolBarButton(event -> handleProfile(), "/fr/pr70/project_pr70/icon/profile-logo.png", profileButton);
+        setDashboardButton(event -> handleProfile(), "/fr/pr70/project_pr70/icon/profile-logo.png", profileButton);
 
         // Boutton pour se deconnecter
         Button logoutButton = new Button();
-        setToolBarButton(event -> handleLogout(),"/fr/pr70/project_pr70/icon/log-out-logo.png", logoutButton );
+        setDashboardButton(event -> handleLogout(),"/fr/pr70/project_pr70/icon/log-out-logo.png", logoutButton );
 
         toolBar.getItems().addAll(profileButton, logoutButton);
     }
@@ -198,7 +212,7 @@ public class DashboardController
      *  @behaviour :
      *  Defini l'action et le logo assossiés au bouton
      */
-    private void setToolBarButton(EventHandler<ActionEvent> _handler, String _logoPath, Button _button)
+    private void setDashboardButton(EventHandler<ActionEvent> _handler, String _logoPath, Button _button)
     {
         _button.setOnAction(_handler);
         ImageView buttonImage = new ImageView(new Image(getClass().getResource(_logoPath).toString()));
@@ -215,12 +229,14 @@ public class DashboardController
      *  @behaviour :
      *  Defini l'action assossiés au bouton
      */
-    private void setToolBarButton(EventHandler<ActionEvent> _handler, Button _button)
+    private void setDashboardButton(EventHandler<ActionEvent> _handler, Button _button)
     {
         _button.setOnAction(_handler);
         _button.setId("button");
     }
 
+    /*! @brief : Methode de creation dynamique du header de la table des taches
+     */
     private void updateHeader()
     {
         HBox header = new HBox();
@@ -236,124 +252,111 @@ public class DashboardController
         header.getChildren().addAll(assigned, name, status, priority, deadline, category);
     }
 
+    /*! @brief : Methode de creation dynamique d'une tache
+     *  @param _currentUser ; utilisateur courant
+     *  @param _userName ; nom de l'utilisateur associé à la tache
+     *  @param _task ; tache que l'on souhaite afficher
+     *  @return : HBox ; le HBox contenant l'ensemble des informations de la tache
+     */
+    private HBox updateTask(User _currentUser, String _userName, Task _task)
+    {
+        // assigned label
+        Label taskAssigned = new Label(_userName);
+        if(_userName.equals(_currentUser.getUsername()))
+            taskAssigned.setText("you");
 
+        // name label
+        Label taskName = new Label(_task.getName());
+
+        // status label
+        Label taskStatus = new Label();
+        taskStatus.setText(_task.isCompleted()?"completed":"to do");
+        taskStatus.setId(_task.isCompleted()?"completed":"todo");
+        taskStatus.setOnMouseClicked(eventHandle -> { handleTaskStatus(_task); });
+
+        // priority label
+        Label taskPriority = new Label(_task.getPriority().toString());
+
+        // deadline progress bar
+        ProgressBar taskDeadline = new ProgressBar(_task.getTimePercent());
+
+        // category label
+        Label taskCategory = new Label(_task.getCategory().toString());
+        taskCategory.setId("category");
+        Color categoryColor = _task.getCategory().getColor();
+        taskCategory.setStyle("-fx-background-color: rgb("+categoryColor.getRed()*255+", "+categoryColor.getGreen()*255+", "+categoryColor.getBlue()*255+")");
+        Region region1 = new Region();
+        HBox.setHgrow(region1, Priority.ALWAYS);
+
+        HBox hBox = new HBox(taskAssigned, taskName, taskStatus, taskPriority, taskDeadline, taskCategory, region1);
+
+        // report button
+        if(_currentUser.isAdmin())
+        {
+            Button taskReport = new Button();
+            setDashboardButton(actionEvent -> { handleTaskReport(_task); }, "/fr/pr70/project_pr70/icon/alarm-logo.png", taskReport);
+            Region spacer1 = new Region();
+            spacer1.setId("spacer");
+
+            hBox.getChildren().addAll(taskReport, spacer1);
+        }
+
+        // task edit button
+        Button taskEdit = new Button();
+        setDashboardButton(actionEvent -> { handleTaskEdit(_task); }, "/fr/pr70/project_pr70/icon/edit-logo.png", taskEdit);
+        Region spacer2 = new Region();
+        spacer2.setId("spacer");
+
+        // task delete button
+        Button taskDelete = new Button();
+        setDashboardButton(actionEvent -> { handleTaskDelete(_task, _userName); }, "/fr/pr70/project_pr70/icon/trash-logo.png", taskDelete);
+        Region spacer3 = new Region();
+        spacer3.setId("spacer");
+
+        hBox.getChildren().addAll(taskEdit, spacer2, taskDelete, spacer3);
+        hBox.setId("task");
+        if(_task.isReported())
+            hBox.setStyle("-fx-background-color: red");
+        setHandleDetail(hBox, _task);
+        return hBox;
+    }
+
+    /*!
+     * @brief : Methode de creation dynamique de la table des taches du dashboard
+     */
     @FXML
     public void updateTaskTable()
     {
-
         // clear taskList
         taskTable.getChildren().clear();
-
-        // get Currrent User
-        UserManager userManager = MainApplication.getUserManager();
 
         User currentUser = MainApplication.getCurrentUser();
         if(currentUser == null) return;
 
-        ArrayList<User> users = userManager.getAllowedUsers(MainApplication.getCurrentUser());
         updateHeader();
 
-        //update task
+        //update tasks
+
+        // lister les taches de tous les utilisateurs associés
+        // recupérer les utilisateurs autorisés
+        ArrayList<User> users = MainApplication.getUserManager().getAllowedUsers(MainApplication.getCurrentUser());
         ArrayList<String> userNames = new ArrayList<>();
         ArrayList<Task> tasks = new ArrayList<>();
         for(User user : users)
         {
             TaskManager taskManager = user.getTasks();
-            for(int i = 0; i < taskManager.getTasks().size(); i++)
+            for(Task task : taskManager.getTasks())
             {
-                if(user.getUsername().equals(currentUser.getUsername()))
-                {
-                    userNames.add("you");
-                }
-                else
-                {
-                    userNames.add(user.getUsername());
-                }
+                userNames.add(user.getUsername());
             }
             tasks.addAll(taskManager.getTasks());
         }
 
         for(int i = 0; i < tasks.size(); i++)
         {
-            String userName;
-            if(userNames.get(i).equals("you"))
-            {
-                userName = currentUser.getUsername();
-            }
-            else
-            {
-                userName = userNames.get(i);
-            }
+            String userName = userNames.get(i);
             Task task = tasks.get(i);
-            Label taskAssigned = new Label(userNames.get(i));
-            Label taskName = new Label(task.getName());
-            Label taskStatus = new Label();
-            taskStatus.setText(task.isCompleted()?"completed":"to do");
-            taskStatus.setId(task.isCompleted()?"completed":"todo");
-            taskStatus.setOnMouseClicked(eventHandle -> { handleTaskStatus(task); });
-            Label taskPriority = new Label();
-            taskPriority.setText(task.getPriority().toString());
-            ProgressBar taskDeadline = new ProgressBar(task.getTimePercent());
-            Label taskCategory = new Label(task.getCategory().toString());
-            taskCategory.setId("category");
-            Color categoryColor = task.getCategory().getColor();
-            taskCategory.setStyle("-fx-background-color: rgb("+categoryColor.getRed()*255+", "+categoryColor.getGreen()*255+", "+categoryColor.getBlue()*255+")");
-            Region region1 = new Region();
-            HBox.setHgrow(region1, Priority.ALWAYS);
-            HBox hBox = new HBox(taskAssigned, taskName, taskStatus, taskPriority, taskDeadline, taskCategory, region1);
-            if(currentUser.isAdmin())
-            {
-                ImageView reportLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/alarm-logo.png").toString()));
-                reportLogo.setFitHeight(20);
-                reportLogo.setPreserveRatio(true);
-                Button taskReport = new Button();
-                taskReport.setId("button");
-                taskReport.setGraphic(reportLogo);
-                taskReport.setOnAction(actionEvent -> { handleTaskReport(task); });
-                Region spacer1 = new Region();
-                spacer1.setId("spacer");
-                hBox.getChildren().addAll(taskReport, spacer1);
-            }
-
-            ImageView editLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/edit-logo.png").toString()));
-            editLogo.setFitHeight(20);
-            editLogo.setPreserveRatio(true);
-            Button taskEdit = new Button();
-            taskEdit.setId("button");
-            taskEdit.setGraphic(editLogo);
-            taskEdit.setOnAction(actionEvent -> { handleTaskEdit(task); });
-            Region spacer2 = new Region();
-            spacer2.setId("spacer");
-
-            ImageView trashLogo = new ImageView(new Image(getClass().getResource("/fr/pr70/project_pr70/icon/trash-logo.png").toString()));
-            trashLogo.setFitHeight(20);
-            trashLogo.setPreserveRatio(true);
-            Button taskDelete = new Button();
-            taskDelete.setId("button");
-            taskDelete.setGraphic(trashLogo);
-            taskDelete.setOnAction(actionEvent -> { handleTaskDelete(userManager, task, userName); });
-            Region spacer3 = new Region();
-            spacer3.setId("spacer");
-
-            hBox.getChildren().addAll(taskEdit, spacer2, taskDelete, spacer3);
-            hBox.setId("task");
-
-
-            if(task.isReported())
-            {
-                hBox.setStyle("-fx-background-color: red");
-            }
-            hBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-                        if(mouseEvent.getClickCount() == 2){
-                            MainApplication.setDetail(task);
-                        }
-                    }
-                }
-            });
-            //hBox.setAlignment(Pos.CENTER_LEFT);
+            HBox hBox = updateTask(currentUser, userName, task);
             taskTable.getChildren().add(hBox);
         }
     }
