@@ -24,7 +24,7 @@ public class ProfileController implements Cancelable{
     private Label invalidText;
 
     @FXML
-    protected VBox profileBox;
+    private VBox profileBox;
 
     @FXML
     private Label userLabel;
@@ -147,6 +147,7 @@ public class ProfileController implements Cancelable{
      */
     private void setStyles()
     {
+        profileBox.setId("profileBox");
         // Ajout de padding à la VBox
         profileBox.setPadding(new Insets(20));
         // Alignement au centre de la VBox
@@ -154,7 +155,7 @@ public class ProfileController implements Cancelable{
 
         // Definir le logo du profile
         URL url = getClass().getResource("/fr/pr70/project_pr70/icon/profile-logo.png");
-        if(url != null) return;
+        if(url == null) return;
         profileLogo = new ImageView(new Image(url.toString()));
         profileLogo.setFitHeight(100);
         profileLogo.setPreserveRatio(true);
